@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: "home", component: IndexComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
+  { path: "login", component: RegisterpageComponent },
   { path: "landing", component: LandingpageComponent }
 ];
 
