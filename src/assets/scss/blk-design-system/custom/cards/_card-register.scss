@@ -36,6 +36,7 @@
     }
   }
 
+
   .card-header {
     padding: 0 0 50px;
     overflow: hidden;
@@ -46,6 +47,22 @@
       font-weight: 900;
       color: $black;
       text-transform: lowercase;
+      margin-left: -5px;
+      z-index: 1;
+    }
+  }
+
+  .match-header {
+    padding: 20px 0 0;
+    overflow: hidden;
+    align-self: center;
+    align-items: center;
+
+    .match-title {
+      position: relative;
+      font-size: 5em;
+      font-weight: 900;
+      color: $white;
       margin-left: -5px;
       z-index: 1;
     }
@@ -75,6 +92,8 @@
     margin-top: 24px;
   }
 }
+
+
 
 @include media-breakpoint-down(md) {
   .card.card-register .card-img {

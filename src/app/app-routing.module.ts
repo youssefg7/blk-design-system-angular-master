@@ -8,6 +8,8 @@ import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.c
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { HomeComponent } from "./pages/home/home.component";
+import { MatchCardComponent } from "./pages/match-card/match-card.component";
+import { MatchesComponent } from "./pages/matches/matches.component";
 
 const routes: Routes = [
   { path: "nazamly", component: HomeComponent },
@@ -15,7 +17,11 @@ const routes: Routes = [
   { path: "home", component: IndexComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
+<<<<<<< HEAD
   { path: "login", component: RegisterpageComponent },
+=======
+  { path: "matches", component: MatchesComponent },
+>>>>>>> 8a4c474bb9d26ac8cd108d0ca63bbaadd1f8424c
   { path: "landing", component: LandingpageComponent }
 ];
 

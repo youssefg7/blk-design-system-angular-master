@@ -84,6 +84,7 @@
     &.bg-warning {
         background-color: $warning !important;
     }
+<<<<<<< HEAD
     &.bg-info {
         background-color: $info !important;
     }
@@ -107,6 +108,47 @@
     .navbar-toggle button:focus,
     .navbar-toggler {
         outline: none;
+=======
+  }
+
+  &.bg-dark {
+    background: $black !important;
+  }
+
+  &.bg-primary {
+    background-color: $primary !important;
+  }
+
+  &.bg-warning {
+    background-color: $warning !important;
+  }
+
+  &.bg-info {
+    background-color: $info !important;
+  }
+
+  &.bg-success {
+    background-color: darken($success, 10%) !important;
+  }
+
+  &.bg-danger {
+    background-color: $danger !important;
+  }
+
+  &.bg-black {
+    background-color: $black !important;
+  }
+
+  .navbar-brand {
+    position: relative;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    color: $white;
+    text-transform: capitalize;
+    font-size: $font-paragraph;
+    span {
+      font-weight: $font-weight-bold;
+>>>>>>> 8a4c474bb9d26ac8cd108d0ca63bbaadd1f8424c
     }
 }
 
