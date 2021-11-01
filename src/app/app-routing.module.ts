@@ -17,11 +17,8 @@ const routes: Routes = [
   { path: "home", component: IndexComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
-<<<<<<< HEAD
   { path: "login", component: RegisterpageComponent },
-=======
   { path: "matches", component: MatchesComponent },
->>>>>>> 8a4c474bb9d26ac8cd108d0ca63bbaadd1f8424c
   { path: "landing", component: LandingpageComponent }
 ];
 
