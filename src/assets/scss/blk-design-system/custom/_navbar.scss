@@ -113,6 +113,10 @@
     background-color: $danger !important;
   }
 
+  &.bg-black {
+    background-color: $black !important;
+  }
+
   .navbar-brand {
     position: relative;
     padding-top: 0.3125rem;

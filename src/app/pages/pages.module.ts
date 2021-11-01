@@ -23,6 +23,7 @@ import { RegisterpageComponent } from "./examples/registerpage/registerpage.comp
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { HomeComponent } from './home/home.component';
 import { MatchCardComponent } from './match-card/match-card.component';
+import { MatchesComponent } from './matches/matches.component';
 
 @NgModule({
   imports: [
@@ -50,14 +51,17 @@ import { MatchCardComponent } from './match-card/match-card.component';
     RegisterpageComponent,
     LandingpageComponent,
     HomeComponent,
-    MatchCardComponent
+    MatchCardComponent,
+    MatchesComponent
   ],
   exports: [
     IndexComponent,
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    HomeComponent
+    HomeComponent,
+    MatchCardComponent,
+    MatchesComponent
   ],
   providers: []
 })
