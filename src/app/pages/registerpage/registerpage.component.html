@@ -98,3 +98,12 @@
         </div>
 
     </div>
+    <button *ngFor="let name of names" (click)="addName(name)">
+{{name}}
+</button>
+    <ul>
+        <li *ngFor="let name of nameOrder">
+            <span> {{ name }} </span>
+            <a (click)="removeName(name)">x</a>
+        </li>
+    </ul>

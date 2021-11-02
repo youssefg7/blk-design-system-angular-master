@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nazamly-2021": {
+      "hosting": {
+        "blk-design-system-angular": [
+          "nazamly-2021"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nazamly-2021"
+  }
+}

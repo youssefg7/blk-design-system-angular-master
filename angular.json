@@ -111,6 +111,16 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "blk-design-system-angular:build:production",
+            "firebaseProject": "nazamly-2021",
+            "firebaseHostingSite": "nazamly-2021"
+          }
         }
       }
     },
