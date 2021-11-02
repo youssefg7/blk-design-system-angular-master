@@ -21,6 +21,7 @@
                                         </div>
                                         <input formControlName="name" class="form-control" placeholder="Full Name" type="text" (focus)="focus = true" (blur)="focus = false" />
                                     </div>
+                                    <span *ngIf="name && name.invalid && registerAttempt==true" style="color: red;">Name is required</span>
                                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -29,14 +30,18 @@
                                         </div>
                                         <input formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus1 = true" (blur)="focus1 = false" />
                                     </div>
+                                    <span *ngIf="newEmail && newEmail.errors?.email && registerAttempt==true" style="color: red;">Not an email</span>
+                                    <span *ngIf="newEmail && newEmail.errors?.required && registerAttempt==true" style="color: red;">Email is required</span>
                                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus2 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="tim-icons icon-lock-circle"> </i>
                                             </div>
                                         </div>
-                                        <input formControlName="password" class="form-control" placeholder="Password" type="password" (focus)="focus2 = true" (blur)="focus2 = false" />
+                                        <input formControlName="password" class="form-control" minlength="6" placeholder="Password" type="password" (focus)="focus2 = true" (blur)="focus2 = false" />
                                     </div>
+                                    <span *ngIf="newPassword && newPassword.errors?.required && registerAttempt==true" style="color: red;">Password is required</span>
+                                    <span *ngIf="newPassword && newPassword.errors?.minlegnth && registerAttempt==true" style="color: red;">Incorrect password or email. Try again</span>
                                     <div class="form-check text-left">
                                         <label class="form-check-label">
                                         <input formControlName="isAdmin" class="form-check-input" type="checkbox" />
@@ -61,22 +66,24 @@
 
                             <div class="card-body">
                                 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="form">
-                                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
+                                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus3 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="tim-icons icon-email-85"> </i>
                                             </div>
                                         </div>
-                                        <input formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus1 = true" (blur)="focus1 = false" />
+                                        <input formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus3 = true" (blur)="focus3 = false" />
                                     </div>
-                                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus2 === true }">
+                                    <span *ngIf="loginEmail && loginEmail.invalid && loginAttempt==true" style="color: red;">Enter your email</span>
+                                    <div class="input-group" [ngClass]="{ 'input-group-focus': focus4 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="tim-icons icon-lock-circle"> </i>
                                             </div>
                                         </div>
-                                        <input formControlName="password" class="form-control" placeholder="Password" type="password" (focus)="focus2 = true" (blur)="focus2 = false" />
+                                        <input formControlName="password" class="form-control" placeholder="Password" type="password" (focus)="focus4 = true" (blur)="focus4 = false" />
                                     </div>
+                                    <span *ngIf="loginPassword && loginPassword.invalid && loginAttempt==true" style="color: red;">Double check your password</span>
                                     <div class="card-footer">
                                         <button class="btn btn-danger btn-round btn-lg"> LOG IN </button>
                                     </div>
