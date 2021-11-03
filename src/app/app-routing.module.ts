@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: "login", component: RegisterpageComponent },
   { path: "matches", component: MatchesComponent },
   { path: "landing", component: LandingpageComponent },
+  { path: "test", component: HomeComponent },
   { path: "index" , component:IndexComponent }
 ];
 

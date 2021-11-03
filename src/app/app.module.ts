@@ -12,6 +12,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import {
   collection,
   doc,
@@ -31,7 +32,6 @@ import {
 } from "@angular/fire/firestore";
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -46,6 +46,7 @@ import {
     LayoutModule,
     PagesModule,
     ReactiveFormsModule,
+    VirtualScrollerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
