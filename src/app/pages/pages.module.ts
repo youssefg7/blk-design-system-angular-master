@@ -68,7 +68,9 @@ import { ManageComponent } from './manage/manage.component';
     HomeComponent,
     MatchCardComponent,
     MatchesComponent,
-    BuyTicketsComponent
+    BuyTicketsComponent,
+    ManageComponent,
+    StatisticsComponent
   ],
   providers: []
 })

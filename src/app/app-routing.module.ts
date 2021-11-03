@@ -10,6 +10,9 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
 import { HomeComponent } from "./pages/home/home.component";
 import { MatchCardComponent } from "./pages/match-card/match-card.component";
 import { MatchesComponent } from "./pages/matches/matches.component";
+import { StatisticsComponent } from "./pages/statistics/statistics.component";
+import { BuyTicketsComponent } from "./pages/buy-tickets/buy-tickets.component";
+import { ManageComponent } from "./pages/manage/manage.component";
 
 const routes: Routes = [
   { path: "nazamly", component: HomeComponent },
@@ -20,8 +23,14 @@ const routes: Routes = [
   { path: "login", component: RegisterpageComponent },
   { path: "matches", component: MatchesComponent },
   { path: "landing", component: LandingpageComponent },
-  { path: "test", component: HomeComponent },
-  { path: "index" , component:IndexComponent }
+  { path: "index" , component:IndexComponent },
+  { path: "statistics" , component:StatisticsComponent },
+  { path: "buyTickets" , component:BuyTicketsComponent },
+  { path: "manage" , component:ManageComponent },
+  
+
+
+
 ];
 
 @NgModule({
