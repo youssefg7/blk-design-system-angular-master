@@ -14,14 +14,13 @@ import { MatchesComponent } from "./pages/matches/matches.component";
 const routes: Routes = [
   { path: "nazamly", component: HomeComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: IndexComponent },
+  { path: "home", component: HomeComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
   { path: "login", component: RegisterpageComponent },
   { path: "matches", component: MatchesComponent },
   { path: "landing", component: LandingpageComponent },
-  { path: "test", component: HomeComponent },
-  
+  { path: "index" , component:IndexComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,42 @@
 <div class="wrapper">
     <div class="page-header">
         <div class="content">
-            <app-match-card></app-match-card>
+            <ul>
+                <div class="scroll">
+                    <div class="container" *ngFor="let tsmatch of matchList">
+                        <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+                            <div class="card card-register">
+                                <div class="match-header">
+                                    <h1>{{tsmatch.tournamentName}}</h1>
+                                </div>
+                                <h3 style="align-self: center;">{{tsmatch.date}}</h3>
+                                <div class="match-body">
+                                    <div class="row" style="align-items: center;">
+                                        <div class="column" style="align-items: center; padding-right: 30px;">
+                                            <img style="height: 150px;" [src]="tsmatch.aPic">
+                                            <h2 style="padding-top: 10px;" class="match-title">{{tsmatch.aName}}</h2>
+                                        </div>
+                                        <h2 class="card-title">{{tsmatch.aScore}}</h2>
+                                        <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">:</h2>
+                                        <h2 class="card-title">{{tsmatch.bScore}}</h2>
+                                        <div class="column" style="align-content: center; padding-left: 30px;">
+                                            <img style="height: 150px;" [src]="tsmatch.bPic">
+                                            <h2 style="padding-top: 10px;" class="match-title">{{tsmatch.bName}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="match-header" style="padding-bottom: 10px;">
+                                    <a class="btn btn-danger btn-round btn-lg">
+                                        DETAILS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
         </div>
     </div>
 </div>
+
+
