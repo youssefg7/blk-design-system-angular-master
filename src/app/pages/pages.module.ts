@@ -24,6 +24,9 @@ import { LandingpageComponent } from "./examples/landingpage/landingpage.compone
 import { HomeComponent } from './home/home.component';
 import { MatchCardComponent } from './match-card/match-card.component';
 import { MatchesComponent } from './matches/matches.component';
+import { BuyTicketsComponent } from './buy-tickets/buy-tickets.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   imports: [
@@ -52,7 +55,10 @@ import { MatchesComponent } from './matches/matches.component';
     LandingpageComponent,
     HomeComponent,
     MatchCardComponent,
-    MatchesComponent
+    MatchesComponent,
+    BuyTicketsComponent,
+    StatisticsComponent,
+    ManageComponent
   ],
   exports: [
     IndexComponent,
@@ -61,7 +67,8 @@ import { MatchesComponent } from './matches/matches.component';
     LandingpageComponent,
     HomeComponent,
     MatchCardComponent,
-    MatchesComponent
+    MatchesComponent,
+    BuyTicketsComponent
   ],
   providers: []
 })
