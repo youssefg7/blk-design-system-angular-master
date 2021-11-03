@@ -32,6 +32,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     isAdmin: new FormControl(false)
   });
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -40,8 +41,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("register-page");
+  
     this.registerAttempt = false;
     this.loginAttempt = false;
   }

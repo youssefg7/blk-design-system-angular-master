@@ -5,38 +5,37 @@ import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
-
-import { BsDropdownModule } from "ngx-bootstrap/dropdown";
-import { ProgressbarModule } from "ngx-bootstrap/progressbar";
-import { TooltipModule } from "ngx-bootstrap/tooltip";
-import { CollapseModule } from "ngx-bootstrap/collapse";
-import { TabsModule } from "ngx-bootstrap/tabs";
-import { PaginationModule } from "ngx-bootstrap/pagination";
-import { AlertModule } from "ngx-bootstrap/alert";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { CarouselModule } from "ngx-bootstrap/carousel";
-import { ModalModule } from "ngx-bootstrap/modal";
 import { PagesModule } from "./pages/pages.module";
-import { IndexComponent } from "./pages/index/index.component";
-import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
-import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
-import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { LayoutModule } from "./layout/layout.module";
 import { UsersService } from "./shared/users.service";
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import {
+  collection,
+  doc,
+  docData,
+  DocumentReference,
+  CollectionReference,
+  Firestore,
+  onSnapshot,
+  query,
+  where,
+  Unsubscribe,
+  Query,
+  DocumentData,
+  collectionData,
+  collectionChanges,
+  docSnapshots
+} from "@angular/fire/firestore";
 
 
 
 @NgModule({
   declarations: [
     AppComponent
-    // IndexComponent,
-    // ProfilepageComponent,
-    // RegisterpageComponent,
-    // LandingpageComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -49,14 +48,11 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth())
-    // PaginationModule.forRoot(),
-    // AlertModule.forRoot(),
-    // BsDatepickerModule.forRoot(),
-    // CarouselModule.forRoot(),
-    // ModalModule.forRoot()
+    provideAuth(() => getAuth()),
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { 
+  constructor(private afs: Firestore){}
+}
