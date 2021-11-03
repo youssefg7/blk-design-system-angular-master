@@ -48,7 +48,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   onSubmitRegister(): void {
-    console.log(this.registerForm.value);
+    console.log(this.registerForm.value.name);
     console.log('register fn');
     this.registerAttempt = true;
     if (this.registerForm.valid) {

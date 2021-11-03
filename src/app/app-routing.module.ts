@@ -19,7 +19,9 @@ const routes: Routes = [
   { path: "register", component: RegisterpageComponent },
   { path: "login", component: RegisterpageComponent },
   { path: "matches", component: MatchesComponent },
-  { path: "landing", component: LandingpageComponent }
+  { path: "landing", component: LandingpageComponent },
+  { path: "test", component: HomeComponent },
+  
 ];
 
 @NgModule({
