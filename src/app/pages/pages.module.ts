@@ -16,6 +16,7 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { IndexComponent } from "./index/index.component";
 import { ProfilepageComponent } from "./examples/profilepage/profilepage.component";
@@ -41,6 +42,7 @@ import { ManageComponent } from './manage/manage.component';
     PopoverModule.forRoot(),
     CollapseModule.forRoot(),
     JwBootstrapSwitchNg2Module,
+    MatGridListModule,
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
     AlertModule.forRoot(),
