@@ -12,7 +12,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {
   collection,
   doc,
@@ -46,7 +46,7 @@ import {
     LayoutModule,
     PagesModule,
     ReactiveFormsModule,
-    VirtualScrollerModule,
+    MatGridListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
