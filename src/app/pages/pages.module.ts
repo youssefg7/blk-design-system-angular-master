@@ -19,7 +19,7 @@ import { PopoverModule } from "ngx-bootstrap/popover";
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import { IndexComponent } from "./index/index.component";
-import { ProfilepageComponent } from "./examples/profilepage/profilepage.component";
+import { ProfilepageComponent } from "./profilepage/profilepage.component";
 import { RegisterpageComponent } from "./registerpage/registerpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { HomeComponent } from './home/home.component';

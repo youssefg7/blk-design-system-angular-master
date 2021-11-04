@@ -85,7 +85,7 @@
                                     </div>
                                     <span *ngIf="loginPassword && loginPassword.invalid && loginAttempt==true" style="color: red;">Double check your password</span>
                                     <div class="card-footer">
-                                        <button class="btn btn-danger btn-round btn-lg"> LOG IN </button>
+                                        <button class="btn btn-danger btn-round btn-lg" (click)="onclick()"> LOG IN </button>
                                     </div>
                                 </form>
                             </div>
