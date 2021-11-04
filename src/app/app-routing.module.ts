@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
 import { IndexComponent } from "./pages/index/index.component";
-import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
+import { ProfilepageComponent } from "./pages/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { HomeComponent } from "./pages/home/home.component";
@@ -27,10 +27,6 @@ const routes: Routes = [
   { path: "statistics" , component:StatisticsComponent },
   { path: "buyTickets" , component:BuyTicketsComponent },
   { path: "manage" , component:ManageComponent },
-  
-
-
-
 ];
 
 @NgModule({

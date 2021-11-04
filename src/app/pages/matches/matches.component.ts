@@ -24,7 +24,6 @@ export class MatchesComponent implements OnInit {
 
     
   }
-
 }
 
 class tsmatch{

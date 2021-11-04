@@ -17,6 +17,12 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   registerAttempt;
   loginAttempt;
 
+  onclick(){
+    console.log("clicked");
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("profileBtn").style.display = "block";
+  }
+
   addName = neme => {
     this.nameOrder.push(neme);
   }
