@@ -5,25 +5,18 @@
     <div class="card card-plain bg-transparent" style="position: fixed; z-index: 100;">
         <mat-grid-list cols="4" rowHeight="70px">
             <mat-grid-tile>
-                <select bsDropdown style="width: 200px;" id="teamSelect" class="form-control" (change)="onTeamChange()">
-                    <option value="" disabled selected>Select Team</option>
-                    <option *ngFor="let tsmatch of matchList" [value]="tsmatch.aName" style="color: black;">{{tsmatch.aName}}</option>
-                </select>
+                <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control" (input)="onTeamChange()">
             </mat-grid-tile>
             <mat-grid-tile>
-                <select bsDropdown style="width: 200px;" id="tournamentSelect" class="form-control"
-                    (change)="onTournamentChange()">
-                    <option value="" disabled selected>Select Tournamet</option>
-                    <option *ngFor="let tsmatch of matchList" [value]="tsmatch.tournamentName" style="color: black;">
-                        {{tsmatch.tournamentName}}</option>
-                </select>
+                <input placeholder="Tournament Name" style="width: 200px;" id="tournamentSelect" class="form-control"
+                    (input)="onTournamentChange()">
             </mat-grid-tile>
             <mat-grid-tile>
                 <input type="date" class="form-control"
                     style="width: 200px;" id="dateSelect" (change)="onDateChange()">
             </mat-grid-tile>
             <mat-grid-tile>
-                <a class="btn btn-success btn-round">
+                <a class="btn btn-success btn-round" (click)="onClearClick()">
                     Clear
                 </a>
             </mat-grid-tile>
@@ -38,7 +31,7 @@
     <mat-grid-list cols="3" rowHeight="500px" style="margin: 20px;">
         <div *ngFor="let tsmatch of matchList">
             <mat-grid-tile
-                *ngIf="(tsmatch.aName == nameFilter || tsmatch.bName == nameFilter || nameFilter == 'Select Team')&&(tsmatch.tournamentName == tournamentFilter || tournamentFilter == 'Select Tournamet')&&(tsmatch.date == dateFilter || dateFilter == 'any')">
+                *ngIf="(tsmatch.aName.toLowerCase().startsWith(nameFilter) || tsmatch.bName.toLowerCase().startsWith(nameFilter) || nameFilter == null)&&(tsmatch.tournamentName.toLowerCase().startsWith(tournamentFilter) || tournamentFilter == null)&&(tsmatch.date == dateFilter || dateFilter == 'any')">
                 <div class="container" id="container">
                     <div class="card card-register">
                         <div class="match-header">

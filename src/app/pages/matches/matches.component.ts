@@ -15,8 +15,8 @@ export class MatchesComponent implements OnInit {
   constructor(public users:UsersService) { }
   
   matchList=[];
-  nameFilter = "Select Team";
-  tournamentFilter = "Select Tournamet";
+  nameFilter = null;
+  tournamentFilter = null;
   dateFilter = "any";
 
 
@@ -31,19 +31,31 @@ export class MatchesComponent implements OnInit {
   }
 
   onTeamChange(){
-    var e = document.getElementById("teamSelect") as HTMLSelectElement;
-    this.nameFilter = e.options[e.selectedIndex].text;
+    var e = document.getElementById("teamSelect") as HTMLInputElement;
+    this.nameFilter = e.value.toLowerCase();
   }
 
   onTournamentChange(){
-    var e = document.getElementById("tournamentSelect") as HTMLSelectElement;
-    this.tournamentFilter = e.options[e.selectedIndex].text;
+    var e = document.getElementById("tournamentSelect") as HTMLInputElement;
+    this.tournamentFilter = e.value.toLowerCase();
   }
   
   onDateChange(){
     var e = document.getElementById("dateSelect") as HTMLInputElement;
     console.log(formatDate(e.value,'dd/MM/yyyy','en_US'));
     this.dateFilter = formatDate(e.value,'dd/MM/yyyy','en_US');
+  }
+
+  onClearClick(){
+    var e = document.getElementById("teamSelect") as HTMLSelectElement;
+    e.selectedIndex = 0;
+    e = document.getElementById("tournamentSelect") as HTMLSelectElement;
+    e.selectedIndex = 0;
+    var s = document.getElementById("dateSelect") as HTMLInputElement;
+    s.value = null;
+    this.dateFilter = "any";
+    this.nameFilter = null;
+    this.tournamentFilter = null;
   }
 
 }
