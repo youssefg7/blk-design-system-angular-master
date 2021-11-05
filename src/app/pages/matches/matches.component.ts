@@ -17,7 +17,7 @@ export class MatchesComponent implements OnInit {
   matchList=[];
   nameFilter = null;
   tournamentFilter = null;
-  dateFilter = "any";
+  dateFilter = null;
 
 
   ngOnInit(): void {
@@ -47,13 +47,13 @@ export class MatchesComponent implements OnInit {
   }
 
   onClearClick(){
-    var e = document.getElementById("teamSelect") as HTMLSelectElement;
-    e.selectedIndex = 0;
-    e = document.getElementById("tournamentSelect") as HTMLSelectElement;
-    e.selectedIndex = 0;
-    var s = document.getElementById("dateSelect") as HTMLInputElement;
-    s.value = null;
-    this.dateFilter = "any";
+    var e = document.getElementById("teamSelect") as HTMLInputElement;
+    e.value = null;
+    e = document.getElementById("tournamentSelect") as HTMLInputElement;
+    e.value = null;
+    e = document.getElementById("dateSelect") as HTMLInputElement;
+    e.value = null;
+    this.dateFilter = null;
     this.nameFilter = null;
     this.tournamentFilter = null;
   }
