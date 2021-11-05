@@ -1,6 +1,5 @@
 import { formatDate, getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -12,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MatchesComponent implements OnInit {
   
 
-  constructor(public users:UserService) { }
+  constructor() { }
   
   matchList=[];
   nameFilter = null;
