@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from "@angular/forms";
-import { UsersService } from "src/app/shared/users.service";
+import { User } from "src/app/models/user.model";
+import { UserService } from "src/app/services/user.service";
+
 @Component({
   selector: "app-registerpage",
   templateUrl: "registerpage.component.html"
 })
+
 export class RegisterpageComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   focus;
@@ -42,7 +45,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
-  constructor(private fb: FormBuilder, private usersService: UsersService) { }
+  constructor(private fb: FormBuilder, private userService: UserService) { }
 
 
   ngOnInit() {
@@ -54,7 +57,8 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   onSubmitRegister(): void {
-    console.log(this.registerForm.value.name);
+    this.userService.addUser(this.registerForm.value);
+    console.log(this.registerForm.value.name + 'successfully added');
     console.log('register fn');
     this.registerAttempt = true;
     if (this.registerForm.valid) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/shared/users.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { UsersService } from 'src/app/shared/users.service';
 export class MatchesComponent implements OnInit {
   
 
-  constructor(public users:UsersService) { }
+  constructor(public users:UserService) { }
   
   matchList=[];
 

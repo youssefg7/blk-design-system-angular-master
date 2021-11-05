@@ -7,10 +7,11 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { PagesModule } from "./pages/pages.module";
 import { LayoutModule } from "./layout/layout.module";
-import { UsersService } from "./shared/users.service";
+import { UserService } from "./services/user.service";
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {
@@ -50,8 +51,9 @@ import {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
   ],
-  providers: [UsersService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
