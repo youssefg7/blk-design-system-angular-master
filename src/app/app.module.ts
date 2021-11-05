@@ -14,6 +14,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { AngularFireModule } from  '@angular/fire/compat';
+import { AngularFirestoreModule } from  '@angular/fire/compat/firestore';
 import {
   collection,
   doc,
@@ -48,7 +50,8 @@ import {
     PagesModule,
     ReactiveFormsModule,
     MatGridListModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
@@ -57,5 +60,5 @@ import {
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(private afs: Firestore){}
+  constructor(){}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from "@angular/forms";
 import { User } from "src/app/models/user.model";
-//import { UserService } from "src/app/services/user.service"; //see line 60 for more info
+import { UserService } from "src/app/services/user.service"; //see line 60 for more info
 
 @Component({
   selector: "app-registerpage",
@@ -45,7 +45,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userService : UserService) { }
 
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   onSubmitRegister(): void {
-    //this.userService.addUser(this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
+    this.userService.addUser(this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
     console.log(this.registerForm.value.name + 'successfully added');
     console.log('register fn');
     this.registerAttempt = true;
