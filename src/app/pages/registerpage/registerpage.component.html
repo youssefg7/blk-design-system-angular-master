@@ -41,12 +41,15 @@
                                         <input formControlName="password" class="form-control" minlength="6" placeholder="Password" type="password" (focus)="focus2 = true" (blur)="focus2 = false" />
                                     </div>
                                     <span *ngIf="newPassword && newPassword.errors?.required && registerAttempt==true" style="color: red;">Password is required</span>
-                                    <span *ngIf="newPassword && newPassword.errors?.minlegnth && registerAttempt==true" style="color: red;">Incorrect password or email. Try again</span>
+                                    <span id="failedLogIn" style="display: none; color: red;">Incorrect password or email. Try again</span>
+
                                     <div class="form-check text-left">
                                         <label class="form-check-label">
                                         <input formControlName="isAdmin" class="form-check-input" type="checkbox" />
                                         <span class="form-check-sign"> </span> Are you a tournament organizer?
                                         </label>
+                                        <span id="successRegister" style="display: none; color: green;">Success! Login now.</span>
+                                        <span id="failedRegister" style="display: none; color: red;">Failed to create a new account</span>
                                     </div>
                                     <div class="card-footer">
                                         <button class="btn btn-danger btn-round btn-lg">CREATE ACCOUNT
@@ -74,7 +77,7 @@
                                         </div>
                                         <input formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus3 = true" (blur)="focus3 = false" />
                                     </div>
-                                    <span *ngIf="loginEmail && loginEmail.invalid && loginAttempt==true" style="color: red;">Enter your email</span>
+                                    <span *ngIf="loginEmail && loginEmail.invalid && loginAttempt==true" style="color: red;">Not an email!</span>
                                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus4 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -83,9 +86,10 @@
                                         </div>
                                         <input formControlName="password" class="form-control" placeholder="Password" type="password" (focus)="focus4 = true" (blur)="focus4 = false" />
                                     </div>
-                                    <span *ngIf="loginPassword && loginPassword.invalid && loginAttempt==true" style="color: red;">Double check your password</span>
+                                    <span *ngIf="loginPassword && loginPassword.invalid && loginAttempt==true" style="color: red;">Passwords are 6 characters min!</span>
+                                    <span id="failedLogin" style="display: none; color: red;">Failed to login, check email or password!</span>
                                     <div class="card-footer">
-                                        <button class="btn btn-danger btn-round btn-lg" (click)="onclick()"> LOG IN </button>
+                                        <button class="btn btn-danger btn-round btn-lg"> LOG IN </button>
                                     </div>
                                 </form>
                             </div>

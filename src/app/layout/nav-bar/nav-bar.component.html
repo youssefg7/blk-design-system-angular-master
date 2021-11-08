@@ -14,8 +14,9 @@
                 <li class="nav-item btn"><a routerLink="statistics" class="nav-link"> STATS </a></li>
                 <li class="nav-item btn"><a routerLink="buyTickets" class="nav-link"> BUY TICKETS </a></li>
                 <li class="nav-item btn"><a routerLink="manage" class="nav-link"> MANAGE </a></li>
-                <li class="nav-item btn" id="loginBtn"><a routerLink="register" class="nav-link"><i class="tim-icons icon-single-02"></i> LOGIN </a></li>
-                <li class="nav-item btn" id="profileBtn" style="display: none;"><a routerLink="profile" class="nav-link"><i class="tim-icons icon-single-02"></i> PROFILE </a></li>
+                <li *ngIf="!(afAuth.user | async)" class="nav-item btn" id="loginBtn"><a routerLink="register" class="nav-link"><i class="tim-icons icon-single-02"></i> LOGIN </a></li>
+                <li *ngIf="afAuth.user | async" class="nav-item btn" id="profileBtn"><a routerLink="profile" class="nav-link"><i class="tim-icons icon-single-02"></i> PROFILE </a></li>
+                <li *ngIf="afAuth.user | async" (click)="logout()" class="nav-item btn" id="loginBtn"><a routerLink="register" class="nav-link"> LOGOUT </a></li>
             </ul>
         </div>
     </div>
