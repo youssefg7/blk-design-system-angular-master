@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-matches',
   templateUrl: './matches.component.html',
   styleUrls: ['./matches.component.scss'],
-  host: {'[style.display]': '"flex"','[style.flex-direction]': '"column"','[style.overflow]': '"auto"'}
+  host: {}
 })
 export class MatchesComponent implements OnInit {
   
