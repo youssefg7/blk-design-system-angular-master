@@ -94,26 +94,4 @@ export class UserService {
         isAdmin: user.isAdmin
       });
   }
-<<<<<<< HEAD
-=======
-
-  checkLoginInfo(email:string, password: string){
-    /*this.angularFirestore.collection("user-collection").get().then(querySnapshot => {
-      querySnapshot.docs.forEach(doc => {
-      this.users.push(doc.data());
-    });
-  });
-    
-    this.getUserList().subscribe(res => {
-      this.users = res.map( e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as User;
-      })
-    });*/
-  }
-
-
->>>>>>> 360edd490139cf592cef5533050c402d88f31562
 }

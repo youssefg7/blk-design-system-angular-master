@@ -53,42 +53,19 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   constructor(private afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private fb: FormBuilder, private userService: UserService) { }
 
 
-<<<<<<< HEAD
   ngOnInit() {
     if (this.authService.userLoggedIn) {                       // if the user's logged in, navigate them to the dashboard (NOTE: don't use afAuth.currentUser -- it's never null)
       this.router.navigate(['home']);
     }
-=======
-  async ngOnInit() {
-  
->>>>>>> 360edd490139cf592cef5533050c402d88f31562
     this.registerAttempt = false;
     this.loginAttempt = false;
     console.log(this.userService.getUserList());
-    /*const docSnap = await getDoc( doc(this.db, "users", "pwci3ewPUZI8ltzfkS8C").withConverter(userConverter) );
-    const user = docSnap.data();
-    console.log(user.toString);
-    
-    const querySnapshot = await getDoc(collection(this.db, "users"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id}`);
-    });
-    //this.userService.fetchUsers();
-    //this.users=this.userService.users;
-    //this.users.forEach( (user) =>{
-    //  console.log(`${user.id} => ${user.data()}`);
-    //});*/
   }
 
 
 
   onSubmitRegister(): void {
-<<<<<<< HEAD
     console.log(this.registerForm.value.name + 'successfully added');
-=======
-    this.userService.addUser(this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
-    console.log(this.registerForm.value.name + ' successfully added');
->>>>>>> 360edd490139cf592cef5533050c402d88f31562
     console.log('register fn');
     this.registerAttempt = true;
     if (this.registerForm.valid) {
