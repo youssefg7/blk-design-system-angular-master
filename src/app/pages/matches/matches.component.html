@@ -2,18 +2,18 @@
 <br>
 <br>
 <div class="content">
-    <div class="card card-plain bg-transparent" style="position: fixed; z-index: 100;">
+    <div class="card card-plain bg-antoon" style="position: fixed; z-index: 100; background-color: #171941;">
         <mat-grid-list cols="4" rowHeight="70px">
             <mat-grid-tile>
-                <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control" (input)="onTeamChange()">
+                <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control"
+                    (input)="onTeamChange()">
             </mat-grid-tile>
             <mat-grid-tile>
                 <input placeholder="Tournament Name" style="width: 200px;" id="tournamentSelect" class="form-control"
                     (input)="onTournamentChange()">
             </mat-grid-tile>
             <mat-grid-tile>
-                <input type="date" class="form-control"
-                    style="width: 200px;" id="dateSelect" (change)="onDateChange()">
+                <input type="date" class="form-control" style="width: 200px;" id="dateSelect" (change)="onDateChange()">
             </mat-grid-tile>
             <mat-grid-tile>
                 <a class="btn btn-success btn-round" (click)="onClearClick()">
@@ -23,6 +23,11 @@
         </mat-grid-list>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
