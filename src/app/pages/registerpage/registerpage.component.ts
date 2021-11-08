@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { collection, doc, getDoc, getDocs, getFirestore } from "@angular/fire/firestore";
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from "@angular/forms";
-import { User } from "src/app/models/user.model";
+import { map } from "rxjs/operators";
+import { User, userConverter } from "src/app/models/user.model";
 import { UserService } from "src/app/services/user.service"; //see line 60 for more info
 
 @Component({
@@ -9,6 +11,7 @@ import { UserService } from "src/app/services/user.service"; //see line 60 for m
 })
 
 export class RegisterpageComponent implements OnInit, OnDestroy {
+  users: User[];
   isCollapsed = true;
   focus;
   focus1;
@@ -19,6 +22,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   nameOrder = [];
   registerAttempt;
   loginAttempt;
+  db = getFirestore();
 
   onclick(){
     console.log("clicked");
@@ -48,17 +52,31 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private userService : UserService) { }
 
 
-  ngOnInit() {
+  async ngOnInit() {
   
     this.registerAttempt = false;
     this.loginAttempt = false;
+    console.log(this.userService.getUserList());
+    /*const docSnap = await getDoc( doc(this.db, "users", "pwci3ewPUZI8ltzfkS8C").withConverter(userConverter) );
+    const user = docSnap.data();
+    console.log(user.toString);
+    
+    const querySnapshot = await getDoc(collection(this.db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id}`);
+    });
+    //this.userService.fetchUsers();
+    //this.users=this.userService.users;
+    //this.users.forEach( (user) =>{
+    //  console.log(`${user.id} => ${user.data()}`);
+    //});*/
   }
 
 
 
   onSubmitRegister(): void {
     this.userService.addUser(this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
-    console.log(this.registerForm.value.name + 'successfully added');
+    console.log(this.registerForm.value.name + ' successfully added');
     console.log('register fn');
     this.registerAttempt = true;
     if (this.registerForm.valid) {

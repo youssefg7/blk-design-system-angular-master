@@ -9,6 +9,7 @@ export const environment = {
     storageBucket: 'nazamly-2021.appspot.com',
     locationId: 'europe-west',
     apiKey: 'AIzaSyBepH65QB_t2-W11tQ9RhWByctnZ17cgBM',
+    databaseURL: 'https://nazamly-2021.firebaseio.com',
     authDomain: 'nazamly-2021.firebaseapp.com',
     messagingSenderId: '1090393277214',
     measurementId: 'G-CNLBZH997E',
@@ -16,6 +17,7 @@ export const environment = {
   production: false,
   firebaseConfig: {
     apiKey: "AIzaSyBepH65QB_t2-W11tQ9RhWByctnZ17cgBM",
+    databaseURL: 'https://nazamly-2021.firebaseio.com',
     authDomain: "nazamly-2021.firebaseapp.com",
     projectId: "nazamly-2021",
     storageBucket: "nazamly-2021.appspot.com",
