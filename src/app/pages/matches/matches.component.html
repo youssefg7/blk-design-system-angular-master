@@ -37,34 +37,7 @@
         <div *ngFor="let tsmatch of matchList">
             <mat-grid-tile
                 *ngIf="(tsmatch.aName.toLowerCase().startsWith(nameFilter) || tsmatch.bName.toLowerCase().startsWith(nameFilter) || nameFilter == null)&&(tsmatch.tournamentName.toLowerCase().startsWith(tournamentFilter) || tournamentFilter == null)&&(tsmatch.date == dateFilter || dateFilter == null)">
-                <div class="container" id="container">
-                    <div class="card card-register">
-                        <div class="match-header">
-                            <h1>{{tsmatch.tournamentName}}</h1>
-                        </div>
-                        <h3 style="align-self: center;">{{tsmatch.date}}</h3>
-                        <div class="match-body">
-                            <div class="row" style="align-items: center;">
-                                <div class="teamitem" style="padding-right: 30px;">
-                                    <img style="height: 150px; max-width: 140px;" [src]="tsmatch.aPic">
-                                    <h2 class="caption">{{tsmatch.aName}}</h2>
-                                </div>
-                                <h2 class="card-title">{{tsmatch.aScore}}</h2>
-                                <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">:</h2>
-                                <h2 class="card-title">{{tsmatch.bScore}}</h2>
-                                <div class="teamitem" style="padding-left: 30px;">
-                                    <img style="height: 150px; max-width: 140px;" [src]="tsmatch.bPic">
-                                    <h2 class="caption">{{tsmatch.bName}}</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="match-header" style="padding-bottom: 10px;">
-                            <a class="btn btn-danger btn-round btn-lg">
-                                DETAILS
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <app-match-card [tsmatch]="tsmatch" style="width: 100%;"></app-match-card>
             </mat-grid-tile>
         </div>
     </mat-grid-list>
