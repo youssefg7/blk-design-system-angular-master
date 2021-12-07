@@ -2,18 +2,21 @@ import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { collection, doc, getDoc, getDocs, getFirestore } from "@angular/fire/firestore";
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
-import { User, userConverter } from "src/app/models/user.model";
+import User  from "src/app/models/user.model";
 import { UserService } from "src/app/services/user.service"; //see line 60 for more info
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { UsersService } from "src/app/services/users.service";
+import { user } from "rxfire/auth";
 @Component({
   selector: "app-registerpage",
   templateUrl: "registerpage.component.html"
 })
 
 export class RegisterpageComponent implements OnInit, OnDestroy {
-  users: User[];
+  users? = [];
+
   isCollapsed = true;
   focus;
   focus1;
@@ -50,19 +53,34 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   })
-  constructor(private afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private fb: FormBuilder, private userService: UserService) { }
+  constructor(private afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private fb: FormBuilder, private userService: UserService, private usersService: UsersService) { }
 
 
   ngOnInit() {
+    console.log('ngOnInit called');
+    this.userService.getUsers().subscribe(list => this.users = list);
+    console.log(this.users.length);
+    console.log('ngOnInit finish');
     if (this.authService.userLoggedIn) {                       // if the user's logged in, navigate them to the dashboard (NOTE: don't use afAuth.currentUser -- it's never null)
       this.router.navigate(['home']);
     }
     this.registerAttempt = false;
     this.loginAttempt = false;
-    console.log(this.userService.getUserList());
   }
 
-
+/*
+    retrieveUsers(): void {
+    this.usersService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.users = data;
+    });
+  }
+*/
 
   onSubmitRegister(): void {
     console.log(this.registerForm.value.name + 'successfully added');

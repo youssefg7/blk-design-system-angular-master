@@ -13,9 +13,10 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule} from '@angular/material/grid-list';
 import { AngularFireModule } from  '@angular/fire/compat';
 import { AngularFirestoreModule } from  '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import {
   collection,
   doc,
@@ -33,6 +34,7 @@ import {
   collectionChanges,
   docSnapshots
 } from "@angular/fire/firestore";
+import { UsersService } from "./services/users.service";
 
 
 @NgModule({
@@ -55,8 +57,10 @@ import {
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    AngularFireDatabaseModule,
   ],
-  providers: [UserService],
+  providers: [UserService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

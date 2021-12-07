@@ -1,13 +1,13 @@
 import { DocumentData, QueryDocumentSnapshot, SnapshotOptions } from "@angular/fire/firestore";
 
-export class User {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
+export default class User {
+    id?: string | null;
+    name?: string;
+    email?: string;
+    password?: string;
+    isAdmin?: boolean;
 
-    constructor( name: string, email: string, password: string, isAdmin: boolean) {}
+    constructor( name?: string, email?: string, password?: string, isAdmin?: boolean) {}
 
     toString(): string {
         return ('User: ' + this.name + ', ' + this.email);
@@ -15,6 +15,7 @@ export class User {
 
 }
 
+/*
 export const userConverter = {
     toFirestore(user: User): DocumentData {
         return {
@@ -29,4 +30,6 @@ export const userConverter = {
         const data = snapshot.data(options)!;
         return new User(data.name, data.email, data.password, data.isAdmin);
       }
+
 };
+*/

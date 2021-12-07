@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import User from '../models/user.model';
+//import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { map } from 'rxjs/operators';
+//import 'rxjs/add/observable/of';
 import { collection, collectionData, DocumentSnapshot, Firestore, getDocs, getFirestore } from '@angular/fire/firestore';
 import { DocumentData } from 'rxfire/firestore/interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +17,23 @@ export class UserService {
 
   tutorialsRef: AngularFirestoreCollection<User>;
 
-  public users : User[];
+  users : Observable<User[]>;
   db = getFirestore();
 
 
-  constructor(private angularFirestore:AngularFirestore) {
-    this.tutorialsRef = angularFirestore.collection(this.dbPath);
+
+
+  constructor(private angularFirestore:AngularFirestore, firestore:Firestore) {
+    const col = collection(firestore, 'users-collection');
+    this.users = collectionData(col);
+    //this.tutorialsRef = angularFirestore.collection(this.dbPath);
+    //this.users = this.angularFirestore.collection('users').valueChanges();
   }
 
+  getUsers(){
+    return this.users;
+  }
+  
   getAll(): AngularFirestoreCollection<User> {
     return this.tutorialsRef;
   }
