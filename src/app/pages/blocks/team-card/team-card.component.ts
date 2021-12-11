@@ -11,6 +11,7 @@ export class TeamCardComponent implements OnInit {
   shortLink : string ="https://www.precisionpass.co.uk/wp-content/uploads/2018/03/default-team-logo.png";
   loading: boolean = false;
   file: any = null;
+  loadText = "";
 
   constructor(private fileService:FileService) { }
 
@@ -18,16 +19,26 @@ export class TeamCardComponent implements OnInit {
   }
 
   onUpload() {
-    this.loading = !this.loading;
-    console.log(this.file);
-    this.fileService.upload(this.file).subscribe(
+    if(this.file == null){
+      this.loading = true;
+      this.loadText = "Please upload an image"
+    }else{
+      this.loadText = "Loading...";
+      this.loading = true;
+      console.log(this.file);
+      this.fileService.upload(this.file).subscribe(
         url => {this.shortLink = url;
           this.loading = false}
     );
+    }
   }
 
   onChange(event: any) {
     this.file = event.target.files[0];
+  }
+
+  onSubmit(){
+    
   }
 
 }
