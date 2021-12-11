@@ -13,33 +13,9 @@
   .card-title {
     margin-bottom: 0.75rem;
   }
-  
 
   .card-body {
     padding: 15px;
-
-    &.table-full-width {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .card-title {
-      color: $white;
-      text-transform: inherit;
-      font-weight: $font-weight-light;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-description,
-    .card-category {
-      color: rgba($white, 0.6);
-    }
-  }
-
-  .match-body {
-    padding: 15px;
-    align-self: center;
-    align-items: center;
 
     &.table-full-width {
       padding-left: 0;
@@ -128,8 +104,6 @@
       padding: 7px 0;
     }
   }
-
-  
 
   &.card-coin {
     border: 2px solid $default;

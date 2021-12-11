@@ -1,8 +1,10 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
@@ -16,18 +18,13 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
-import {MatGridListModule} from '@angular/material/grid-list';
 
 import { IndexComponent } from "./index/index.component";
 import { ProfilepageComponent } from "./profilepage/profilepage.component";
 import { RegisterpageComponent } from "./registerpage/registerpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
-import { HomeComponent } from './home/home.component';
-import { MatchCardComponent } from './match-card/match-card.component';
 import { MatchesComponent } from './matches/matches.component';
-import { BuyTicketsComponent } from './buy-tickets/buy-tickets.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { ManageComponent } from './manage/manage.component';
+import { MatchCardComponent } from './blocks/match-card/match-card.component';
 
 @NgModule({
   imports: [
@@ -35,6 +32,7 @@ import { ManageComponent } from './manage/manage.component';
     BrowserModule,
     FormsModule,
     RouterModule,
+    MatGridListModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
@@ -42,7 +40,6 @@ import { ManageComponent } from './manage/manage.component';
     PopoverModule.forRoot(),
     CollapseModule.forRoot(),
     JwBootstrapSwitchNg2Module,
-    MatGridListModule,
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
     AlertModule.forRoot(),
@@ -55,24 +52,14 @@ import { ManageComponent } from './manage/manage.component';
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    HomeComponent,
-    MatchCardComponent,
     MatchesComponent,
-    BuyTicketsComponent,
-    StatisticsComponent,
-    ManageComponent
+    MatchCardComponent
   ],
   exports: [
     IndexComponent,
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    HomeComponent,
-    MatchCardComponent,
-    MatchesComponent,
-    BuyTicketsComponent,
-    ManageComponent,
-    StatisticsComponent
   ],
   providers: []
 })

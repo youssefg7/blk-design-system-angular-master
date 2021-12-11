@@ -1,0 +1,50 @@
+div.teamitem {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+}
+
+.caption {
+    display: block;
+    padding-top: 10px;
+}
+
+.match-body {
+    padding: 15px;
+    align-self: center;
+    align-items: center;
+
+    &.table-full-width {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .card-title {
+      color: #fff;
+      text-transform: inherit;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-description,
+    .card-category {
+      color: rgba(#fff, 0.6);
+    }
+  }
+
+  .match-header {
+    padding: 20px 0 0;
+    overflow: hidden;
+    align-self: center;
+    align-items: center;
+
+    .match-title {
+      position: relative;
+      font-size: 5em;
+      font-weight: 900;
+      color: #fff;
+      margin-left: -5px;
+      z-index: 1;
+    }
+  }
+

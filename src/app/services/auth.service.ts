@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userLoggedIn: boolean;
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  userLoggedIn:boolean;
+
+  constructor(private router: Router, private afAuth: AngularFireAuth) { 
     this.userLoggedIn = false;
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
@@ -20,6 +19,7 @@ export class AuthService {
       }
     })
   }
+
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -62,6 +62,7 @@ export class AuthService {
       });
   }
 
+
   logoutUser(): Promise<void> {
     return this.afAuth.signOut()
       .then(() => {
@@ -80,3 +81,5 @@ export class AuthService {
     return this.afAuth.currentUser;                                 // returns user object for logged-in users, otherwise returns null 
   }
 }
+
+

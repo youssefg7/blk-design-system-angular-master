@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MasterComponentComponent } from './master-component.component';
+import { RegisterpageComponent } from './registerpage.component';
 
-describe('MasterComponentComponent', () => {
-  let component: MasterComponentComponent;
-  let fixture: ComponentFixture<MasterComponentComponent>;
+describe('RegisterpageComponent', () => {
+  let component: RegisterpageComponent;
+  let fixture: ComponentFixture<RegisterpageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MasterComponentComponent ]
+      declarations: [ RegisterpageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MasterComponentComponent);
+    fixture = TestBed.createComponent(RegisterpageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

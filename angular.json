@@ -37,14 +37,7 @@
               "src/assets/scss/blk-design-system.scss",
               "src/assets/demo/demo.css"
             ],
-            "scripts": [],
-            "aot": false,
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -71,8 +64,7 @@
                 }
               ]
             }
-          },
-          "defaultConfiguration": ""
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -118,16 +110,6 @@
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "blk-design-system-angular:build:production",
-            "firebaseProject": "nazamly-2021",
-            "firebaseHostingSite": "nazamly-2021"
           }
         }
       }

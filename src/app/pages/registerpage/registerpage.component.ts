@@ -1,46 +1,23 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
-import { collection, doc, getDoc, getDocs, getFirestore } from "@angular/fire/firestore";
-import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from "@angular/forms";
-import { map } from "rxjs/operators";
-import User  from "src/app/models/user.model";
-import { UserService } from "src/app/services/user.service"; //see line 60 for more info
-import { AuthService } from "src/app/services/auth.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormControl, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { UsersService } from "src/app/services/users.service";
-import { user } from "rxfire/auth";
+import { User } from 'src/app/models/user.model';
+import { Observable } from 'rxjs';
+
 @Component({
-  selector: "app-registerpage",
-  templateUrl: "registerpage.component.html"
+  selector: 'app-registerpage',
+  templateUrl: './registerpage.component.html',
+  styleUrls: ['./registerpage.component.scss']
 })
-
 export class RegisterpageComponent implements OnInit, OnDestroy {
-  users? = [];
 
-  isCollapsed = true;
-  focus;
-  focus1;
-  focus2;
-  focus3;
-  focus4;
-  names = ["Youssef", "Mostafa", "Kiro", "Anthony"];
-  nameOrder = [];
-  registerAttempt;
-  loginAttempt;
-  db = getFirestore();
-
-  onclick() {
-    console.log("clicked");
-
-  }
-
-  addName = neme => {
-    this.nameOrder.push(neme);
-  }
-  removeName = neme => {
-    let index = this.nameOrder.indexOf(neme);
-    if (index > -1) this.nameOrder.splice(index, 1);
-  }
+  registerAttempt:boolean;
+  loginAttempt:boolean;
+  users$: Observable<Array<User>> = this.userService.users$;
+  userList:any;
+  focus; focus1; focus2; focus3; focus4;
 
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -52,15 +29,16 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
-  })
-  constructor(private afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private fb: FormBuilder, private userService: UserService, private usersService: UsersService) { }
+  });
 
+  constructor(private router: Router ,private authService: AuthService, private userService: UserService) { }
 
-  ngOnInit() {
-    console.log('ngOnInit called');
-    this.userService.getUsers().subscribe(list => this.users = list);
-    console.log(this.users.length);
-    console.log('ngOnInit finish');
+  ngOnInit(): void {
+    this.users$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.userList = queriedItems;
+      return queriedItems;
+    });
     if (this.authService.userLoggedIn) {                       // if the user's logged in, navigate them to the dashboard (NOTE: don't use afAuth.currentUser -- it's never null)
       this.router.navigate(['home']);
     }
@@ -68,19 +46,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     this.loginAttempt = false;
   }
 
-/*
-    retrieveUsers(): void {
-    this.usersService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.users = data;
-    });
-  }
-*/
 
   onSubmitRegister(): void {
     console.log(this.registerForm.value.name + 'successfully added');
@@ -118,7 +83,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
         }
       })
     }
-
   }
 
   get name() {
@@ -149,4 +113,5 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("register-page");
   }
+
 }

@@ -3,27 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  firebase: {
-    projectId: 'nazamly-2021',
-    appId: '1:1090393277214:web:f8853478e25034ce8f3f0f',
-    storageBucket: 'nazamly-2021.appspot.com',
-    locationId: 'europe-west',
-    apiKey: 'AIzaSyBepH65QB_t2-W11tQ9RhWByctnZ17cgBM',
-    databaseURL: 'https://nazamly-2021.firebaseio.com',
-    authDomain: 'nazamly-2021.firebaseapp.com',
-    messagingSenderId: '1090393277214',
-    measurementId: 'G-CNLBZH997E',
-  },
   production: false,
   firebaseConfig: {
     apiKey: "AIzaSyBepH65QB_t2-W11tQ9RhWByctnZ17cgBM",
-    databaseURL: 'https://nazamly-2021.firebaseio.com',
     authDomain: "nazamly-2021.firebaseapp.com",
+    databaseURL: "https://nazamly-2021-default-rtdb.firebaseio.com",
     projectId: "nazamly-2021",
     storageBucket: "nazamly-2021.appspot.com",
     messagingSenderId: "1090393277214",
     appId: "1:1090393277214:web:f8853478e25034ce8f3f0f",
-    measurementId: "G-CNLBZH997E"
+    measurementId: "${config.measurementId}"
   }
 };
 
@@ -34,4 +23,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

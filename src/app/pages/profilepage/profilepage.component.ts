@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: "app-profilepage",
   templateUrl: "profilepage.component.html"
 })
 export class ProfilepageComponent implements OnInit, OnDestroy {
+  
   accountDetails = new FormGroup({
     name: new FormControl('Youssef', [Validators.required]),
     password: new FormControl('', [Validators.required]),

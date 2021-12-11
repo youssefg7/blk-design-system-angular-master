@@ -1,68 +1,68 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+
+
+import { BsDropdownModule } from "ngx-bootstrap/dropdown";
+import { ProgressbarModule } from "ngx-bootstrap/progressbar";
+import { TooltipModule } from "ngx-bootstrap/tooltip";
+import { CollapseModule } from "ngx-bootstrap/collapse";
+import { TabsModule } from "ngx-bootstrap/tabs";
+import { PaginationModule } from "ngx-bootstrap/pagination";
+import { AlertModule } from "ngx-bootstrap/alert";
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { CarouselModule } from "ngx-bootstrap/carousel";
+import { ModalModule } from "ngx-bootstrap/modal";
+
 import { PagesModule } from "./pages/pages.module";
-import { LayoutModule } from "./layout/layout.module";
-import { UserService } from "./services/user.service";
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideStorage, getStorage } from '@angular/fire/storage';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { MatGridListModule} from '@angular/material/grid-list';
-import { AngularFireModule } from  '@angular/fire/compat';
-import { AngularFirestoreModule } from  '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import {
-  collection,
-  doc,
-  docData,
-  DocumentReference,
-  CollectionReference,
-  Firestore,
-  onSnapshot,
-  query,
-  where,
-  Unsubscribe,
-  Query,
-  DocumentData,
-  collectionData,
-  collectionChanges,
-  docSnapshots
-} from "@angular/fire/firestore";
-import { UsersService } from "./services/users.service";
-
-
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { IndexComponent } from "./pages/index/index.component";
+import { ProfilepageComponent } from "./pages/profilepage/profilepage.component";
+import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
+import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
-    AppComponent
-
+    AppComponent,
+    NavBarComponent
+    // IndexComponent,
+    // ProfilepageComponent,
+    // RegisterpageComponent,
+    // LandingpageComponent
   ],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    LayoutModule,
+    AngularFireAuthModule,
     PagesModule,
-    ReactiveFormsModule,
     MatGridListModule,
-    AngularFirestoreModule,
+    // BsDropdownModule.forRoot(),
+    // ProgressbarModule.forRoot(),
+    // TooltipModule.forRoot(),
+    // CollapseModule.forRoot(),
+    // TabsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage()),
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    // PaginationModule.forRoot(),
+    // AlertModule.forRoot(),
+    // BsDatepickerModule.forRoot(),
+    // CarouselModule.forRoot(),
+    // ModalModule.forRoot()
   ],
-  providers: [UserService, UsersService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor(){}
-}
+export class AppModule {}

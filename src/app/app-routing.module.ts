@@ -7,26 +7,15 @@ import { IndexComponent } from "./pages/index/index.component";
 import { ProfilepageComponent } from "./pages/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { MatchCardComponent } from "./pages/match-card/match-card.component";
 import { MatchesComponent } from "./pages/matches/matches.component";
-import { StatisticsComponent } from "./pages/statistics/statistics.component";
-import { BuyTicketsComponent } from "./pages/buy-tickets/buy-tickets.component";
-import { ManageComponent } from "./pages/manage/manage.component";
 
 const routes: Routes = [
-  { path: "nazamly", component: HomeComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomeComponent },
+  { path: "", redirectTo: "matches", pathMatch: "full" },
+  { path: "home", component: IndexComponent },
+  { path: "matches", component: MatchesComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
-  { path: "login", component: RegisterpageComponent },
-  { path: "matches", component: MatchesComponent },
-  { path: "landing", component: LandingpageComponent },
-  { path: "index" , component:IndexComponent },
-  { path: "statistics" , component:StatisticsComponent },
-  { path: "buyTickets" , component:BuyTicketsComponent },
-  { path: "manage" , component:ManageComponent },
+  { path: "landing", component: LandingpageComponent }
 ];
 
 @NgModule({
@@ -39,4 +28,4 @@ const routes: Routes = [
   ],
   exports: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

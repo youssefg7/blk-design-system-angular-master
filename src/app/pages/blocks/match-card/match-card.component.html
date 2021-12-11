@@ -1,21 +1,21 @@
 <div class="container" id="container">
     <div class="card card-register">
         <div class="match-header">
-            <h1>{{tsmatch.tournamentName}}</h1>
+            <h1>{{tsmatch.tournamentId}}</h1>
         </div>
         <h3 style="align-self: center;">{{tsmatch.date}}</h3>
         <div class="match-body">
-            <div class="row" style="align-items: center;">
+            <div class="row" style="align-items: center; align-self: center;">
                 <div class="teamitem" style="padding-right: 30px;">
-                    <img style="height: 150px; max-width: 140px;" [src]="tsmatch.aPic">
-                    <h2 class="caption">{{tsmatch.aName}}</h2>
+                    <img style="height: 150px; max-width: 140px;" src="https://www.precisionpass.co.uk/wp-content/uploads/2018/03/default-team-logo.png">
+                    <h2 class="caption">{{tsmatch.aId}}</h2>
                 </div>
                 <h2 class="card-title">{{tsmatch.aScore}}</h2>
                 <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">:</h2>
                 <h2 class="card-title">{{tsmatch.bScore}}</h2>
                 <div class="teamitem" style="padding-left: 30px;">
-                    <img style="height: 150px; max-width: 140px;" [src]="tsmatch.bPic">
-                    <h2 class="caption">{{tsmatch.bName}}</h2>
+                    <img style="height: 150px; max-width: 140px;" src="https://www.precisionpass.co.uk/wp-content/uploads/2018/03/default-team-logo.png">
+                    <h2 class="caption">{{tsmatch.bId}}</h2>
                 </div>
             </div>
         </div>

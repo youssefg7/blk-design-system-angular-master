@@ -1,14 +1,10 @@
-import {Tournament} from './tournament.model'
-
-export class Match {
-    id: string;
+export interface Match {
+    id?: string;
     aId: string;
     bId: string;
-    aName: string;
-    bName: string;
+    tournamentId: string;
+    date: string;
     aScore: Number;
     bScore: Number;
-    tournament: Tournament;
-    tournamentName: string;
-    date: string;
-}
+    doc?: any;
+  }

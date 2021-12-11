@@ -1,54 +1,42 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Match } from '../models/match.model';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
+import { Observable, from } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchService {
 
-  constructor(private angularFirestore:AngularFirestore) { }
+  private matchesCollection: AngularFirestoreCollection<Match>;
+  matches$: Observable<Match[]>;
 
-  getMatchDoc(id) {
-    return this.angularFirestore
-    .collection('matches-collection')
-    .doc(id)
-    .valueChanges()
+  constructor(private afs: AngularFirestore) {
+    this.matchesCollection = afs.collection<Match>('matches');
+    this.matches$ = this.matchesCollection.valueChanges({idField:'id'})
+   }
+
+   addMatch(match:Match):Observable<DocumentReference>{
+    return from(this.matchesCollection.add(match));
   }
 
-  getMatchesList() { 
-    return this.angularFirestore
-    .collection("matches-collection")
-    .snapshotChanges();
+//to be tested
+  updateMatch(match:Match):Observable<void>{
+    return from(
+      this.afs.doc<Match>('matches/${match.id}').update({
+        aId: match.aId,
+        bId: match.bId,
+        aScore: match.aScore,
+        bScore: match.bScore, 
+        tournamentId: match.tournamentId,
+        date: match.date,
+      }),
+    );
   }
-
-  addMatch(match: any) { //Modify any to Match
-    return new Promise<any>((resolve, reject) =>{
-      this.angularFirestore
-        .collection("matches-collection")
-        .add(match)
-        .then(response => { console.log(response) }, error => reject(error));
-    });
-  }
-
-  deleteMatch(match) {
-    return this.angularFirestore
-      .collection("matches-collection")
-      .doc(match.id)
-      .delete();
-  }
-  
-  updateMatch(match: any, id) {   //Modify any to Match
-    return this.angularFirestore
-      .collection("matches-collection")
-      .doc(id)
-      .update({
-        /*name: user.name,
-        email: user.email,
-        password: user.password,
-        isAdmin: user.isAdmin*/
-      });
-  }
-
 
 }
