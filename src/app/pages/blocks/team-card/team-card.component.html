@@ -1,0 +1,22 @@
+<div>
+    <mat-grid-list cols="2" style="margin: 20px;">
+        <div>
+            <input type="text" placeholder="Team Name" class="form-control">
+            <div class="text-center" style="padding: 30px;">
+                <img style="height: 150px; max-width: 140px;" [src]="shortLink">
+            </div>
+            <div class="text-center">
+                <input class="form-control" type="file" 
+                        (change)="onChange($event)">
+              
+                <button (click)="onUpload()" 
+                    class="btn btn-success">
+                    Upload
+                </button>
+                <div class="container" *ngIf="loading">
+                    <h3>Loading ...</h3>
+                </div>
+            </div>
+        </div>
+    </mat-grid-list>
+</div>

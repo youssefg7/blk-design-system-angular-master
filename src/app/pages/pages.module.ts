@@ -25,6 +25,7 @@ import { RegisterpageComponent } from "./registerpage/registerpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { MatchesComponent } from './matches/matches.component';
 import { MatchCardComponent } from './blocks/match-card/match-card.component';
+import { TeamCardComponent } from './blocks/team-card/team-card.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { MatchCardComponent } from './blocks/match-card/match-card.component';
     RegisterpageComponent,
     LandingpageComponent,
     MatchesComponent,
-    MatchCardComponent
+    MatchCardComponent,
+    TeamCardComponent
   ],
   exports: [
     IndexComponent,

@@ -1,3 +1,9 @@
+<ng-template #template>
+    <div style="background-color: #000000;">
+        <app-team-card></app-team-card>
+    </div>
+</ng-template>
+
 <div class="wrapper">
     <section class="section">
         <div class="container">
@@ -46,7 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-danger btn-round float-right" placement="right" type="submit">
+                                <button class="btn btn-danger btn-round float-right" placement="right" type="submit" (click)="test(template)">
                   Save Changes
                 </button>
                             </form>
