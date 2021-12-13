@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable,OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  registeredUserid:any;
+  currentuserUid : any;
   userLoggedIn:boolean;
+  isPaused:boolean;
+  
 
-  constructor(private router: Router, private afAuth: AngularFireAuth) { 
+
+
+  constructor(private router: Router, private afAuth: AngularFireAuth, private cookieService:CookieService) { 
     this.userLoggedIn = false;
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
         this.userLoggedIn = true;
+        this.currentuserUid = user.uid;
+        this.cookieService.set('Uid',user.uid);
       } else {
         this.userLoggedIn = false;
       }
@@ -39,6 +48,7 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         let emailLower = user.email.toLowerCase();
+        this.registeredUserid = result.user.uid;
       })
       .catch(error => {
         console.log('Auth Service: signup error', error);
@@ -77,9 +87,12 @@ export class AuthService {
       });
   }
 
+
   getCurrentUser() {
-    return this.afAuth.currentUser;                                 // returns user object for logged-in users, otherwise returns null 
+    this.afAuth.authState.subscribe( item => {return item.uid;})
   }
+  
+    
 }
 
 

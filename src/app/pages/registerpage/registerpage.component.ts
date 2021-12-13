@@ -55,7 +55,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
       this.registerAttempt = false;
       this.authService.signupUser(this.registerForm.value).then((result) => {
         if (result == null) {
-          this.userService.addUser(this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
+          this.userService.addUser(this.authService.registeredUserid, this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
           document.getElementById("failedRegister").style.display = "none";
           document.getElementById("successRegister").style.display = "block";
         } else if (result.isvalid == false) {

@@ -11,8 +11,11 @@
                 <div class="col-md-6">
                     <div class="card card-plain">
                         <div class="card-header">
-                            <h1 class="profile-title text-left">Your Profile Details</h1>
-                            <h5 class="text-on-back">0</h5>
+                            <br>
+                            <br>
+                            <br>
+                            <h1 class="profile-title text-left">Profile Details</h1>
+                            <h6 class="text-on-back" style="font-size: 50pt;">{{getAdmin()}}</h6>
                         </div>
                         <div class="card-body">
                             <form [formGroup]="accountDetails">
@@ -20,13 +23,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label> Name </label>
-                                            <input formControlName="name" id="userName" class="form-control" type="text" />
+                                            <span formControlName="name" id="userName" class="form-control" type="text" [innerText]="this.userService.currentUser.name" [contentEditable]="true" ></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label> Email </label>
-                                            <span id="userEmail" class="form-control"></span>
+                                            <span id="userEmail" [innerText]="this.userService.currentUser.email" class="form-control"></span>
                                         </div>
                                     </div>
                                 </div>

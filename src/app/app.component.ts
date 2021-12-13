@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 import { Location } from "@angular/common";
 import { DOCUMENT } from "@angular/common";
+import { AuthService } from "./services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     public location: Location,
+    private authService: AuthService,
     @Inject(DOCUMENT) document
   ) {}
   @HostListener("window:scroll", ["$event"])
@@ -37,5 +40,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.onWindowScroll(event);
+    console.log(this.authService.getCurrentUser());
+    
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileService } from 'src/app/services/file.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-team-card',
@@ -13,7 +14,7 @@ export class TeamCardComponent implements OnInit {
   file: any = null;
   loadText = "";
 
-  constructor(private fileService:FileService) { }
+  constructor(private fileService:FileService, private cookieService:CookieService) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,7 @@ export class TeamCardComponent implements OnInit {
     }else{
       this.loadText = "Loading...";
       this.loading = true;
-      console.log(this.file);
+      //console.log(this.file);
       this.fileService.upload(this.file).subscribe(
         url => {this.shortLink = url;
           this.loading = false}
@@ -38,7 +39,7 @@ export class TeamCardComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    console.log(this.cookieService.get('Uid'));
   }
 
 }
