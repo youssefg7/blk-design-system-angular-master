@@ -18,7 +18,7 @@ export class MatchService {
 
   constructor(private afs: AngularFirestore) {
     this.matchesCollection = afs.collection<Match>('matches');
-    this.matches$ = this.matchesCollection.valueChanges({idField:'id'})
+    this.matches$ = this.matchesCollection.valueChanges({idField:'id'});
    }
 
    addMatch(match:Match):Observable<DocumentReference>{

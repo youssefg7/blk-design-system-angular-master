@@ -25,7 +25,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   modalRef?: BsModalRef;
   isCollapsed = true;
-  constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService) {}
+  constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService, private authService:AuthService) {}
 
   ngOnInit() {
     console.log(this.cookieService.get('Uid'));
@@ -46,9 +46,31 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
   }
 
   test(template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
-    console.log(this.cookieService.get('Uid'));
 
+    if((document.getElementById("userPass") as HTMLInputElement).value == ""){
+      
+      this.userService.updateUser({
+        name: document.getElementById("userName").innerText,
+        email: this.userService.currentUser.email,
+        password: this.userService.currentUser.password,
+        isAdmin: this.userService.currentUser.isAdmin,
+        favouriteTeamsIds: ["hi","it","works"]
+        
+      })
+
+    }else{
+      this.authService.authUpdatePassword((document.getElementById("userPass") as HTMLInputElement).value);
+      this.userService.updateUser({
+        name: document.getElementById("userName").innerText,
+        email: this.userService.currentUser.email,
+        password: (document.getElementById("userPass") as HTMLInputElement).value,
+        isAdmin: this.userService.currentUser.isAdmin,
+        favouriteTeamsIds: ["hi","it","works"]
+        
+      })
+    }
+    //this.modalRef = this.modalService.show(template);
+    
   }
 
   getAdmin(){

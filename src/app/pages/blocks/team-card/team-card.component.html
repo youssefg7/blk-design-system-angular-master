@@ -1,18 +1,16 @@
-<div style="padding: 30px;">
-    <input type="text" placeholder="Team Name" class="form-control">
-    <div class="text-center" style="padding: 20px;"> <img style="height: 150px; max-width: 140px;" [src]="shortLink"> </div>
-    <div class="text-center">
-        <input class="form-control" type="file" (change)="onChange($event)">
-    </div>
-    <div style="display: flex;">
-            <button (click)="onUpload()" class="btn btn-success" style="align-self: flex-start;">
-                Upload
-            </button>
-            <p *ngIf="loading" style="margin-left: auto; margin-right: 0;">{{loadText}}</p>
-    </div>
-    <div class="text-center">
-        <button (click)="onSubmit()" class="btn btn-danger">
-            Submit
-        </button>
+<div class="container" id="container">
+    <div class="card card-register">
+        <div class="team-header">
+            <h1>{{tsteam.name}}</h1>
+        </div>
+        <div *ngIf="showId" style="align-self: center;">TeamId: {{tsteam.id}}</div>
+        <div class="team-body">
+            <div class="text-center" style="padding: 20px;"> <img style="height: 150px; max-width: 140px;" [src]="tsteam.pictureUrl"> </div>
+        </div>
+        <div class="team-header" style="padding-bottom: 10px;">
+            <a class="btn btn-danger btn-round btn-lg">
+                Edit Info
+            </a>
+        </div>
     </div>
 </div>

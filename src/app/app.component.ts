@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.onWindowScroll(event);
-    console.log(this.authService.getCurrentUser());
     
   }
 }

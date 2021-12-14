@@ -8,11 +8,13 @@ import { ProfilepageComponent } from "./pages/profilepage/profilepage.component"
 import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { MatchesComponent } from "./pages/matches/matches.component";
+import { ManagepageComponent } from "./pages/managepage/managepage.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "matches", pathMatch: "full" },
   { path: "home", component: IndexComponent },
   { path: "matches", component: MatchesComponent },
+  { path: "manage", component: ManagepageComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
   { path: "landing", component: LandingpageComponent }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FileService } from 'src/app/services/file.service';
-import { CookieService } from 'ngx-cookie-service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Team } from 'src/app/models/team.model';
+
 
 @Component({
   selector: 'app-team-card',
@@ -9,37 +9,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class TeamCardComponent implements OnInit {
 
-  shortLink : string ="https://www.precisionpass.co.uk/wp-content/uploads/2018/03/default-team-logo.png";
-  loading: boolean = false;
-  file: any = null;
-  loadText = "";
+  @Input() tsteam:Team;
+  @Input() showId:boolean;
 
-  constructor(private fileService:FileService, private cookieService:CookieService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  onUpload() {
-    if(this.file == null){
-      this.loading = true;
-      this.loadText = "Please upload an image"
-    }else{
-      this.loadText = "Loading...";
-      this.loading = true;
-      //console.log(this.file);
-      this.fileService.upload(this.file).subscribe(
-        url => {this.shortLink = url;
-          this.loading = false}
-    );
-    }
-  }
-
-  onChange(event: any) {
-    this.file = event.target.files[0];
-  }
-
-  onSubmit(){
-    console.log(this.cookieService.get('Uid'));
+    
   }
 
 }

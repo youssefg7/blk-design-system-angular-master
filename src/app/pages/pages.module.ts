@@ -26,6 +26,9 @@ import { LandingpageComponent } from "./examples/landingpage/landingpage.compone
 import { MatchesComponent } from './matches/matches.component';
 import { MatchCardComponent } from './blocks/match-card/match-card.component';
 import { TeamCardComponent } from './blocks/team-card/team-card.component';
+import { ManagepageComponent } from './managepage/managepage.component';
+import { ManageTeamsComponent } from './blocks/manage-teams/manage-teams.component';
+import { TeamCreateComponent } from './blocks/team-create/team-create.component';
 
 @NgModule({
   imports: [
@@ -55,7 +58,10 @@ import { TeamCardComponent } from './blocks/team-card/team-card.component';
     LandingpageComponent,
     MatchesComponent,
     MatchCardComponent,
-    TeamCardComponent
+    TeamCardComponent,
+    ManagepageComponent,
+    ManageTeamsComponent,
+    TeamCreateComponent
   ],
   exports: [
     IndexComponent,

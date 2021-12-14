@@ -9,7 +9,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
   registeredUserid:any;
-  currentuserUid : any;
   userLoggedIn:boolean;
   isPaused:boolean;
   
@@ -21,7 +20,6 @@ export class AuthService {
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
         this.userLoggedIn = true;
-        this.currentuserUid = user.uid;
         this.cookieService.set('Uid',user.uid);
       } else {
         this.userLoggedIn = false;
@@ -87,11 +85,10 @@ export class AuthService {
       });
   }
 
-
-  getCurrentUser() {
-    this.afAuth.authState.subscribe( item => {return item.uid;})
+  authUpdatePassword(pass:string){
+    this.afAuth.authState.subscribe( item => {return item.updatePassword(pass);});
   }
-  
+
     
 }
 

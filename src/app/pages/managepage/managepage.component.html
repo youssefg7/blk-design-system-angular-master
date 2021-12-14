@@ -1,0 +1,27 @@
+<ng-template #template>
+    <div style="background-color: #1f2251;">
+        <app-team-create></app-team-create>
+    </div>
+</ng-template>
+<br>
+<br>
+<br>
+<br>
+<tabset class="nav-tabs-danger">
+    <tab>
+        <ng-template tabHeading>
+            <i class="tim-icons icon-single-02"> </i> Your Teams
+        </ng-template>
+        <div style="margin-left: 60px;">
+            <button class="btn btn-danger btn-round" type="submit" (click)="openTeamMenu(template)">
+                 Add Team
+            </button>
+            <app-manage-teams [showId]="true" [condition]="this.cookieService.get('Uid')"></app-manage-teams>
+        </div>
+    </tab>
+    <tab [disabled]="!this.userService.currentUser.isAdmin">
+      <ng-template tabHeading>
+        <i class="tim-icons icon-trophy"> </i> Your Tournaments
+      </ng-template>
+    </tab>
+</tabset>
