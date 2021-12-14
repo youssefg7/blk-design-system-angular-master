@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators} from "@angular/forms";
 import { BsModalService, BsModalRef, ModalOptions } from "ngx-bootstrap/modal";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Observable } from "rxjs";
 import { User } from "src/app/models/user.model";
 import { CookieService } from "ngx-cookie-service";
@@ -25,7 +26,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   modalRef?: BsModalRef;
   isCollapsed = true;
-  constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService, private authService:AuthService) {}
+  constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
 
   ngOnInit() {
     console.log(this.cookieService.get('Uid'));

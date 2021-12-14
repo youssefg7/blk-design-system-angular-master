@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FileService } from 'src/app/services/file.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-create',
@@ -13,8 +14,10 @@ export class TeamCreateComponent implements OnInit {
   loading: boolean = false;
   file: any = null;
   loadText = "";
+  @Output()
+  EEmitter : EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private fileService:FileService, private cookieService:CookieService) { }
+  constructor(private fileService:FileService, private cookieService:CookieService, private teamService:TeamService) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +42,16 @@ export class TeamCreateComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.cookieService.get('Uid'));
+    if((document.getElementById("teamName") as HTMLInputElement).value == ""){
+      this.loading = true;
+      this.loadText = "Please write the Team's Name"
+    }else{
+      this.teamService.addTeam({
+        name: (document.getElementById("teamName") as HTMLInputElement).value,
+        userId: this.cookieService.get('Uid'),
+        pictureUrl: this.shortLink
+      })
+      this.EEmitter.emit("close team-create")
+    }
   }
 }

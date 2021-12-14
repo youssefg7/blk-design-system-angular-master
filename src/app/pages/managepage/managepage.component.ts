@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-managepage',
@@ -10,9 +11,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ManagepageComponent implements OnInit {
 
-  constructor(public userService : UserService, private modalService: BsModalService, public cookieService: CookieService) { }
+  constructor(public userService : UserService, private modalService: BsModalService, public cookieService: CookieService, public afAuth:AngularFireAuth) { }
 
   modalRef?: BsModalRef;
+  
 
   ngOnInit(): void {
     this.userService.getCurrentUser();
@@ -21,5 +23,9 @@ export class ManagepageComponent implements OnInit {
 
   openTeamMenu(template : TemplateRef<any>){
      this.modalRef = this.modalService.show(template);
+  }
+
+  eventHandle(event){
+    this.modalRef.hide();
   }
 }

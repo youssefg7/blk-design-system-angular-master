@@ -72,6 +72,7 @@ export class AuthService {
 
 
   logoutUser(): Promise<void> {
+    this.cookieService.delete('Uid');
     return this.afAuth.signOut()
       .then(() => {
         this.router.navigate(['/home']);                    // when we log the user out, navigate them to home

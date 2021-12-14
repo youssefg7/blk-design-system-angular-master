@@ -20,7 +20,7 @@ export class TeamService {
     this.teams$ = this.teamsCollection.valueChanges({idField:'id'});
    }
 
-   addMatch(team:Team):Observable<DocumentReference>{
+   addTeam(team:Team):Observable<DocumentReference>{
     return from(this.teamsCollection.add(team));
   }
 

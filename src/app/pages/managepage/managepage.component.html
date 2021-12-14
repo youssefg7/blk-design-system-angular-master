@@ -1,6 +1,7 @@
+<div *ngIf="afAuth.user | async">
 <ng-template #template>
     <div style="background-color: #1f2251;">
-        <app-team-create></app-team-create>
+        <app-team-create (EEmitter)="eventHandle($event)"></app-team-create>
     </div>
 </ng-template>
 <br>
@@ -25,3 +26,4 @@
       </ng-template>
     </tab>
 </tabset>
+</div>
