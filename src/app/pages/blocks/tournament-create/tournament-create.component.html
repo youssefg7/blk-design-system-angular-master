@@ -1,0 +1,26 @@
+<div style="padding: 30px;">
+    <input type="text" placeholder="Tournament Name" class="form-control" id="tournamentName" style="margin-bottom: 10px;">
+    <input type="text" placeholder="TeamId" class="form-control" id="teamName" style="margin-bottom: 10px;">
+    <div style="display: flex;">
+            <button  class="btn btn-success" style="align-self: flex-start; margin-bottom: 10px;">
+                Add Team
+            </button>
+            <p style="margin-left: auto; margin-right: 0;">loadText</p>
+    </div>
+    <div>
+        <div *ngFor="let item of list" style="display: flex; margin-bottom: 5px;">
+            <i style="margin-left: 0; margin-right: auto;" (mouseenter)="showImage(template)" >{{item}}</i>
+            <ng-template #template>
+                <div style="background-color: #1f2251;">
+                    {{item}}
+                </div>
+            </ng-template>
+            <i class="tim-icons icon-simple-remove"  style="margin-left: auto; margin-right: 0;"></i>
+        </div>
+    </div>
+    <div class="text-center">
+        <button  class="btn btn-danger" style="margin-top: 5px;">
+            Submit
+        </button>
+    </div>
+</div>

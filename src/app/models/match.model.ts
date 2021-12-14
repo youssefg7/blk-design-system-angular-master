@@ -4,7 +4,8 @@ export interface Match {
     bId: string;
     tournamentId: string;
     date: string;
-    aScore: Number;
-    bScore: Number;
+    aScore: string;
+    bScore: string;
+    scorersId? : string[];
     doc?: any;
   }

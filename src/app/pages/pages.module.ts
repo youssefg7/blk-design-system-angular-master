@@ -29,6 +29,8 @@ import { TeamCardComponent } from './blocks/team-card/team-card.component';
 import { ManagepageComponent } from './managepage/managepage.component';
 import { ManageTeamsComponent } from './blocks/manage-teams/manage-teams.component';
 import { TeamCreateComponent } from './blocks/team-create/team-create.component';
+import { ManageTournamentsComponent } from './blocks/manage-tournaments/manage-tournaments.component';
+import { TournamentCreateComponent } from './blocks/tournament-create/tournament-create.component';
 
 @NgModule({
   imports: [
@@ -61,7 +63,9 @@ import { TeamCreateComponent } from './blocks/team-create/team-create.component'
     TeamCardComponent,
     ManagepageComponent,
     ManageTeamsComponent,
-    TeamCreateComponent
+    TeamCreateComponent,
+    ManageTournamentsComponent,
+    TournamentCreateComponent
   ],
   exports: [
     IndexComponent,

@@ -1,7 +1,12 @@
 <div *ngIf="afAuth.user | async">
-<ng-template #template>
+<ng-template #teamtemplate>
     <div style="background-color: #1f2251;">
         <app-team-create (EEmitter)="eventHandle($event)"></app-team-create>
+    </div>
+</ng-template>
+<ng-template #tournamenttemplate>
+    <div style="background-color: #1f2251;">
+        <app-tournament-create></app-tournament-create>
     </div>
 </ng-template>
 <br>
@@ -14,7 +19,7 @@
             <i class="tim-icons icon-single-02"> </i> Your Teams
         </ng-template>
         <div style="margin-left: 60px;">
-            <button class="btn btn-danger btn-round" type="submit" (click)="openTeamMenu(template)">
+            <button class="btn btn-danger btn-round" type="submit" (click)="openMenu(teamtemplate)">
                  Add Team
             </button>
             <app-manage-teams [showId]="true" [condition]="this.cookieService.get('Uid')"></app-manage-teams>
@@ -24,6 +29,12 @@
       <ng-template tabHeading>
         <i class="tim-icons icon-trophy"> </i> Your Tournaments
       </ng-template>
+      <div style="margin-left: 60px;">
+        <button class="btn btn-danger btn-round" type="submit" (click)="openMenu(tournamenttemplate)">
+             New Tournament
+        </button>
+        <app-manage-tournaments></app-manage-tournaments>
+    </div>
     </tab>
 </tabset>
 </div>

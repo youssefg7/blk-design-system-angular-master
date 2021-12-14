@@ -29,7 +29,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
   constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
 
   ngOnInit() {
-    console.log(this.cookieService.get('Uid'));
+    //console.log(this.cookieService.get('Uid'));
     this.users$.subscribe( queriedItems => {
       console.log(queriedItems);
       this.userList = queriedItems;

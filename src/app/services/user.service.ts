@@ -32,6 +32,5 @@ export class UserService {
 
   getCurrentUser(){
     this.usersCollection.doc(this.cookieService.get('Uid')).valueChanges({idField:'id'}).subscribe( item => {this.currentUser = item;});
-    
   }
 }

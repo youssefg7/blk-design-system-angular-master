@@ -21,7 +21,7 @@ export class ManagepageComponent implements OnInit {
   }
 
 
-  openTeamMenu(template : TemplateRef<any>){
+  openMenu(template : TemplateRef<any>){
      this.modalRef = this.modalService.show(template);
   }
 

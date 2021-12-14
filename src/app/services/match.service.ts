@@ -21,11 +21,13 @@ export class MatchService {
     this.matches$ = this.matchesCollection.valueChanges({idField:'id'});
    }
 
-   addMatch(match:Match):Observable<DocumentReference>{
-    return from(this.matchesCollection.add(match));
+   addMatch(id:string, match:Match)/*:Observable<DocumentReference>*/{
+    //return from(this.matchesCollection.add(match));
+    this.matchesCollection.doc(id).set(match);
+
   }
 
-//to be tested
+/*to be tested
   updateMatch(match:Match):Observable<void>{
     return from(
       this.afs.doc<Match>('matches/${match.id}').update({
@@ -37,6 +39,6 @@ export class MatchService {
         date: match.date,
       }),
     );
-  }
+  }*/
 
 }

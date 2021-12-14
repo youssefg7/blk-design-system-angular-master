@@ -1,0 +1,14 @@
+<tabset class="nav-tabs-danger">
+    <tab *ngFor="let item of tourarray">
+        <ng-template tabHeading>
+            {{item}}
+        </ng-template>
+        <mat-grid-list cols="3" rowHeight="500px" style="margin: 20px;">
+            <div *ngFor="let i of counter(item.length)">
+                <mat-grid-tile>
+                    <app-match-card [tsmatch]="matcharray" style="width: 100%;"></app-match-card>
+                </mat-grid-tile>
+            </div>
+        </mat-grid-list>    
+    </tab>
+</tabset>
