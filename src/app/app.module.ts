@@ -44,6 +44,7 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TooltipModule,
     RouterModule,
     AppRoutingModule,
     AngularFireAuthModule,

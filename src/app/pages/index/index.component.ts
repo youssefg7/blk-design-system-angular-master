@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import noUiSlider from "nouislider";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-index",
@@ -13,11 +14,14 @@ export class IndexComponent implements OnInit, OnDestroy {
   date = new Date();
   pagination = 3;
   pagination1 = 1;
-  constructor() {}
+  constructor(private userService: UserService) {}
   scrollToDownload(element: any) {
     element.scrollIntoView({ behavior: "smooth" });
   }
   ngOnInit() {
+
+    this.userService.getCurrentUser();
+
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("index-page");
 

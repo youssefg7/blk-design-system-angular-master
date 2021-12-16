@@ -23,6 +23,7 @@ export class AuthService {
         this.cookieService.set('Uid',user.uid);
       } else {
         this.userLoggedIn = false;
+        this.cookieService.delete('Uid');
       }
     })
   }
@@ -72,7 +73,6 @@ export class AuthService {
 
 
   logoutUser(): Promise<void> {
-    this.cookieService.delete('Uid');
     return this.afAuth.signOut()
       .then(() => {
         this.router.navigate(['/home']);                    // when we log the user out, navigate them to home

@@ -5,7 +5,7 @@ import { FormsModule} from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule } from "@angular/forms";
-
+import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 import { TooltipModule } from "ngx-bootstrap/tooltip";
@@ -41,6 +41,10 @@ import { BuyCardComponent } from './blocks/buy-card/buy-card.component';
     RouterModule,
     MatGridListModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot({
+      maxOpened:4,
+      autoDismiss:true,
+    }),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
