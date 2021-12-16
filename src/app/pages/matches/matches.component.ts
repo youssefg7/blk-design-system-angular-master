@@ -22,9 +22,11 @@ export class MatchesComponent implements OnInit {
   ngOnInit(): void {
     this.matches$.subscribe( queriedItems => {
       console.log(queriedItems);
-      this.matchList = queriedItems;
+      //this.matchList = queriedItems;
       return queriedItems;
     });
+
+    this.matchList = [{aId: "askdbaskd", bId:"sdksajdn", tournamentId: "adshbja", aScore: "2", bScore: "3", date: "21983721"}];
       
   }
 
