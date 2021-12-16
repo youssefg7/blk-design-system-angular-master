@@ -1,26 +1,55 @@
-<div style="padding: 30px;">
+<ng-template #template>
+    <div style="background-color: #1f2251;">
+        <div>
+            <mat-grid-list cols="2" rowHeight="50px">
+                <mat-grid-tile>
+                    <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control"
+                        >
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <input placeholder="Tournament Name" style="width: 200px;" id="tournamentSelect" class="form-control"
+                        >
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div class="content" style="width: 100%; height: 500px; overflow-y: scroll;">
+            <mat-grid-list cols="2" rowHeight="400px" style="margin: 10px;">
+                <div *ngFor="let tsteam of teamList">
+                    <mat-grid-tile>
+                        <app-team-card (teamAddedId)="teamAddedHandler($event)" [showUser]="true" [tsteam]="tsteam" [added]="addedTeams.includes(tsteam.id)" style="width: 100%;"></app-team-card>
+                    </mat-grid-tile>
+                </div>
+            </mat-grid-list>
+        </div>
+    </div>
+</ng-template>
+
+<div style="padding: 30px;" class="text-center">
     <input type="text" placeholder="Tournament Name" class="form-control" id="tournamentName" style="margin-bottom: 10px;">
-    <input type="text" placeholder="TeamId" class="form-control" id="teamName" style="margin-bottom: 10px;">
-    <div style="display: flex;">
-            <button  class="btn btn-success" style="align-self: flex-start; margin-bottom: 10px;" (click)="start()">
-                Add Team
-            </button>
-            <p style="margin-left: auto; margin-right: 0;">loadText</p>
+    <div style="display: flex; margin-bottom: 10px;">
+        <input type="date" class="form-control" style="width: 200px; margin-left: 0; margin-right: auto;" id="startDateSelect" placement="right" tooltip="start date">
+        <input type="date" class="form-control" style="width: 200px; margin-left: auto; margin-right: 0;" id="endDateSelect" placement="right" tooltip="end date">
+    </div>
+    <div style="display: flex; margin-bottom: 5px;">
+        <input type="number" min="0" placeholder="Price per Ticket" class="form-control" id="price" style="margin-bottom: 5px; margin-right: 18px;">
+        <input type="number" min="0" placeholder="Ticket per Match" class="form-control" id="capacity" style="margin-bottom: 5px; margin-left: 18px;">
+    </div>
+    <i>If there are no tickets to sell just leave the input fields empty</i>
+    <button  class="btn btn-success text-center" (click)="openModal(template)" style="margin-top: 10px;">
+        Add Teams
+    </button>
+    <div style="display: flex; margin-bottom: 20px;">
+        <p style="margin-right: auto; margin-left: 0;">Teams added:</p>
     </div>
     <div>
-        <div *ngFor="let item of list" style="display: flex; margin-bottom: 5px;">
-            <i style="margin-left: 0; margin-right: auto;" (mouseenter)="showImage(template)" >{{item}}</i>
-            <ng-template #template>
-                <div style="background-color: #1f2251;">
-                    {{item}}
-                </div>
-            </ng-template>
-            <i class="tim-icons icon-simple-remove"  style="margin-left: auto; margin-right: 0;"></i>
+        <div *ngFor="let team of addedTeams" style="display: flex; margin-bottom: 5px;">
+            <i style="margin-left: 0; margin-right: auto;" *ngIf="team!=''" >{{getTeam(team).name}}</i>
+            <i class="tim-icons icon-simple-remove" *ngIf="team!=''" style="margin-left: auto; margin-right: 0;" (click)="removeTeam(team)"></i>
         </div>
     </div>
     <div class="text-center">
-        <button  class="btn btn-danger" style="margin-top: 5px;">
-            Submit
+        <button  class="btn btn-danger" style="margin-top: 20px;" (click)="onAddTournament()">
+            Add Tournament
         </button>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from "@angular/router";
 import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-registerpage',
@@ -31,7 +32,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private router: Router ,private authService: AuthService, private userService: UserService) { }
+  constructor(private router: Router ,private authService: AuthService, private userService: UserService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.users$.subscribe( queriedItems => {
@@ -55,7 +56,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
       this.registerAttempt = false;
       this.authService.signupUser(this.registerForm.value).then((result) => {
         if (result == null) {
-          this.userService.addUser(this.authService.registeredUserid, this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
+          this.userService.addUser(this.cookieService.get('Uid'), this.registerForm.value); //error in this line due to circulation of service dependencies: https://angular.io/errors/NG0200
           document.getElementById("failedRegister").style.display = "none";
           document.getElementById("successRegister").style.display = "block";
         } else if (result.isvalid == false) {

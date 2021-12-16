@@ -4,7 +4,7 @@ export interface Tournament {
     userId: string;
     teamsId: string[];
     matchesId: string[];
-    ticketPrice? : Number;
-    ticketsLeft: Number;
+    startDate:string;
+    endDate:string;
     doc?: any;
   }

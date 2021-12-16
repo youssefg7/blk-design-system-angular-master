@@ -47,7 +47,7 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         let emailLower = user.email.toLowerCase();
-        this.registeredUserid = result.user.uid;
+        this.cookieService.set('Uid',result.user.uid);
       })
       .catch(error => {
         console.log('Auth Service: signup error', error);

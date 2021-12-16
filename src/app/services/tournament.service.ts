@@ -16,7 +16,7 @@ export class TournamentService {
   tournaments$: Observable<Tournament[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.tournamentsCollection = afs.collection<Tournament>('tournament');
+    this.tournamentsCollection = afs.collection<Tournament>('tournaments');
     this.tournaments$ = this.tournamentsCollection.valueChanges({idField:'id'});
    }
 

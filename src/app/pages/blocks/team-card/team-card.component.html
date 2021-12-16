@@ -3,14 +3,17 @@
         <div class="team-header">
             <h1>{{tsteam.name}}</h1>
         </div>
-        <div *ngIf="showId" style="align-self: center;">TeamId: {{tsteam.id}}</div>
+        <div *ngIf="showUser" style="align-self: center;">User Name: {{getUser(tsteam.userId).name}}</div>
         <div class="team-body">
             <div class="text-center" style="padding: 20px;"> <img style="height: 150px; max-width: 140px;" [src]="tsteam.pictureUrl"> </div>
         </div>
         <div class="team-header" style="padding-bottom: 10px;">
-            <a class="btn btn-danger btn-round btn-lg">
+            <a *ngIf="!showUser" class="btn btn-danger btn-round btn-lg">
                 Edit Info
             </a>
+            <button *ngIf="showUser" class="btn btn-danger btn-round btn-lg" [disabled]="added" (click)="addTeam()">
+                Add to Tournament
+            </button>
         </div>
     </div>
 </div>
