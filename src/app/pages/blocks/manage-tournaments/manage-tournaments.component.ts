@@ -17,7 +17,6 @@ export class ManageTournamentsComponent implements OnInit {
     tournamentId:"dfsaf",
     date:"asfdasf"
   };
-  num:number[] = [1,1,1,1,1,1,1,1,1,11,1,1,1]
 
   constructor() { }
 

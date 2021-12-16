@@ -1,4 +1,4 @@
-<div *ngIf="afAuth.user | async">
+<div *ngIf="(afAuth.user | async) && this.userService.currentUser.isAdmin">
 <ng-template #teamtemplate>
     <div style="background-color: #1f2251;">
         <app-team-create (EEmitter)="eventHandle($event)"></app-team-create>
@@ -25,7 +25,7 @@
             <app-manage-teams [showId]="true" [condition]="this.cookieService.get('Uid')"></app-manage-teams>
         </div>
     </tab>
-    <tab [disabled]="!this.userService.currentUser.isAdmin">
+    <tab>
       <ng-template tabHeading>
         <i class="tim-icons icon-trophy"> </i> Your Tournaments
       </ng-template>

@@ -18,8 +18,8 @@ export class TournamentCreateComponent implements OnInit {
 
   async showImage(template : TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
-    await new Promise(f => setTimeout(f, 1000));
-    this.modalRef.hide();
+    //await new Promise(f => setTimeout(f, 1000));
+    //this.modalRef.hide();
  }
 
 }
