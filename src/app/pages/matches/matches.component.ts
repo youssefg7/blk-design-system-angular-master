@@ -3,9 +3,10 @@ import { MatchService } from 'src/app/services/match.service';
 import { Observable } from 'rxjs';
 import { Match } from 'src/app/models/match.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
-
-
+import { TeamService } from 'src/app/services/team.service';
+import { TournamentService } from 'src/app/services/tournament.service';
+import { Team } from 'src/app/models/team.model';
+import { Tournament } from 'src/app/models/tournament.model';
 
 @Component({
   selector: 'app-matches',
@@ -15,18 +16,33 @@ import { CompileShallowModuleMetadata } from '@angular/compiler';
 export class MatchesComponent implements OnInit {
   matches$: Observable<Array<Match>> = this.matchService.matches$;
 
-  constructor(private matchService:MatchService, private authService:AuthService) { }
+  constructor(private matchService:MatchService, private teamService:TeamService, private tournamentService:TournamentService) { }
 
   matchList:Match[];
+  teams$: Observable<Array<Team>> = this.teamService.teams$;
+  tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
+  tournamentList : Tournament[];
+  teamList : Team[];
+  teamSearch:string = "";
+  tourSearch:string = "";
+  dateSearch:string = "";
 
   ngOnInit(): void {
     this.matches$.subscribe( queriedItems => {
       console.log(queriedItems);
-      //this.matchList = queriedItems;
+      this.matchList = queriedItems;
       return queriedItems;
     });
-
-    this.matchList = [{aId: "askdbaskd", bId:"sdksajdn", tournamentId: "adshbja", aScore: "2", bScore: "3", date: "21983721"}];
+    this.teams$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.teamList = queriedItems;
+      return queriedItems;
+    });
+    this.tournaments$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.tournamentList = queriedItems;
+      return queriedItems;
+    });
       
   }
 
@@ -38,5 +54,23 @@ export class MatchesComponent implements OnInit {
     })
   }
 
+  onDateChange(){
+    this.dateSearch = (document.getElementById("dateSelect") as HTMLInputElement).value;
+  }
 
+  onTourChange(){
+    this.tourSearch = (document.getElementById("tournamentSelect") as HTMLInputElement).value;
+  }
+
+  onTeamChange(){
+    this.teamSearch = (document.getElementById("teamSelect") as HTMLInputElement).value;
+  }
+
+  getTeam(team:string):Team{
+    return this.teamList.find(x => x.id == team);
+  }
+  
+  getTournament(tournament:string):Tournament{
+    return this.tournamentList.find(x => x.id == tournament);
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Team } from 'src/app/models/team.model';
-import { ViewportScroller } from '@angular/common';
 import { TeamService } from 'src/app/services/team.service';
 import { MatchService } from 'src/app/services/match.service';
 import { TournamentService } from 'src/app/services/tournament.service';
@@ -17,7 +16,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class TournamentCreateComponent implements OnInit {
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   addedTeams: string[] = [""];
-  private vps: ViewportScroller;
   modalRef? : BsModalRef;
   teamList : Team[];
 
@@ -73,7 +71,7 @@ onAddTournament(){
       for(let j = 0;j<matches;j++){
         let teamA = tour[i][j][0];
         let teamB = tour[i][j][1];
-        let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()) + "-" + ((new Date(start.setDate(start.getDate()+i))).getMonth()) + "-" + ((new Date(start.setDate(start.getDate()+i))).getDate());
+        let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()).toString().concat("-",(((new Date(start.setDate(start.getDate()+i))).getMonth()) + 1).toString(),"-",((new Date(start.setDate(start.getDate()+i))).getDate()).toString());
         this.matchService.addMatch((tourid+((i+(rounds*j)).toString())),{
           aId: teamA,
           bId: teamB,
@@ -91,8 +89,8 @@ onAddTournament(){
     userId: this.cookieService.get('Uid'),
     teamsId: this.addedTeams,
     matchesId: matchesId,
-    startDate: start.getFullYear() + "-" + start.getMonth() + "-" + start.getDate(),
-    endDate: end.getFullYear() + "-" + end.getMonth() + "-" + end.getDate()
+    startDate: start.getFullYear().toString().concat("-",(start.getMonth()+1).toString(),"-",start.getDate().toString()),
+    endDate: end.getFullYear().toString().concat("-",(end.getMonth()+1).toString(),"-",end.getDate().toString()),
   });
 
   this.modalRef.hide();
