@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit,Output, TemplateRef, EventEmitter } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Team } from 'src/app/models/team.model';
@@ -18,6 +18,7 @@ export class TournamentCreateComponent implements OnInit {
   addedTeams: string[] = [""];
   modalRef? : BsModalRef;
   teamList : Team[];
+  @Output() EEmitter : EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private modalService:BsModalService, private toastr:ToastrService, private teamService:TeamService, private matchService:MatchService, private tourService:TournamentService, private cookieService:CookieService) { }
 
@@ -48,7 +49,6 @@ removeTeam(team:string){
 onAddTournament(){
   let start = (document.getElementById("startDateSelect") as HTMLInputElement).valueAsDate;
   let end = (document.getElementById("endDateSelect") as HTMLInputElement).valueAsDate;
-  //console.log((new Date(start.setDate(start.getDate()+7))).toString())
   let daysBetweenRounds;
   let matchesId:string[] = [""];
   this.addedTeams.shift();
@@ -66,7 +66,7 @@ onAddTournament(){
     daysBetweenRounds = this.dayDiff(start,end);
   }
   const tour = this.generateTournament(this.addedTeams);
-  const tourid = this.makeid(5);
+  const tourid = this.makeid(20);
   for(let i =0;i<rounds;i++){
       for(let j = 0;j<matches;j++){
         let teamA = tour[i][j][0];
@@ -93,12 +93,12 @@ onAddTournament(){
     endDate: end.getFullYear().toString().concat("-",(end.getMonth()+1).toString(),"-",end.getDate().toString()),
   });
 
-  this.modalRef.hide();
-  
-  
-  /*this.toastr.success('Hello world!', 'Toastr fun!', {
+  this.toastr.success('Tournament Added!', (document.getElementById("tournamentName") as HTMLInputElement).value, {
     timeOut:3000,
-  });*/
+  });
+
+  this.EEmitter.emit("close tournament-create");
+  
  }
 
  matchParticipants(participants) {

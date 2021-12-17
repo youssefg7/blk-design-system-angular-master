@@ -14,8 +14,7 @@ export class TeamCreateComponent implements OnInit {
   loading: boolean = false;
   file: any = null;
   loadText = "";
-  @Output()
-  EEmitter : EventEmitter<string> = new EventEmitter<string>();
+  @Output() EEmitter : EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private fileService:FileService, private cookieService:CookieService, private teamService:TeamService) { }
 

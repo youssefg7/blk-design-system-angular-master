@@ -55,6 +55,7 @@ export class MatchesComponent implements OnInit {
   }
 
   onDateChange(){
+    console.log((document.getElementById("dateSelect") as HTMLInputElement).value);
     this.dateSearch = (document.getElementById("dateSelect") as HTMLInputElement).value;
   }
 

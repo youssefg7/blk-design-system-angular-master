@@ -6,7 +6,7 @@
 </ng-template>
 <ng-template #tournamenttemplate>
     <div style="background-color: #1f2251;">
-        <app-tournament-create></app-tournament-create>
+        <app-tournament-create (EEmitter)="eventHandle($event)"></app-tournament-create>
     </div>
 </ng-template>
 <br>

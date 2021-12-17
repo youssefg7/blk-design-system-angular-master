@@ -28,4 +28,5 @@ export class ManagepageComponent implements OnInit {
   eventHandle(event){
     this.modalRef.hide();
   }
+
 }
