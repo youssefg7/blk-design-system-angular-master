@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Match } from 'src/app/models/match.model';
+import { Tournament } from 'src/app/models/tournament.model';
+import { TournamentService } from 'src/app/services/tournament.service';
+import { MatchService } from 'src/app/services/match.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-tournaments',
@@ -7,26 +11,32 @@ import { Match } from 'src/app/models/match.model';
   styleUrls: ['./manage-tournaments.component.scss']
 })
 export class ManageTournamentsComponent implements OnInit {
+  tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
+  tournamentList:Tournament[];
+  matches$: Observable<Array<Match>> = this.matchService.matches$;
+  matchList:Match[];
+  @Input() condition;
 
-  tourarray:string[]=["a","bb","ccc","dddd","eeeee","ffffff","ggggggg","hhhhhhhh","iiiiiiiii","jjjjjjjjjj","kkkkkkkkkkk","llllllllllll","llllllllllll","llllllllllll","llllllllllll","llllllllllll","llllllllllll","llllllllllll","llllllllllll"];
-  matcharray:Match={
-    aId:"SS1LOayA3PPzXy8qYrIa",
-    bId:"dabESHQVj7xY12dKJbUS",
-    aScore:"2",
-    bScore:"2",
-    tournamentId:"IjLXc",
-    date:"2021-11-11"
-  };
+ 
 
-  constructor() { }
+  constructor(private tournamentService:TournamentService, private matchService:MatchService) { }
 
   ngOnInit(): void {
-    
+    this.tournaments$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.tournamentList = queriedItems;
+      return queriedItems;
+    });
+    this.matches$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.matchList = queriedItems;
+      return queriedItems;
+    });
   }
 
 
-  counter(i: number) {
-    return new Array(i);
+  getMatch(match:string):Match{
+    return this.matchList.find(x => x.id === match);
   }
 
 }

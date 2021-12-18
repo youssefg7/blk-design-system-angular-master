@@ -33,7 +33,7 @@
         <button class="btn btn-danger btn-round" type="submit" (click)="openMenu(tournamenttemplate)">
              New Tournament
         </button>
-        <app-manage-tournaments></app-manage-tournaments>
+        <app-manage-tournaments [condition]="this.cookieService.get('Uid')"></app-manage-tournaments>
     </div>
     </tab>
 </tabset>
