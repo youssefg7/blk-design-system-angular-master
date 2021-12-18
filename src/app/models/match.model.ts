@@ -6,6 +6,8 @@ export interface Match {
     date: string;
     aScore: string;
     bScore: string;
+    ticketPrice:number;
+    ticketsLeft
     scorersId? : string[];
     doc?: any;
   }

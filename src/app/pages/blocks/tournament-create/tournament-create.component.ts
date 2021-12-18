@@ -76,6 +76,8 @@ onAddTournament(){
           aId: teamA,
           bId: teamB,
           date: date,
+          ticketPrice: (document.getElementById("price") as HTMLInputElement).valueAsNumber,
+          ticketsLeft: (document.getElementById("capacity") as HTMLInputElement).valueAsNumber,
           tournamentId: tourid,
           aScore: "-",
           bScore: "-"
