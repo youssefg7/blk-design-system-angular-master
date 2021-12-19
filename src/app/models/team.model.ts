@@ -3,6 +3,6 @@ export interface Team {
     name: string;
     userId: string;
     pictureUrl: string;
-    playersId?: string[];
+    playersId: string[];
     doc?: any;
   }

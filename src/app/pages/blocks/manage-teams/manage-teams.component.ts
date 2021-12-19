@@ -14,7 +14,7 @@ export class ManageTeamsComponent implements OnInit {
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   teamList:Team[];
   @Input() condition:string;
-  @Input() showId:boolean;
+  @Input() showUser:boolean;
 
   constructor(private teamService:TeamService, private cookieService:CookieService) { }
 

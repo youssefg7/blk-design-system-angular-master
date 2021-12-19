@@ -23,5 +23,8 @@ export class TeamService {
    addTeam(team:Team):Observable<DocumentReference>{
     return from(this.teamsCollection.add(team));
   }
+  updateTeam(id:string, team : Team){
+    this.teamsCollection.doc(id).update(team);
+}
 
 }

@@ -22,7 +22,7 @@
             <button class="btn btn-danger btn-round" type="submit" (click)="openMenu(teamtemplate)">
                  Add Team
             </button>
-            <app-manage-teams [showId]="true" [condition]="this.cookieService.get('Uid')"></app-manage-teams>
+            <app-manage-teams [showUser]="false" [condition]="this.cookieService.get('Uid')"></app-manage-teams>
         </div>
     </tab>
     <tab>

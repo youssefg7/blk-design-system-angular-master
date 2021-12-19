@@ -48,7 +48,8 @@ export class TeamCreateComponent implements OnInit {
       this.teamService.addTeam({
         name: (document.getElementById("teamName") as HTMLInputElement).value,
         userId: this.cookieService.get('Uid'),
-        pictureUrl: this.shortLink
+        pictureUrl: this.shortLink,
+        playersId: [""]
       })
       this.EEmitter.emit("close team-create")
     }

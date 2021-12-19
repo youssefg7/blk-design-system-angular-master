@@ -8,7 +8,7 @@
             <div class="text-center" style="padding: 20px;"> <img style="height: 150px; max-width: 140px;" [src]="tsteam.pictureUrl"> </div>
         </div>
         <div class="team-header" style="padding-bottom: 10px;">
-            <a *ngIf="!showUser" class="btn btn-danger btn-round btn-lg">
+            <a *ngIf="!showUser" class="btn btn-danger btn-round btn-lg" (click)="openEditMenu(edittemplate)">
                 Edit Info
             </a>
             <button *ngIf="showUser" class="btn btn-danger btn-round btn-lg" [disabled]="added" (click)="addTeam()">
@@ -17,3 +17,26 @@
         </div>
     </div>
 </div>
+
+<ng-template #edittemplate>
+    <div style="background-color: #1f2251;">
+        <div style="display: flex;">
+            <img style="height: 150px; max-width: 140px; margin-left: auto; margin-right: auto; margin-top: 20px;" [src]="tsteam.pictureUrl">
+        </div>
+        <h1 class="text-center" style="margin-top:10px;">{{tsteam.name}}</h1>
+        <input type="text" placeholder="Player Name" class="form-control" id="playerName" style="margin-bottom: 10px; margin-left: auto; margin-right: auto; width:90%;">
+        <button class="btn btn-success btn-round btn-lg" style="margin-left: 30px;" (click)="addPlayer()">
+             Add Player
+        </button>
+        <p style="margin-left: 30px; margin-top: 20px; margin-bottom: 20px;">Players added:</p>
+        <div *ngFor="let player of addedPlayers" style="display: flex; margin-bottom: 5px; margin-left: auto; margin-right: auto; width: 90%;">
+            <i style="margin-left: 0; margin-right: auto;" *ngIf="player!=''" >{{getPlayer(player).name}}</i>
+            <i class="tim-icons icon-simple-remove" *ngIf="player!=''" style="margin-left: auto; margin-right: 0;" (click)="removePlayer(player)"></i>
+        </div>
+        <div style="display: flex;">
+            <button class="btn btn-danger btn-round btn-lg" style="margin-top: 15px; margin-left: auto; margin-right: auto; margin-bottom: 20px;" (click)="editTeam()">
+                Submit Changes
+            </button>
+        </div>
+    </div>
+</ng-template>

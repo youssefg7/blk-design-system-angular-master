@@ -2,7 +2,7 @@
     <mat-grid-list cols="3" rowHeight="400px" style="margin: 20px;">
         <div *ngFor="let tsteam of teamList">
             <mat-grid-tile *ngIf="tsteam.userId == condition">
-                <app-team-card [showId]="showId" [tsteam]="tsteam" style="width: 100%;"></app-team-card>
+                <app-team-card [showUser]="showUser" [tsteam]="tsteam" style="width: 100%;"></app-team-card>
             </mat-grid-tile>
         </div>
     </mat-grid-list>
