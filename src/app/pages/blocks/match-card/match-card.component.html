@@ -26,11 +26,17 @@
             </div>
         </div>
         <div class="match-header" style="padding-bottom: 10px; color: white;">
-            <a class="btn btn-danger btn-round btn-lg">
+            <a *ngIf="!manager" class="btn btn-danger btn-round btn-lg">
                 DETAILS
             </a>
-            <a class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
+            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg">
+                Sales Details
+            </a>
+            <a *ngIf="!manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
                 Buy Tickets
+            </a>
+            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
+                Edit Details
             </a>
         </div>
     </div>

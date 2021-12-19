@@ -55,7 +55,7 @@ export class MatchesComponent implements OnInit {
   }
 
   onDateChange(){
-    console.log((document.getElementById("dateSelect") as HTMLInputElement).value);
+    //console.log(new Date((document.getElementById("dateSelect") as HTMLInputElement).value).getTime());
     this.dateSearch = (document.getElementById("dateSelect") as HTMLInputElement).value;
   }
 
@@ -74,4 +74,5 @@ export class MatchesComponent implements OnInit {
   getTournament(tournament:string):Tournament{
     return this.tournamentList.find(x => x.id == tournament);
   }
+
 }

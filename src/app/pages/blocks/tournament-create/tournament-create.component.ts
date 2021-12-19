@@ -48,7 +48,9 @@ removeTeam(team:string){
 
 onAddTournament(){
   let start = (document.getElementById("startDateSelect") as HTMLInputElement).valueAsDate;
+  let startedit = start;
   let end = (document.getElementById("endDateSelect") as HTMLInputElement).valueAsDate;
+  let endedit = end;
   let daysBetweenRounds;
   let matchesId:string[] = [""];
   this.addedTeams.shift();
@@ -63,7 +65,9 @@ onAddTournament(){
   if(this.addedTeams.length == 2){
     daysBetweenRounds = 0;
   }else{
-    daysBetweenRounds = this.dayDiff(start,end);
+    daysBetweenRounds = this.dayDiff(startedit,endedit)/rounds;
+    endedit = end;
+    startedit = start;
   }
   const tour = this.generateTournament(this.addedTeams);
   const tourid = this.makeid(20);
@@ -71,7 +75,18 @@ onAddTournament(){
       for(let j = 0;j<matches;j++){
         let teamA = tour[i][j][0];
         let teamB = tour[i][j][1];
-        let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()).toString().concat("-",(((new Date(start.setDate(start.getDate()+i))).getMonth()) + 1).toString(),"-",((new Date(start.setDate(start.getDate()+i))).getDate()).toString());
+        let date = (new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear().toString();
+        if(((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1) < 10){
+          date = date.concat("-0",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1).toString());
+        }else{
+          date = date.concat("-",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1).toString())
+        }
+        if((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate() < 10){
+          date = date.concat("-0",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate()).toString());
+        }else{
+          date = date.concat("-",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate()).toString());
+        }
+        //let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()).toString().concat("-",(((new Date(start.setDate(start.getDate()+i))).getMonth()) + 1).toString(),"-",((new Date(start.setDate(start.getDate()+i))).getDate()).toString());
         this.matchService.addMatch((tourid+((i+(rounds*j)).toString())),{
           aId: teamA,
           bId: teamB,
@@ -85,6 +100,8 @@ onAddTournament(){
         matchesId.push((tourid+((i+(rounds*j)).toString())));
       }
   }
+
+
   matchesId.shift();
   this.tourService.addTournament(tourid,{
     name: (document.getElementById("tournamentName") as HTMLInputElement).value,

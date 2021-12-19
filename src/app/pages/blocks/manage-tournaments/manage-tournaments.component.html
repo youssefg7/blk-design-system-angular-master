@@ -7,7 +7,7 @@
             <mat-grid-list cols="2" rowHeight="500px" style="margin: 20px;">
                 <div *ngFor="let match of tour.matchesId">
                     <mat-grid-tile>
-                        <app-match-card [tsmatch]="getMatch(match)" style="width: 100%;"></app-match-card>
+                        <app-match-card [tsmatch]="getMatch(match)" [manager]="true" style="width: 100%;"></app-match-card>
                     </mat-grid-tile>
                 </div>
             </mat-grid-list>    

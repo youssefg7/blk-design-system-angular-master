@@ -15,6 +15,7 @@ import { Tournament } from 'src/app/models/tournament.model';
 })
 export class MatchCardComponent implements OnInit {
   @Input() tsmatch:Match;
+  @Input() manager:boolean;
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
   tournamentList : Tournament[];
