@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Match } from 'src/app/models/match.model';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { TournamentService } from 'src/app/services/tournament.service';
+import { TeamService } from 'src/app/services/team.service';
+import { Team } from 'src/app/models/team.model';
+import { Tournament } from 'src/app/models/tournament.model';
 
 @Component({
   selector: 'app-buy-card',
@@ -9,10 +15,13 @@ import { Match } from 'src/app/models/match.model';
 })
 export class BuyCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tournamentService : TournamentService,private teamService:TeamService) { }
   buyAttempt: boolean;
   cardRadioChecked: boolean;
   @Input() tsmatch: Match;
+  @Input() firstTeam: Team;
+  @Input() secondTeam: Team;
+  @Input() tournament: Tournament;
   focus; focus1; focus2; focus3; focus4;
 
   buyForm = new FormGroup({
@@ -27,6 +36,13 @@ export class BuyCardComponent implements OnInit {
   onSubmitBuy(): void {
     this.buyAttempt = true;
     console.log(this.buyForm.value );
+    if(this.buyForm.valid){
+      const doc = new jsPDF();
+
+      doc.text(this.tsmatch.date,5,5);
+      doc.text("Tickets for ",5,10);
+      doc.save("A7la"+"Tickets");
+    }
   }
 
   cardRadio() {

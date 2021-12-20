@@ -14,43 +14,46 @@ import { Tournament } from 'src/app/models/tournament.model';
   styleUrls: ['./match-card.component.scss']
 })
 export class MatchCardComponent implements OnInit {
-  @Input() tsmatch:Match;
-  @Input() manager:boolean;
+  @Input() tsmatch: Match;
+  @Input() manager: boolean;
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
-  tournamentList : Tournament[];
-  teamList : Team[];
+  tournamentList: Tournament[];
+  teamList: Team[];
 
-  constructor(private modalService: BsModalService, private tournamentService : TournamentService, private teamService:TeamService) { }
+
+  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService) { }
+
 
   modalRef?: BsModalRef;
 
+  
   ngOnInit(): void {
-    this.teams$.subscribe( queriedItems => {
+    this.teams$.subscribe(queriedItems => {
       console.log(queriedItems);
       this.teamList = queriedItems;
       return queriedItems;
     });
-    this.tournaments$.subscribe( queriedItems => {
+    this.tournaments$.subscribe(queriedItems => {
       console.log(queriedItems);
       this.tournamentList = queriedItems;
       return queriedItems;
     });
   }
-  openMenu(template : TemplateRef<any>){
+  openMenu(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
- }
+  }
 
- getTeam(team:string):Team{
-  return this.teamList.find(x => x.id === team);
-}
+  getTeam(team: string): Team {
+    return this.teamList.find(x => x.id === team);
+  }
 
-getTournament(tournament:string):Tournament{
-   return this.tournamentList.find(x => x.id === tournament);
-}
+  getTournament(tournament: string): Tournament {
+    return this.tournamentList.find(x => x.id === tournament);
+  }
 
-getDate(date:string):string{
- return (new Date(date)).toLocaleDateString();
-}
+  getDate(date: string): string {
+    return (new Date(date)).toLocaleDateString();
+  }
 
 }

@@ -28,9 +28,10 @@
         <button class="btn btn-success btn-round btn-lg" style="margin-left: 30px;" (click)="addPlayer()">
              Add Player
         </button>
-        <p style="margin-left: 30px; margin-top: 20px; margin-bottom: 20px;">Players added:</p>
+        <span *ngIf="playerNameEmpty" style="color: red;">You must enter the player's name!</span>
+        <p style="margin-left: 30px; margin-top: 20px; margin-bottom: 20px;">Team Players:</p>
         <div *ngFor="let player of addedPlayers" style="display: flex; margin-bottom: 5px; margin-left: auto; margin-right: auto; width: 90%;">
-            <i style="margin-left: 0; margin-right: auto;" *ngIf="player!=''" >{{getPlayer(player).name}}</i>
+            <i style="margin-left: 0; margin-right: auto;" *ngIf="player!=''">{{getPlayer(player).name}}</i>
             <i class="tim-icons icon-simple-remove" *ngIf="player!=''" style="margin-left: auto; margin-right: 0;" (click)="removePlayer(player)"></i>
         </div>
         <div style="display: flex;">

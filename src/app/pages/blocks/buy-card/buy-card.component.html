@@ -49,8 +49,7 @@
                 </div>
                 <input formControlName="numOfTickets" class="form-control" type="number" min="1" (focus)="focus1 = true" (blur)="focus1 = false" />
             </div>
-            <span *ngIf="numOfTickets && numOfTickets.value>69" style="color: red;">Max available number of tickets is 69</span>
-
+            <span *ngIf="numOfTickets > tsmatch.ticketsLeft" style="color: red;">Max available number of tickets is {{tsmatch.ticketsLeft}}</span>
             <div class="input-group">
                 <p>Select Payment Method: </p>
                 <div class="form-check form-check-radio">

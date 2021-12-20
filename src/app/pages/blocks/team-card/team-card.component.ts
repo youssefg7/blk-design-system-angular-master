@@ -15,31 +15,31 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamCardComponent implements OnInit {
   users$: Observable<Array<User>> = this.userService.users$;
-  userList:User[];
+  userList: User[];
   players$: Observable<Array<Player>> = this.playerService.players$;
-  playerList:Player[];
+  playerList: Player[];
 
-  additionText:string;
+  additionText: string;
   modalRef?: BsModalRef;
-  addedPlayers:string[] = [""];
-
+  addedPlayers: string[] = [""];
+  playerNameEmpty: boolean;
   @Output() teamAddedId: EventEmitter<string> = new EventEmitter<string>();
-  @Input() tsteam:Team;
-  @Input() showUser:boolean;
-  @Input() added:boolean;
+  @Input() tsteam: Team;
+  @Input() showUser: boolean;
+  @Input() added: boolean;
 
 
-  constructor(private userService : UserService, private modalService:BsModalService, private playerService:PlayerService, private teamService:TeamService) { }
+  constructor(private userService: UserService, private modalService: BsModalService, private playerService: PlayerService, private teamService: TeamService) { }
 
   ngOnInit(): void {
-
-    this.users$.subscribe( queriedItems => {
+    this.playerNameEmpty = false;
+    this.users$.subscribe(queriedItems => {
       console.log(queriedItems);
       this.userList = queriedItems;
       return queriedItems;
     });
 
-    this.players$.subscribe( queriedItems => {
+    this.players$.subscribe(queriedItems => {
       console.log(queriedItems);
       this.playerList = queriedItems;
       return queriedItems;
@@ -48,43 +48,48 @@ export class TeamCardComponent implements OnInit {
     this.addedPlayers = this.tsteam.playersId;
   }
 
-  filterFunction(player:Player):string {
+  filterFunction(player: Player): string {
     return player.id;
   }
 
-  getUser(user:string):User{
+  getUser(user: string): User {
     return this.userList.find(x => x.id == user);
   }
 
-  addPlayer(){
-    const playerId = this.makeid(10);
-    this.addedPlayers.push(playerId);
-    this.playerService.addPlayer(playerId,{
-      name: (document.getElementById("playerName") as HTMLInputElement).value,
-      teamId: this.tsteam.id,
-      totalScore: 0,
-    });
+  addPlayer() {
+    if ((document.getElementById("playerName") as HTMLInputElement).value == "") {
+      this.playerNameEmpty = true;
+    } else {
+      this.playerNameEmpty = false;
+      const playerId = this.makeid(10);
+      this.addedPlayers.push(playerId);
+      this.playerService.addPlayer(playerId, {
+        name: (document.getElementById("playerName") as HTMLInputElement).value,
+        teamId: this.tsteam.id,
+        totalScore: 0,
+      });
+    }
 
   }
 
-  removePlayer(player:string){
+  removePlayer(player: string) {
     this.addedPlayers = this.addedPlayers.filter(x => x != player);
   }
 
-  getPlayer(player:string){
+  getPlayer(player: string) {
     return this.playerList.find(x => x.id == player);
   }
 
-  addTeam(){
+  addTeam() {
     this.teamAddedId.emit(this.tsteam.id);
   }
 
-  openEditMenu(template : TemplateRef<any>){
-    this.modalRef = this.modalService.show(template, Object.assign({},{class: 'modal-lg'}));
+  openEditMenu(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-lg' }));
   }
 
-  editTeam(){
-    this.teamService.updateTeam(this.tsteam.id,{
+  editTeam() {
+    this.teamService.updateTeam(this.tsteam.id, {
       name: this.tsteam.name,
       pictureUrl: this.tsteam.pictureUrl,
       userId: this.tsteam.userId,
@@ -94,14 +99,14 @@ export class TeamCardComponent implements OnInit {
   }
 
   makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
-  charactersLength));
-   }
-   return result;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
   }
 
 }
