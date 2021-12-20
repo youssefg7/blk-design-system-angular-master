@@ -26,7 +26,7 @@
 <br>
 <br>
 <div class="content">
-    <mat-grid-list cols="3" rowHeight="500px" style="margin: 10px;">
+    <mat-grid-list cols="3" rowHeight="550px" style="margin: 10px;">
         <div *ngFor="let tsmatch of matchList">
             <mat-grid-tile *ngIf="(this.dateSearch == '' ||this.dateSearch == tsmatch.date) && ( getTeam(tsmatch.aId).name.toLowerCase().startsWith(this.teamSearch.toLowerCase()) || getTeam(tsmatch.bId).name.toLowerCase().startsWith(this.teamSearch.toLowerCase()) || this.teamSearch == '') && ( getTournament(tsmatch.tournamentId).name.toLowerCase().startsWith(this.tourSearch.toLowerCase()) || this.tourSearch == '')">
                 <app-match-card [tsmatch]="tsmatch" [manager]="false" style="width: 100%;"></app-match-card>

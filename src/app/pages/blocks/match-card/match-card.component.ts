@@ -27,15 +27,13 @@ export class MatchCardComponent implements OnInit {
 
   modalRef?: BsModalRef;
 
-  
+
   ngOnInit(): void {
     this.teams$.subscribe(queriedItems => {
-      console.log(queriedItems);
       this.teamList = queriedItems;
       return queriedItems;
     });
     this.tournaments$.subscribe(queriedItems => {
-      console.log(queriedItems);
       this.tournamentList = queriedItems;
       return queriedItems;
     });

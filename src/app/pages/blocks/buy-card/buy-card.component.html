@@ -17,11 +17,12 @@
                               name="favTeam"
                               type="radio"
                               value="firstTeam"
-                              formControlName="favTeam"
+                              [formControl]="favTeam"
                             />
-                            <span class="form-check-sign"> </span> First team
+                            <span class="form-check-sign"> </span> {{firstTeam.name}}
                           </label>
                 </div>
+
                 <div class="form-check form-check-radio">
                     <label class="form-check-label">
                         <i class="tim-icons icon-alert-circle-exc"> </i>
@@ -31,9 +32,9 @@
                               name="favTeam"
                               type="radio"
                               value="secondTeam"
-                              formControlName="favTeam"
+                              [formControl]="favTeam"
                             />
-                            <span class="form-check-sign"> </span> Second team
+                            <span class="form-check-sign"> </span> {{secondTeam.name}}
                           </label>
                 </div>
             </div>
@@ -47,9 +48,8 @@
                         <i class="tim-icons icon-pencil"> </i>
                     </div>
                 </div>
-                <input formControlName="numOfTickets" class="form-control" type="number" min="1" (focus)="focus1 = true" (blur)="focus1 = false" />
+                <input [formControl]="numOfTickets" [max]="tsmatch.ticketsLeft" class="form-control" type="number" min="1" (focus)="focus1 = true" (blur)="focus1 = false" />
             </div>
-            <span *ngIf="numOfTickets > tsmatch.ticketsLeft" style="color: red;">Max available number of tickets is {{tsmatch.ticketsLeft}}</span>
             <div class="input-group">
                 <p>Select Payment Method: </p>
                 <div class="form-check form-check-radio">
@@ -62,7 +62,7 @@
                               name="paymentRadios"
                               type="radio"
                               value="cash"
-                              formControlName="paymentMethod"
+                              [formControl]="paymentMethod"
                             />
                             <span class="form-check-sign"> </span> Cash Payment
                           </label>
@@ -95,7 +95,6 @@
                     </div>
                     <input formControlName="cardNumber" class="form-control" placeholder="Card Number" type="text" (focus)="focus2 = true" (blur)="focus2 = false" />
                 </div>
-
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus3 === true }">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
@@ -113,6 +112,7 @@
                     </div>
                     <input formControlName="expiryDate" class="form-control" placeholder="Expiry Date" type="date" (focus)="focus4 = true" (blur)="focus4 = false" />
                 </div>
+                <span *ngIf="!this.cardInfo" style="color: red;">Check your card Info</span>
             </div>
             <div class="card-footer">
                 <button class="btn btn-danger btn-round btn-lg">Confirm Purchase

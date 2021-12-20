@@ -7,6 +7,10 @@ import { TournamentService } from 'src/app/services/tournament.service';
 import { TeamService } from 'src/app/services/team.service';
 import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
+import { MatchService } from 'src/app/services/match.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-buy-card',
@@ -15,8 +19,9 @@ import { Tournament } from 'src/app/models/tournament.model';
 })
 export class BuyCardComponent implements OnInit {
 
-  constructor(private tournamentService : TournamentService,private teamService:TeamService) { }
+  constructor(private userService: UserService, private tournamentService: TournamentService, private teamService: TeamService, private matchService: MatchService) { }
   buyAttempt: boolean;
+  cardInfo: boolean;
   cardRadioChecked: boolean;
   @Input() tsmatch: Match;
   @Input() firstTeam: Team;
@@ -34,14 +39,30 @@ export class BuyCardComponent implements OnInit {
   });
 
   onSubmitBuy(): void {
+    console.log(this.paymentMethod.value);
     this.buyAttempt = true;
-    console.log(this.buyForm.value );
-    if(this.buyForm.valid){
-      const doc = new jsPDF();
+    if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (this.cvv.value() != "" && this.cardNumber.value() != "" && this.expiryDate.value() != ""))) {
+      this.cardInfo = true;
+      this.matchService.addMatch(this.tsmatch.id, {
+        aId: this.tsmatch.aId,
+        bId: this.tsmatch.bId,
+        aScore: this.tsmatch.aScore,
+        bScore: this.tsmatch.bScore,
+        date: this.tsmatch.date,
+        ticketsLeft: this.tsmatch.ticketsLeft - this.numOfTickets.value,
+        ticketPrice: this.tsmatch.ticketPrice,
+        tournamentId: this.tsmatch.tournamentId,
+        week: this.tsmatch.week
+      })
 
-      doc.text(this.tsmatch.date,5,5);
-      doc.text("Tickets for ",5,10);
-      doc.save("A7la"+"Tickets");
+      const doc = new jsPDF();
+      doc.text(this.firstTeam.name + " vs " + this.secondTeam.name, 5, 2);
+      doc.text(this.tournament.name, 5, 7);
+      doc.text(this.tsmatch.date, 5, 13);
+      doc.text("Tickets for " + this.userService.currentUser.name, 5, 17);
+      doc.save("Mabrook el Tickets");
+    } else {
+      this.cardInfo = false;
     }
   }
 
@@ -73,7 +94,9 @@ export class BuyCardComponent implements OnInit {
     return this.buyForm.get('expiryDate');
   }
   ngOnInit(): void {
-    this.buyAttempt=false;
+    this.buyAttempt = false;
+    this.cardInfo = true;
+    this.userService.getCurrentUser();
   }
 
 }

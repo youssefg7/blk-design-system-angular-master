@@ -34,13 +34,11 @@ export class TeamCardComponent implements OnInit {
   ngOnInit(): void {
     this.playerNameEmpty = false;
     this.users$.subscribe(queriedItems => {
-      console.log(queriedItems);
       this.userList = queriedItems;
       return queriedItems;
     });
 
     this.players$.subscribe(queriedItems => {
-      console.log(queriedItems);
       this.playerList = queriedItems;
       return queriedItems;
     });

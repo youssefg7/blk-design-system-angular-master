@@ -5,7 +5,7 @@
 </ng-template>
 <ng-template #detailtemplate>
     <div style="background-color: #1f2251;">
-        <app-match-manage [tsmatch]="tsmatch" ></app-match-manage>
+        <app-match-manage [tsmatch]="tsmatch"></app-match-manage>
     </div>
 </ng-template>
 
@@ -13,6 +13,7 @@
     <div class="card card-register">
         <div class="match-header">
             <h1>{{getTournament(tsmatch.tournamentId).name}}</h1>
+            <p>Week {{tsmatch.week}}</p>
         </div>
         <h3 style="align-self: center;">{{getDate(tsmatch.date)}}</h3>
         <div class="match-body">

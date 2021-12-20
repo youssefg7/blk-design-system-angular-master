@@ -10,4 +10,5 @@ export interface Match {
     ticketsLeft
     scorersId? : string[];
     doc?: any;
+    week: number;
   }
