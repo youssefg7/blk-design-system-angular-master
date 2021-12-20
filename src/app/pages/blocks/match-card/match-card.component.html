@@ -3,6 +3,11 @@
         <app-buy-card [firstTeam]="getTeam(tsmatch.aId)" [secondTeam]="getTeam(tsmatch.bId)" [tournament]="getTournament(tsmatch.tournamentId)" [tsmatch]="tsmatch"></app-buy-card>
     </div>
 </ng-template>
+<ng-template #detailtemplate>
+    <div style="background-color: #1f2251;">
+        <app-match-manage [tsmatch]="tsmatch" ></app-match-manage>
+    </div>
+</ng-template>
 
 <div class="container" id="container">
     <div class="card card-register">
@@ -35,7 +40,7 @@
             <a *ngIf="!manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
                 Buy Tickets
             </a>
-            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
+            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(detailtemplate)">
                 Edit Details
             </a>
         </div>
