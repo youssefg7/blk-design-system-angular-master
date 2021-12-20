@@ -88,7 +88,6 @@ onAddTournament(){
         }else{
           date = date.concat("-",(startedit.getDate()).toString());
         }
-        //let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()).toString().concat("-",(((new Date(start.setDate(start.getDate()+i))).getMonth()) + 1).toString(),"-",((new Date(start.setDate(start.getDate()+i))).getDate()).toString());
         this.matchService.addMatch((tourid+((i+(rounds*j)).toString())),{
           aId: teamA,
           bId: teamB,
