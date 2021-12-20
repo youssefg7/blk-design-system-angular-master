@@ -48,9 +48,9 @@ removeTeam(team:string){
 
 onAddTournament(){
   let start = (document.getElementById("startDateSelect") as HTMLInputElement).valueAsDate;
-  let startedit = start;
+  let startedit = new Date(start);
   let end = (document.getElementById("endDateSelect") as HTMLInputElement).valueAsDate;
-  let endedit = end;
+  let endedit = new Date(end);
   let daysBetweenRounds;
   let matchesId:string[] = [""];
   this.addedTeams.shift();
@@ -66,8 +66,8 @@ onAddTournament(){
     daysBetweenRounds = 0;
   }else{
     daysBetweenRounds = this.dayDiff(startedit,endedit)/rounds;
-    endedit = end;
-    startedit = start;
+    endedit = new Date(end);
+    startedit = new Date(start);
   }
   const tour = this.generateTournament(this.addedTeams);
   const tourid = this.makeid(20);
@@ -75,16 +75,18 @@ onAddTournament(){
       for(let j = 0;j<matches;j++){
         let teamA = tour[i][j][0];
         let teamB = tour[i][j][1];
-        let date = (new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear().toString();
-        if(((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1) < 10){
-          date = date.concat("-0",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1).toString());
+        startedit = new Date(start);
+        startedit.setDate(start.getDate()+(i*daysBetweenRounds))
+        let date = (startedit).getFullYear().toString();
+        if((startedit.getMonth() + 1) < 10){
+          date = date.concat("-0",(startedit.getMonth() + 1).toString());
         }else{
-          date = date.concat("-",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getMonth() + 1).toString())
+          date = date.concat("-",(startedit.getMonth() + 1).toString())
         }
-        if((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate() < 10){
-          date = date.concat("-0",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate()).toString());
+        if(startedit.getDate() < 10){
+          date = date.concat("-0",(startedit.getDate()).toString());
         }else{
-          date = date.concat("-",((new Date(startedit.setDate(start.getDate()+(i*daysBetweenRounds)))).getDate()).toString());
+          date = date.concat("-",(startedit.getDate()).toString());
         }
         //let date = ((new Date(start.setDate(start.getDate()+(i*daysBetweenRounds)))).getFullYear()).toString().concat("-",(((new Date(start.setDate(start.getDate()+i))).getMonth()) + 1).toString(),"-",((new Date(start.setDate(start.getDate()+i))).getDate()).toString());
         this.matchService.addMatch((tourid+((i+(rounds*j)).toString())),{
@@ -168,9 +170,9 @@ charactersLength));
  return result;
 }
 
-dayDiff(firstDate, secondDate) {
-  firstDate = new Date(firstDate);
-  secondDate = new Date(secondDate);
+dayDiff(first, second) {
+  let firstDate = first;
+  let secondDate = second;
   if (!isNaN(firstDate) && !isNaN(secondDate)) {
     firstDate.setHours(0, 0, 0, 0); //ignore time part
     secondDate.setHours(0, 0, 0, 0); //ignore time part
