@@ -1,3 +1,7 @@
+<div>
+    <app-ticket id="ticket" [tsmatch]="tsmatch" [firstTeam]="firstTeam" [secondTeam]="secondTeam" [tournament]="tournament" [favTeam]="favTeam" [paymentMethod]="paymentMethod" [numOfTickets]="
+    numOfTickets"></app-ticket>
+</div>
 <div class="card card-register">
     <div class="card-header">
         <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
@@ -41,7 +45,7 @@
             <span *ngIf="favTeam && favTeam.invalid && buyAttempt==true" style="color: red;">Team is required</span>
 
             <p>Select Number of tickets: </p>
-            <p>Ticket Price: 69 egp </p>
+            <p>Ticket Price: {{tsmatch.ticketPrice}} </p>
             <div class="input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
                 <div class="input-group-prepend">
                     <div class="input-group-text">

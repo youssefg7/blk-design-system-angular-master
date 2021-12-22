@@ -10,12 +10,13 @@
                 </div>
             </div>
             <ul class="navbar-nav">
+                <li class="nav-item btn"><a routerLink="home" class="nav-link"> HOME </a></li>
                 <li class="nav-item btn"><a routerLink="matches" class="nav-link"> ALL MATCHES </a></li>
                 <li class="nav-item btn"><a routerLink="statistics" class="nav-link"> STATS </a></li>
                 <li *ngIf="(afAuth.user | async) && this.userService.currentUser.isAdmin" class="nav-item btn"><a routerLink="manage" class="nav-link"> MANAGE </a></li>
-                <li *ngIf="!((afAuth.user | async) && this.userService.currentUser.isAdmin)" class="nav-item btn" tooltip = "You need an Organizer account to access this feature"><a class="nav-link"> MANAGE </a></li>
+                <li *ngIf="!((afAuth.user | async) && this.userService.currentUser.isAdmin)" class="nav-item btn" tooltip="You need an Organizer account to access this feature"><a class="nav-link"> MANAGE </a></li>
                 <li *ngIf="afAuth.user | async" class="nav-item btn" id="profileBtn"><a routerLink="profile" class="nav-link"><i class="tim-icons icon-single-02"></i> PROFILE </a></li>
-                <li *ngIf="!(afAuth.user | async)" class="nav-item btn" tooltip = "You need an account to access this feature"><a class="nav-link"> PROFILE </a></li>
+                <li *ngIf="!(afAuth.user | async)" class="nav-item btn" tooltip="You need an account to access this feature"><a class="nav-link"> PROFILE </a></li>
                 <li *ngIf="!(afAuth.user | async)" class="nav-item btn" id="loginBtn"><a routerLink="register" class="nav-link"><i class="tim-icons icon-single-02"></i> LOGIN </a></li>
                 <li *ngIf="afAuth.user | async" (click)="logout()" class="nav-item btn" id="loginBtn"><a routerLink="register" class="nav-link"> LOGOUT </a></li>
             </ul>

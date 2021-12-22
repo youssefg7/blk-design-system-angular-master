@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Match } from 'src/app/models/match.model';
 import jsPDF from 'jspdf';
+import { Html2CanvasOptions } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { TournamentService } from 'src/app/services/tournament.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -56,13 +57,21 @@ export class BuyCardComponent implements OnInit {
       })
 
       const doc = new jsPDF();
-      doc.text(this.firstTeam.name + " vs " + this.secondTeam.name, 5, 2);
-      doc.text(this.tournament.name, 5, 7);
-      doc.text(this.tsmatch.date, 5, 13);
-      doc.text("Tickets for " + this.userService.currentUser.name, 5, 17);
-      doc.save("Mabrook el Tickets");
-    } else {
-      this.cardInfo = false;
+      const ta = document.getElementById('ticket');
+      console.log('true');
+      html2canvas(ta).then(content => {
+        let imgWidth = 210;
+        let imgHeight = (content.height * imgWidth / content.width);
+        const contentDataURL = content.toDataURL('image/png');
+        let pdf = new jsPDF();
+        var position=0;
+        console.log('true1');
+
+        pdf.addImage(contentDataURL,'PNG',0,position,imgWidth,imgHeight);
+        console.log('true2');
+
+        pdf.save("Mabrook");
+      })
     }
   }
 
