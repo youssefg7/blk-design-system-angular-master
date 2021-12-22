@@ -2,11 +2,13 @@ import { Component, OnInit, OnDestroy, TemplateRef } from "@angular/core";
 import { FormControl, FormGroup, Validators} from "@angular/forms";
 import { BsModalService, BsModalRef, ModalOptions } from "ngx-bootstrap/modal";
 import { UserService } from "src/app/services/user.service";
+import { TeamService } from "src/app/services/team.service";
 import { AuthService } from "src/app/services/auth.service";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Observable } from "rxjs";
 import { User } from "src/app/models/user.model";
 import { CookieService } from "ngx-cookie-service";
+import { Team } from "src/app/models/team.model";
 
 @Component({
   selector: "app-profilepage",
@@ -15,7 +17,9 @@ import { CookieService } from "ngx-cookie-service";
 export class ProfilepageComponent implements OnInit, OnDestroy {
   
   users$: Observable<Array<User>> = this.userService.users$;
-  userList:any;
+  userList:User[];
+  teams$: Observable<Array<Team>> = this.teamService.teams$;
+  teamList:Team[];
   userId:string = this.cookieService.get('Uid');
 
   accountDetails = new FormGroup({
@@ -26,13 +30,18 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   modalRef?: BsModalRef;
   isCollapsed = true;
-  constructor(private modalService: BsModalService, public userService:UserService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
+  constructor(private modalService: BsModalService, public userService:UserService,public teamService:TeamService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
 
   ngOnInit() {
     //console.log(this.cookieService.get('Uid'));
     this.users$.subscribe( queriedItems => {
       console.log(queriedItems);
       this.userList = queriedItems;
+      return queriedItems;
+    });
+    this.teams$.subscribe( queriedItems => {
+      console.log(queriedItems);
+      this.teamList = queriedItems;
       return queriedItems;
     });
     var body = document.getElementsByTagName("body")[0];
@@ -46,7 +55,36 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
     body.classList.remove("profile-page");
   }
 
-  test(template: TemplateRef<any>){
+  openMenu(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-lg' }));
+  }
+  
+  teamAddedHandler(id:string){
+    let favteams = this.userService.currentUser.favouriteTeamsIds;
+    favteams.push(id);
+    this.userService.addUser(this.userService.currentUser.id,{
+      email: this.userService.currentUser.email,
+      name: this.userService.currentUser.name,
+      isAdmin: this.userService.currentUser.isAdmin,
+      password: this.userService.currentUser.password,
+      favouriteTeamsIds: favteams
+    })
+    this.userService.getCurrentUser();
+  }
+
+  teamRemovedHandler(id:string){
+    let favteams = this.userService.currentUser.favouriteTeamsIds.filter(x => x != id);
+    this.userService.addUser(this.userService.currentUser.id,{
+      email: this.userService.currentUser.email,
+      name: this.userService.currentUser.name,
+      isAdmin: this.userService.currentUser.isAdmin,
+      password: this.userService.currentUser.password,
+      favouriteTeamsIds: favteams
+    })
+    this.userService.getCurrentUser();
+  }
+
+ /* test(template: TemplateRef<any>){
 
     if((document.getElementById("userPass") as HTMLInputElement).value == ""){
       
@@ -72,7 +110,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
     }
     //this.modalRef = this.modalService.show(template);
     
-  }
+  }*/
 
   getAdmin(){
     if(this.userService.currentUser.isAdmin){

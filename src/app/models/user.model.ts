@@ -5,5 +5,5 @@ export interface User {
     isAdmin: boolean;
     password: string;
     doc?: any;
-    favouriteTeamsIds? : string[];
+    favouriteTeamsIds : string[];
   }

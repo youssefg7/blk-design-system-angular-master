@@ -1,10 +1,38 @@
 <div *ngIf="afAuth.user | async">
-    <ng-template #template>
+    <ng-template #passTemplate>
         <div style="background-color: #1f2251;">
-            <app-team-card></app-team-card>
+            <input type="password" id="currentPass" placeholder="Current Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 10px; width: 60%;">
+            <input type="password" id="newPass" placeholder="New Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 15px; width: 60%;">
+            <button class="btn btn-danger btn-round float-right" type="submit" (click)="changePass()" style="margin-top: 15px; margin-bottom: 10px; margin-right: 20%;">
+                Submit
+            </button>
         </div>
     </ng-template>
-
+    <ng-template #favTemplate>
+        <div style="background-color: #1f2251;">
+            <div>
+                <mat-grid-list cols="2" rowHeight="50px">
+                    <mat-grid-tile>
+                        <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control"
+                            >
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <input placeholder="Tournament Name" style="width: 200px;" id="tournamentSelect" class="form-control"
+                            >
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <div class="content" style="width: 100%; height: 500px; overflow-y: scroll;">
+                <mat-grid-list cols="2" rowHeight="400px" style="margin: 10px;">
+                    <div *ngFor="let tsteam of teamList">
+                        <mat-grid-tile>
+                            <app-team-card (teamAddedId)="teamAddedHandler($event)" [showUser]="true" [tsteam]="tsteam" [added]="this.userService.currentUser.favouriteTeamsIds.includes(tsteam.id)" style="width: 100%;"></app-team-card>
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </div>
+        </div>
+    </ng-template>
     <div class="wrapper">
         <div class="section">
             <div class="container">
@@ -25,8 +53,7 @@
                                             <div class="form-group">
                                                 <label> Name </label>
                                                 <span formControlName="name" id="userName" class="form-control"
-                                                    type="text" [innerText]="this.userService.currentUser.name"
-                                                    [contentEditable]="true"></span>
+                                                    type="text" [innerText]="this.userService.currentUser.name"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -37,32 +64,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Change Password </label>
-                                                <input id="userPass" formControlName="password" class="form-control"
-                                                    type="password" placeholder="new password" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Favorite Teams </label>
-                                                <span class="form-control" type="text">Dropdown tba</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label> Add a Favourite Team </label>
-                                                <span class="form-control">Dropdown tba</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button class="btn btn-danger btn-round float-right" placement="right" type="submit"
-                                        (click)="test(template)">
-                                        Save Changes
+                                        (click)="openMenu(passTemplate)">
+                                        Change Password
                                     </button>
                                 </form>
                             </div>
@@ -71,5 +75,20 @@
                 </div>
             </div>
         </div>
+    </div>
+    <button class="btn btn-danger btn-round float-left" placement="left" type="submit" style="margin-left: 60px;" (click)="openMenu(favTemplate)">
+        Add New Favourite Team
+    </button>
+    <br>
+    <br>
+    <br>
+    <div class="content">
+    <mat-grid-list cols="3" rowHeight="430px" style="margin: 20px;">
+        <div *ngFor="let tsteam of teamList">
+            <mat-grid-tile *ngIf="this.userService.currentUser.favouriteTeamsIds.includes(tsteam.id)">
+                <app-team-card [showUser]="true" [removable]="true" [tsteam]="tsteam" style="width: 100%;" (teamRemovedId)="teamRemovedHandler($event)"></app-team-card>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
     </div>
 </div>

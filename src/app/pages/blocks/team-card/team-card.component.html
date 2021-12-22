@@ -11,8 +11,11 @@
             <a *ngIf="!showUser" class="btn btn-danger btn-round btn-lg" (click)="openEditMenu(edittemplate)">
                 Edit Info
             </a>
-            <button *ngIf="showUser" class="btn btn-danger btn-round btn-lg" [disabled]="added" (click)="addTeam()">
-                Add to Tournament
+            <a *ngIf="showUser && removable" class="btn btn-danger btn-round btn-lg" (click)="removeTeam()">
+                Remove
+            </a>
+            <button *ngIf="showUser && !removable" class="btn btn-danger btn-round btn-lg" [disabled]="added" (click)="addTeam()">
+                Add
             </button>
         </div>
     </div>

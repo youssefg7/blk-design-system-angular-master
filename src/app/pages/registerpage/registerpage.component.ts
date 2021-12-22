@@ -24,7 +24,8 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    isAdmin: new FormControl(false)
+    isAdmin: new FormControl(false),
+    favouriteTeamsIds: new FormControl([""])
   });
 
   loginForm = new FormGroup({

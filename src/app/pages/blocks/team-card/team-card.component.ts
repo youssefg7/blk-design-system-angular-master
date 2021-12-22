@@ -24,9 +24,11 @@ export class TeamCardComponent implements OnInit {
   addedPlayers: string[] = [""];
   playerNameEmpty: boolean;
   @Output() teamAddedId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() teamRemovedId: EventEmitter<string> = new EventEmitter<string>();
   @Input() tsteam: Team;
   @Input() showUser: boolean;
   @Input() added: boolean;
+  @Input() removable: boolean;
 
 
   constructor(private userService: UserService, private modalService: BsModalService, private playerService: PlayerService, private teamService: TeamService) { }
@@ -105,6 +107,10 @@ export class TeamCardComponent implements OnInit {
         charactersLength));
     }
     return result;
+  }
+
+  removeTeam(){
+    this.teamRemovedId.emit(this.tsteam.id);
   }
 
 }

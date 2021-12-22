@@ -26,9 +26,6 @@ export class UserService {
    addUser(id:string,user:User){
     this.usersCollection.doc(id).set(user);
   }
-    updateUser(user : User){
-      this.usersCollection.doc(this.cookieService.get('Uid')).update(user);
-  }
 
   getCurrentUser(){
     this.usersCollection.doc(this.cookieService.get('Uid')).valueChanges({idField:'id'}).subscribe( item => {this.currentUser = item;});
