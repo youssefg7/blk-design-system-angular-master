@@ -6,6 +6,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class MatchCardComponent implements OnInit {
   teamList: Team[];
 
 
-  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService) { }
+  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService, public authService:AuthService) { }
 
 
   modalRef?: BsModalRef;

@@ -38,9 +38,12 @@
             <a *ngIf="manager" class="btn btn-danger btn-round btn-lg">
                 Sales Details
             </a>
-            <a *ngIf="!manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
+            <button *ngIf="!manager && this.authService.userLoggedIn" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
                 Buy Tickets
-            </a>
+            </button>
+            <button *ngIf="!manager && !this.authService.userLoggedIn" class="btn btn-danger btn-round btn-lg" tooltip = "You need an account to access this feature" style="color: white;">
+                Buy Tickets
+            </button>
             <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(detailtemplate)">
                 Edit Details
             </a>
