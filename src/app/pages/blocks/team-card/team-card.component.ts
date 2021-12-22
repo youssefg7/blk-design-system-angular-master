@@ -66,7 +66,6 @@ export class TeamCardComponent implements OnInit {
       this.playerService.addPlayer(playerId, {
         name: (document.getElementById("playerName") as HTMLInputElement).value,
         teamId: this.tsteam.id,
-        totalScore: 0,
       });
     }
 

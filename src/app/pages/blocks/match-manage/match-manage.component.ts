@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
 })
 export class MatchManageComponent implements OnInit {
 
-  constructor(private teamService:TeamService, private tournamentService: TournamentService, private playerService:PlayerService) { }
+  constructor(private teamService:TeamService, private tournamentService: TournamentService, private playerService:PlayerService, private matchService:MatchService) { }
   
   @Input() tsmatch:Match;
   teams$: Observable<Array<Team>> = this.teamService.teams$;
@@ -46,6 +46,22 @@ export class MatchManageComponent implements OnInit {
       this.playerList = queriedItems;
       return queriedItems;
     });
+    if(this.tsmatch.aScore == "-" && this.tsmatch.bScore == "-"){
+      this.matchService.addMatch(this.tsmatch.id,{
+        aId: this.tsmatch.aId,
+        bId: this.tsmatch.bId,
+        aScore: "0",
+        bScore: "0",
+        tournamentId: this.tsmatch.tournamentId,
+        date: this.tsmatch.date,
+        ticketPrice: this.tsmatch.ticketPrice,
+        ticketsLeft: this.tsmatch.ticketsLeft,
+        week: this.tsmatch.week,
+        scorersId: this.tsmatch.scorersId
+      });
+    }
+
+
   }
 
   getTeam(team:string):Team{
@@ -57,7 +73,45 @@ export class MatchManageComponent implements OnInit {
   }
 
   onAddGoal(){
-
+    let ascore:number; let bscore:number;
+    if(this.teamARadioPicked){
+      ascore = parseInt(this.tsmatch.aScore,10)+1;
+      bscore = parseInt(this.tsmatch.bScore,10);
+    }else{
+      ascore = parseInt(this.tsmatch.aScore,10);
+      bscore = parseInt(this.tsmatch.bScore,10)+1;
+    }
+    if(this.selected == "default"){
+      this.matchService.addMatch(this.tsmatch.id,{
+        aId: this.tsmatch.aId,
+        bId: this.tsmatch.bId,
+        aScore: ascore.toString(),
+        bScore: bscore.toString(),
+        tournamentId: this.tsmatch.tournamentId,
+        date: this.tsmatch.date,
+        ticketPrice: this.tsmatch.ticketPrice,
+        ticketsLeft: this.tsmatch.ticketsLeft,
+        week: this.tsmatch.week,
+        scorersId: this.tsmatch.scorersId
+      });
+    }else{
+      let scorers = [""];
+      scorers = scorers.concat(this.tsmatch.scorersId);
+      scorers.push(this.selected);
+      scorers.shift();
+      this.matchService.addMatch(this.tsmatch.id,{
+        aId: this.tsmatch.aId,
+        bId: this.tsmatch.bId,
+        aScore: ascore.toString(),
+        bScore: bscore.toString(),
+        tournamentId: this.tsmatch.tournamentId,
+        date: this.tsmatch.date,
+        ticketPrice: this.tsmatch.ticketPrice,
+        ticketsLeft: this.tsmatch.ticketsLeft,
+        week: this.tsmatch.week,
+        scorersId: scorers
+      });
+    }
   }
 
   teamRadio() {

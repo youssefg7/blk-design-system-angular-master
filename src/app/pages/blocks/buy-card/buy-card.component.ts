@@ -53,7 +53,8 @@ export class BuyCardComponent implements OnInit {
         ticketsLeft: this.tsmatch.ticketsLeft - this.numOfTickets.value,
         ticketPrice: this.tsmatch.ticketPrice,
         tournamentId: this.tsmatch.tournamentId,
-        week: this.tsmatch.week
+        week: this.tsmatch.week,
+        scorersId: this.tsmatch.scorersId
       })
 
       const doc = new jsPDF();

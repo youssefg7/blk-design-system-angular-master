@@ -97,7 +97,8 @@ export class TournamentCreateComponent implements OnInit {
           tournamentId: tourid,
           aScore: "-",
           bScore: "-",
-          week: i + 1
+          week: i + 1,
+          scorersId: [""]
         });
         matchesId.push((tourid + ((i + (rounds * j)).toString())));
       }

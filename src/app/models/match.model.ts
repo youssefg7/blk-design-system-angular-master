@@ -8,7 +8,7 @@ export interface Match {
     bScore: string;
     ticketPrice:number;
     ticketsLeft
-    scorersId? : string[];
+    scorersId : string[];
     doc?: any;
     week: number;
   }

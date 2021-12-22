@@ -18,7 +18,7 @@
 <select class="form-control text-center" style="width: 90%; margin-left: auto; margin-right: auto;" #playerpick (change)="update($event)">
     <option value="default" style="background-color: #171941;">Pick a Scorer</option>
     <ng-container  *ngFor="let player of playerList">
-        <option *ngIf="(this.teamARadioPicked && (player.teamId == tsmatch.aId)) || (!this.teamARadioPicked && (player.teamId == tsmatch.bId))" [value]="player" style="background-color: #171941;">
+        <option *ngIf="(this.teamARadioPicked && (player.teamId == tsmatch.aId)) || (!this.teamARadioPicked && (player.teamId == tsmatch.bId))" [value]="player.id" style="background-color: #171941;">
             {{player.name}}
         </option>
     </ng-container>

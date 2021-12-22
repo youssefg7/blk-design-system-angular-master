@@ -9,10 +9,12 @@ import { RegisterpageComponent } from "./pages/registerpage/registerpage.compone
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { MatchesComponent } from "./pages/matches/matches.component";
 import { ManagepageComponent } from "./pages/managepage/managepage.component";
+import { StatspageComponent } from "./pages/statspage/statspage.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "matches", pathMatch: "full" },
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: IndexComponent },
+  { path: "statistics", component: StatspageComponent},
   { path: "matches", component: MatchesComponent },
   { path: "manage", component: ManagepageComponent },
   { path: "profile", component: ProfilepageComponent },
