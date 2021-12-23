@@ -21,11 +21,12 @@
 <br>
 <br>
 <br>
-<table style="width: 90%; margin-left: auto; margin-right: auto;">
+<div class="table-wrapper">
+<table id="myTable" style="width: 90%; margin-left: auto; margin-right: auto;" class="fl-table">
     <tr>
-      <th mat-sort-header="name">Player Name</th>
-      <th mat-sort-header="team">Team</th>
-      <th mat-sort-header="score">Goals</th>
+      <th (click)="sortTable(0)">Player Name</th>
+      <th (click)="sortTable(1)">Team</th>
+      <th (click)="sortTable(2)">Goals</th>
     </tr>
   <ng-container *ngFor="let score of Scorers">
     <tr *ngIf="score.playerId != ''">
@@ -35,3 +36,6 @@
       </tr>
   </ng-container>
 </table>
+</div>
+
+

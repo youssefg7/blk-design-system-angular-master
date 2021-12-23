@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { Player } from 'src/app/models/player.model';
 
 
 @Component({
@@ -21,9 +23,11 @@ export class MatchCardComponent implements OnInit {
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
   tournamentList: Tournament[];
   teamList: Team[];
+  players$: Observable<Array<Player>> = this.playerService.players$;
+  playerList: Player[];
 
 
-  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService, public authService:AuthService) { }
+  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService, public authService:AuthService, private playerService: PlayerService) { }
 
 
   modalRef?: BsModalRef;
@@ -38,6 +42,10 @@ export class MatchCardComponent implements OnInit {
       this.tournamentList = queriedItems;
       return queriedItems;
     });
+    this.players$.subscribe(queriedItems => {
+      this.playerList = queriedItems;
+      return queriedItems;
+    });
   }
   openMenu(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -49,6 +57,10 @@ export class MatchCardComponent implements OnInit {
 
   getTournament(tournament: string): Tournament {
     return this.tournamentList.find(x => x.id === tournament);
+  }
+
+  getPlayer(player: string): Player {
+    return this.playerList.find(x => x.id === player);
   }
 
   getDate(date: string): string {
