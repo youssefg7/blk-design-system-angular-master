@@ -1,1 +1,40 @@
-<p>standings works!</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="card card-plain bg-antoon" style="position: fixed; z-index: 100; background-color: #171941;">
+    <select class="form-control text-center" style="width: 60%; margin-left: auto; margin-right: auto;" (change)="update($event)">
+    <option value="default" style="background-color: #171941;">Pick a Tournament</option>
+    <ng-container  *ngFor="let tournament of tournamentList">
+        <option [value]="tournament.id" style="background-color: #171941;">
+            {{tournament.name}}
+        </option>
+    </ng-container>
+</select>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="table-wrapper">
+    <table id="myTable" style="width: 90%; margin-left: auto; margin-right: auto;" class="fl-table">
+        <tr>
+            <th (click)="sortTable(0)">Rank</th>
+            <th (click)="sortTable(1)">Team</th>
+            <th (click)="sortTable(2)">Points</th>
+            <th (click)="sortTable(3)">Goals With</th>
+            <th (click)="sortTable(4)">Goals Against</th>
+        </tr>
+        <ng-container *ngFor="let score of Scorers">
+            <tr *ngIf="score.teamId != ''">
+                <td>{{score.rank}}</td>
+                <td>{{getTeam(score.teamId).name}}</td>
+                <td>{{score.count}}</td>
+                <td>{{score.gw}}</td>
+                <td>{{score.ga}}</td>
+            </tr>
+        </ng-container>
+    </table>
+</div>
