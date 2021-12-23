@@ -2,8 +2,9 @@
 <br>
 <br>
 <br>
+<br>
 <div class="card card-plain bg-antoon" style="position: fixed; z-index: 100; background-color: #171941;">
-<select class="form-control text-center" style="width: 60%; margin-left: auto; margin-right: auto;"  (change)="update($event)">
+    <select class="form-control text-center" style="width: 60%; margin-left: auto; margin-right: auto;" (change)="update($event)">
     <option value="default" style="background-color: #171941;">Pick a Tournament</option>
     <ng-container  *ngFor="let tournament of tournamentList">
         <option [value]="tournament.id" style="background-color: #171941;">
@@ -17,25 +18,19 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 <div class="table-wrapper">
-<table id="myTable" style="width: 90%; margin-left: auto; margin-right: auto;" class="fl-table">
-    <tr>
-      <th (click)="sortTable(0)">Player Name</th>
-      <th (click)="sortTable(1)">Team</th>
-      <th (click)="sortTable(2)">Goals</th>
-    </tr>
-  <ng-container *ngFor="let score of Scorers">
-    <tr *ngIf="score.playerId != ''">
-        <td>{{getPlayer(score.playerId).name}}</td>
-        <td>{{getTeam(getPlayer(score.playerId).teamId).name}}</td>
-        <td>{{score.count}}</td>
-      </tr>
-  </ng-container>
-</table>
+    <table id="myTable" style="width: 90%; margin-left: auto; margin-right: auto;" class="fl-table">
+        <tr>
+            <th (click)="sortTable(0)">Player Name</th>
+            <th (click)="sortTable(1)">Team</th>
+            <th (click)="sortTable(2)">Goals</th>
+        </tr>
+        <ng-container *ngFor="let score of Scorers">
+            <tr *ngIf="score.playerId != ''">
+                <td>{{getPlayer(score.playerId).name}}</td>
+                <td>{{getTeam(getPlayer(score.playerId).teamId).name}}</td>
+                <td>{{score.count}}</td>
+            </tr>
+        </ng-container>
+    </table>
 </div>
-
-
