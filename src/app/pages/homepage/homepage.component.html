@@ -1,0 +1,33 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div *ngIf="!this.authService.userLoggedIn" class="navbar-translate">
+        <a class="navbar-brand">
+        You are currently not logged in to a Nazamly account. Today's matches are viewed on your home page!
+        </a>
+        <a class="navbar-brand">
+            Create or login to buy tickets, add your favorite teams, or create and manage your own custom tournaments if you signed up for an organizer account!
+            </a>
+    </div>
+    <div *ngIf="this.authService.userLoggedIn" class="navbar-translate">
+        <a class="navbar-brand">
+        Enjoy your custom Nazamly experience. Your favorite teams' matches are viewed on your home page!
+        </a>
+        <a class="navbar-brand">
+            You can add, delete your favorite teams from Profile page!
+            </a>
+    </div>
+</div>
+
+<div class="content">
+    <mat-grid-list cols="3" rowHeight="550px" style="margin: 10px;">
+        <div *ngFor="let tsmatch of matchList">
+            <mat-grid-tile *ngIf="(tsmatch.date == this.today && !this.authService.userLoggedIn)
+            ||(this.authService.userLoggedIn && (this.userService.currentUser.favouriteTeamsIds.includes(tsmatch.aId)||this.userService.currentUser.favouriteTeamsIds.includes(tsmatch.bId)))">
+                <app-match-card [tsmatch]="tsmatch" [manager]="false" style="width: 100%;"></app-match-card>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+</div>

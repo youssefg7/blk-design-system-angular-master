@@ -1,5 +1,5 @@
 <div>
-    <app-ticket id="ticket" [tsmatch]="tsmatch" [firstTeam]="firstTeam" [secondTeam]="secondTeam" [tournament]="tournament" [favTeam]="favTeam" [paymentMethod]="paymentMethod" [numOfTickets]="
+    <app-ticket *ngIf="buyAttempt" id="ticket" [tsmatch]="tsmatch" [firstTeam]="firstTeam" [secondTeam]="secondTeam" [tournament]="tournament" [favTeam]="favTeam" [paymentMethod]="paymentMethod" [numOfTickets]="
     numOfTickets"></app-ticket>
 </div>
 <div class="card card-register">

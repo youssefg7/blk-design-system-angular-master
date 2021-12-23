@@ -10,16 +10,17 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
 import { MatchesComponent } from "./pages/matches/matches.component";
 import { ManagepageComponent } from "./pages/managepage/managepage.component";
 import { StatspageComponent } from "./pages/statspage/statspage.component";
+import { HomepageComponent } from "./pages/homepage/homepage.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: IndexComponent },
+  { path: "home", component: HomepageComponent },
   { path: "statistics", component: StatspageComponent},
   { path: "matches", component: MatchesComponent },
   { path: "manage", component: ManagepageComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
-  { path: "landing", component: LandingpageComponent }
+  { path: "landing", component: IndexComponent },
 ];
 
 @NgModule({

@@ -9,9 +9,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { MatchService } from 'src/app/services/match.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-buy-card',

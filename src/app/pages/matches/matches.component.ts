@@ -14,10 +14,11 @@ import { Tournament } from 'src/app/models/tournament.model';
   styleUrls: ['./matches.component.scss']
 })
 export class MatchesComponent implements OnInit {
-  matches$: Observable<Array<Match>> = this.matchService.matches$;
 
   constructor(private matchService:MatchService, private teamService:TeamService, private tournamentService:TournamentService) { }
-
+  
+  todayDate: string;
+  matches$: Observable<Array<Match>> = this.matchService.matches$;
   matchList:Match[];
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
@@ -28,35 +29,26 @@ export class MatchesComponent implements OnInit {
   dateSearch:string = "";
 
   ngOnInit(): void {
+    this.todayDate = new Date().toString();
+
     this.matches$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.matchList = queriedItems;
       return queriedItems;
     });
     this.teams$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.teamList = queriedItems;
       return queriedItems;
     });
     this.tournaments$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.tournamentList = queriedItems;
       return queriedItems;
     });
       
   }
 
-  test(){
-    this.matchList.forEach(function (arrayItem) {
-      if(arrayItem.aId.startsWith("qwed")){
-        console.log(arrayItem);
-      }
-    })
-  }
-
   onDateChange(){
-    //console.log(new Date((document.getElementById("dateSelect") as HTMLInputElement).value).getTime());
     this.dateSearch = (document.getElementById("dateSelect") as HTMLInputElement).value;
+
   }
 
   onTourChange(){
