@@ -1,6 +1,29 @@
-<div>
-    <app-ticket id="ticket" [tsmatch]="tsmatch" [firstTeam]="firstTeam" [secondTeam]="secondTeam" [tournament]="tournament" [favTeam]="favTeam" [paymentMethod]="paymentMethod" [numOfTickets]="
-    numOfTickets"></app-ticket>
+<div *ngIf="buyAttempt" class="container" id="ticket">
+    <div class="card card-register">
+        <div class="match-header">
+            <h1>NAZAMLY TICKETS</h1>
+            <h1>{{tournament.name}}</h1>
+            <p>Week {{tsmatch.week}}</p>
+        </div>
+        <h3 style="align-self: center;">{{tsmatch.date}}</h3>
+        <div class="match-body">
+            <div class="row" style="align-items: center; align-self: center;">
+                <div class="teamitem" style="padding-right: 30px;">
+                    <h2 class="caption textover">{{firstTeam.name}}</h2>
+                </div>
+                <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">vs</h2>
+                <div class="teamitem" style="padding-left: 30px;">
+                    <h2 class="caption textover">{{secondTeam.name}}</h2>
+                </div>
+            </div>
+        </div>
+        <span>Tickets for: teamAB</span>
+        <span>Ticket price: {{tsmatch.ticketPrice}}</span>
+        <span>Number of tickets: {{numOfTickets.value}} </span>
+        <span>Total paid: {{tsmatch.ticketPrice * numOfTickets.value}} </span>
+        <span>Payment method: {{paymentMethod.value}} </span>
+
+    </div>
 </div>
 <div class="card card-register">
     <div class="card-header">
@@ -81,7 +104,7 @@
                               name="paymentRadios"
                               type="radio"
                               value="card"
-                              formControlName="paymentMethod"
+                              [formControl]="paymentMethod"
                             />
                             <span class="form-check-sign"> </span> Card Payment
                           </label>
@@ -97,7 +120,7 @@
                             <i class="tim-icons icon-pencil"> </i>
                         </div>
                     </div>
-                    <input formControlName="cardNumber" class="form-control" placeholder="Card Number" type="text" (focus)="focus2 = true" (blur)="focus2 = false" />
+                    <input [formControl]="cardNumber" class="form-control" placeholder="Card Number" type="text" (focus)="focus2 = true" (blur)="focus2 = false" />
                 </div>
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus3 === true }">
                     <div class="input-group-prepend">
@@ -105,7 +128,7 @@
                             <i class="tim-icons icon-key-25"> </i>
                         </div>
                     </div>
-                    <input formControlName="cvv" class="form-control" [maxLength]="3" [minLength]="3" placeholder="Cvv" type="text" (focus)="focus3 = true" (blur)="focus3 = false" />
+                    <input [formControl]="cvv" class="form-control" [maxLength]="3" [minLength]="3" placeholder="Cvv" type="text" (focus)="focus3 = true" (blur)="focus3 = false" />
                 </div>
 
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus4 === true }">
@@ -114,7 +137,7 @@
                             <i class="tim-icons icon-calendar-60"> </i>
                         </div>
                     </div>
-                    <input formControlName="expiryDate" class="form-control" placeholder="Expiry Date" type="date" (focus)="focus4 = true" (blur)="focus4 = false" />
+                    <input [formControl]="expiryDate" class="form-control" placeholder="Expiry Date" type="date" (focus)="focus4 = true" (blur)="focus4 = false" />
                 </div>
                 <span *ngIf="!this.cardInfo" style="color: red;">Check your card Info</span>
             </div>

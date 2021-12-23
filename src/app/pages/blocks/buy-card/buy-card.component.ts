@@ -9,9 +9,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { MatchService } from 'src/app/services/match.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-buy-card',
@@ -40,7 +38,6 @@ export class BuyCardComponent implements OnInit {
   });
 
   onSubmitBuy(): void {
-    console.log(this.paymentMethod.value);
     this.buyAttempt = true;
     if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (this.cvv.value() != "" && this.cardNumber.value() != "" && this.expiryDate.value() != ""))) {
       this.cardInfo = true;
@@ -59,19 +56,12 @@ export class BuyCardComponent implements OnInit {
 
       const doc = new jsPDF();
       const ta = document.getElementById('ticket');
-      console.log('true');
       html2canvas(ta).then(content => {
-        let imgWidth = 210;
-        let imgHeight = (content.height * imgWidth / content.width);
+        let imgHeight = (content.height * 210 / content.width);
         const contentDataURL = content.toDataURL('image/png');
         let pdf = new jsPDF();
-        var position=0;
-        console.log('true1');
-
-        pdf.addImage(contentDataURL,'PNG',0,position,imgWidth,imgHeight);
-        console.log('true2');
-
-        pdf.save("Mabrook");
+        pdf.addImage(contentDataURL,'PNG',0,0,210,imgHeight);
+        pdf.save("Tickets");
       })
     }
   }

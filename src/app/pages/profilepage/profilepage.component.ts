@@ -33,22 +33,17 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
   constructor(private modalService: BsModalService, public userService:UserService,public teamService:TeamService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
 
   ngOnInit() {
-    //console.log(this.cookieService.get('Uid'));
     this.users$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.userList = queriedItems;
       return queriedItems;
     });
     this.teams$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.teamList = queriedItems;
       return queriedItems;
     });
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("profile-page");
     this.userService.getCurrentUser();
-    //(document.getElementById("userName") as HTMLInputElement).value = this.userService.currentUser.name;
-
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
@@ -83,34 +78,6 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
     })
     this.userService.getCurrentUser();
   }
-
- /* test(template: TemplateRef<any>){
-
-    if((document.getElementById("userPass") as HTMLInputElement).value == ""){
-      
-      this.userService.updateUser({
-        name: document.getElementById("userName").innerText,
-        email: this.userService.currentUser.email,
-        password: this.userService.currentUser.password,
-        isAdmin: this.userService.currentUser.isAdmin,
-        favouriteTeamsIds: ["hi","it","works"]
-        
-      })
-
-    }else{
-      this.authService.authUpdatePassword((document.getElementById("userPass") as HTMLInputElement).value);
-      this.userService.updateUser({
-        name: document.getElementById("userName").innerText,
-        email: this.userService.currentUser.email,
-        password: (document.getElementById("userPass") as HTMLInputElement).value,
-        isAdmin: this.userService.currentUser.isAdmin,
-        favouriteTeamsIds: ["hi","it","works"]
-        
-      })
-    }
-    //this.modalRef = this.modalService.show(template);
-    
-  }*/
 
   getAdmin(){
     if(this.userService.currentUser.isAdmin){

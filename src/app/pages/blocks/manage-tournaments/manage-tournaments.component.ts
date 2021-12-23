@@ -23,12 +23,10 @@ export class ManageTournamentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournaments$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.tournamentList = queriedItems;
       return queriedItems;
     });
     this.matches$.subscribe( queriedItems => {
-      console.log(queriedItems);
       this.matchList = queriedItems;
       return queriedItems;
     });
