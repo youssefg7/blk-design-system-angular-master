@@ -7,7 +7,7 @@ export interface Match {
     aScore: string;
     bScore: string;
     ticketPrice:number;
-    ticketsLeft
+    ticketsLeft:number;
     scorersId : string[];
     doc?: any;
     week: number;

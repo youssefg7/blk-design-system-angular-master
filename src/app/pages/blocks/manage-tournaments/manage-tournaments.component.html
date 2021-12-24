@@ -1,9 +1,47 @@
+
 <tabset class="nav-tabs-danger">
     <ng-container  *ngFor="let tour of tournamentList">
         <tab *ngIf="tour.userId == condition">
             <ng-template tabHeading>
                 {{tour.name}}
             </ng-template>
+            <button class="btn btn-success btn-round btn-lg" style="margin-left: 30px;" (click)="openMenu(salestemplate)" (click)="calculate(tour)">
+                Sales Report
+           </button>
+           <ng-template #salestemplate>
+            <div style="background-color: #1f2251;">
+                <div class="table-wrapper">
+                    <table id="myTable" style="width: 90%; margin-left: auto; margin-right: auto;" class="fl-table">
+                        <tr>
+                            <th>Match</th>
+                            <th>Tickets Left</th>
+                            <th>Tickets Sold</th>
+                            <th>Total Revenue</th>
+                        </tr>
+                        
+                            <tr *ngFor="let matchd of tour.matchesId">
+                                <td>{{getTeam(getMatch(matchd).aId).name}} vs {{getTeam(getMatch(matchd).bId).name}}</td>
+                                <td>{{getMatch(matchd).ticketsLeft}}</td>
+                                <td>{{tour.tickets - getMatch(matchd).ticketsLeft}}</td>
+                                <td>{{(tour.tickets - getMatch(matchd).ticketsLeft) * getMatch(matchd).ticketPrice}}</td>
+                            </tr>
+                        
+                        <tr>
+                            <td>Total</td>
+                            <td>{{totalTickets - totalSold}}</td>
+                            <td>{{totalSold}}</td>
+                            <td>{{totalRevenue}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            Percentage of Tickets Sold: {{(totalSold/totalTickets)*100}}%
+                        </tr>
+                    </table>
+                </div>
+                <button class="btn btn-success btn-round btn-lg" style="margin-left: 30px; margin-bottom: 30px;" (click)="onPdf()">
+                    Save as Pdf
+               </button>
+            </div>
+        </ng-template>
             <mat-grid-list cols="2" rowHeight="500px" style="margin: 20px;">
                 <div *ngFor="let match of tour.matchesId">
                     <mat-grid-tile>
