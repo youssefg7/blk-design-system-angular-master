@@ -15,42 +15,43 @@ import { Observable } from 'rxjs';
 export class StandingsComponent implements OnInit {
 
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
-  tournamentList : Tournament[];
+  tournamentList: Tournament[];
   matches$: Observable<Array<Match>> = this.matchService.matches$;
-  matchList : Match[];
+  matchList: Match[];
   teams$: Observable<Array<Team>> = this.teamService.teams$;
-  teamList : Team[];
+  teamList: Team[];
   selected = "default";
-  Scorers:scoreCount[] = [{teamId:"", count:0, gw:0, ga:0, rank:0}];
+  Scorers: scoreCount[] = [{ teamId: "", matchesPlayed: 0, count: 0, gw: 0, ga: 0, rank: 0 }];
 
   constructor(private tournamentService: TournamentService, private matchService: MatchService, private teamService: TeamService) { }
 
   ngOnInit(): void {
-    this.tournaments$.subscribe( queriedItems => {
+    this.tournaments$.subscribe(queriedItems => {
       // console.log(queriedItems);
-       this.tournamentList = queriedItems;
-       return queriedItems;
-     });
-     this.matches$.subscribe( queriedItems => {
+      this.tournamentList = queriedItems;
+      return queriedItems;
+    });
+    this.matches$.subscribe(queriedItems => {
       // console.log(queriedItems);
-       this.matchList = queriedItems;
-       return queriedItems;
-     });
-     this.teams$.subscribe( queriedItems => {
-       // console.log(queriedItems);
-        this.teamList = queriedItems;
-        return queriedItems;
-      });
+      this.matchList = queriedItems;
+      return queriedItems;
+    });
+    this.teams$.subscribe(queriedItems => {
+      // console.log(queriedItems);
+      this.teamList = queriedItems;
+      return queriedItems;
+    });
   }
 
-  update(e){
+  update(e) {
     this.selected = e.target.value;
-    this.Scorers =  [{teamId:"", count:0, gw:0, ga:0, rank:0}];
-    if(this.selected != "default"){
+    this.Scorers = [{ teamId: "", matchesPlayed: 0, count: 0, gw: 0, ga: 0, rank: 0 }];
+    if (this.selected != "default") {
       const currentTour = this.getTournament(this.selected);
-      for(let i = 0; i < currentTour.teamsId.length; i++ ){
+      for (let i = 0; i < currentTour.teamsId.length; i++) {
         this.Scorers.push({
           teamId: currentTour.teamsId[i],
+          matchesPlayed: 0,
           count: 0,
           gw: 0,
           ga: 0,
@@ -58,57 +59,63 @@ export class StandingsComponent implements OnInit {
         });
       }
       this.Scorers.shift();
-      for(let i = 0; i < currentTour.matchesId.length; i++){
+      for (let i = 0; i < currentTour.matchesId.length; i++) {
         let currentMatch = this.getMatch(currentTour.matchesId[i])
-        if(currentMatch.aScore != "-" && currentMatch.bScore != "-"){
+        if (currentMatch.aScore != "-" && currentMatch.bScore != "-") {
 
           let afoundindex = this.Scorers.findIndex(x => x.teamId == currentMatch.aId);
           let bfoundindex = this.Scorers.findIndex(x => x.teamId == currentMatch.bId);
 
 
-          if(parseInt(currentMatch.aScore,10) > parseInt(currentMatch.bScore,10)){
+          if (parseInt(currentMatch.aScore, 10) > parseInt(currentMatch.bScore, 10)) {
             this.Scorers[afoundindex] = {
               teamId: this.Scorers[afoundindex].teamId,
+              matchesPlayed: this.Scorers[afoundindex].matchesPlayed + 1,
               count: this.Scorers[afoundindex].count + 3,
-              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore,10),
-              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore,10),
+              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore, 10),
+              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore, 10),
               rank: this.Scorers[afoundindex].rank
             }
             this.Scorers[bfoundindex] = {
               teamId: this.Scorers[bfoundindex].teamId,
+              matchesPlayed: this.Scorers[bfoundindex].matchesPlayed + 1,
               count: this.Scorers[bfoundindex].count,
-              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore,10),
-              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore,10),
+              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore, 10),
+              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore, 10),
               rank: this.Scorers[bfoundindex].rank
             }
-          }else if(parseInt(currentMatch.bScore,10) > parseInt(currentMatch.aScore,10)){
+          } else if (parseInt(currentMatch.bScore, 10) > parseInt(currentMatch.aScore, 10)) {
             this.Scorers[bfoundindex] = {
               teamId: this.Scorers[bfoundindex].teamId,
+              matchesPlayed: this.Scorers[bfoundindex].matchesPlayed + 1,
               count: this.Scorers[bfoundindex].count + 3,
-              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore,10),
-              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore,10),
+              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore, 10),
+              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore, 10),
               rank: this.Scorers[bfoundindex].rank
             }
             this.Scorers[afoundindex] = {
               teamId: this.Scorers[afoundindex].teamId,
+              matchesPlayed: this.Scorers[afoundindex].matchesPlayed + 1,
               count: this.Scorers[afoundindex].count,
-              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore,10),
-              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore,10),
+              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore, 10),
+              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore, 10),
               rank: this.Scorers[afoundindex].rank
             }
-          }else{
+          } else {
             this.Scorers[bfoundindex] = {
               teamId: this.Scorers[bfoundindex].teamId,
+              matchesPlayed: this.Scorers[bfoundindex].matchesPlayed + 1,
               count: this.Scorers[bfoundindex].count + 1,
-              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore,10),
-              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore,10),
+              gw: this.Scorers[bfoundindex].gw + parseInt(currentMatch.bScore, 10),
+              ga: this.Scorers[bfoundindex].ga + parseInt(currentMatch.aScore, 10),
               rank: this.Scorers[bfoundindex].rank
             }
             this.Scorers[afoundindex] = {
               teamId: this.Scorers[afoundindex].teamId,
+              matchesPlayed: this.Scorers[afoundindex].matchesPlayed + 1,
               count: this.Scorers[afoundindex].count + 1,
-              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore,10),
-              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore,10),
+              gw: this.Scorers[afoundindex].gw + parseInt(currentMatch.aScore, 10),
+              ga: this.Scorers[afoundindex].ga + parseInt(currentMatch.bScore, 10),
               rank: this.Scorers[afoundindex].rank
             }
           }
@@ -118,13 +125,14 @@ export class StandingsComponent implements OnInit {
       }
 
       this.Scorers.sort(this.compare);
-      for(let i = 0; i < this.Scorers.length; i++){
+      for (let i = 0; i < this.Scorers.length; i++) {
         this.Scorers[i] = {
           teamId: this.Scorers[i].teamId,
+          matchesPlayed: this.Scorers[i].matchesPlayed,
           count: this.Scorers[i].count,
           gw: this.Scorers[i].gw,
           ga: this.Scorers[i].ga,
-          rank: i+1
+          rank: i + 1
         }
       }
 
@@ -133,15 +141,15 @@ export class StandingsComponent implements OnInit {
   }
 
 
-  getMatch(match:string):Match{
+  getMatch(match: string): Match {
     return this.matchList.find(x => x.id === match);
   }
 
-  getTournament(tournament:string):Tournament{
+  getTournament(tournament: string): Tournament {
     return this.tournamentList.find(x => x.id === tournament);
   }
 
-  getTeam(team:string):Team{
+  getTeam(team: string): Team {
     return this.teamList.find(x => x.id === team);
   }
 
@@ -189,7 +197,7 @@ export class StandingsComponent implements OnInit {
         rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
         switching = true;
         // Each time a switch is done, increase this count by 1:
-        switchcount ++;
+        switchcount++;
       } else {
         /* If no switching has been done AND the direction is "asc",
         set the direction to "desc" and run the while loop again. */
@@ -202,23 +210,23 @@ export class StandingsComponent implements OnInit {
   }
 
 
-  compare(a,b){
-    if(a.count>b.count){
+  compare(a, b) {
+    if (a.count > b.count) {
       return -1;
     }
-    if(a.count<b.count){
+    if (a.count < b.count) {
       return 1;
     }
-    if(a.gw>b.gw){
+    if (a.gw > b.gw) {
       return -1;
     }
-    if(a.gw<b.gw){
+    if (a.gw < b.gw) {
       return 1;
     }
-    if(a.ga>b.ga){
+    if (a.ga > b.ga) {
       return 1;
     }
-    if(a.ga<b.ga){
+    if (a.ga < b.ga) {
       return -1;
     }
     return 0;
@@ -227,8 +235,9 @@ export class StandingsComponent implements OnInit {
 }
 
 interface scoreCount {
-  teamId:string,
-  count:number,
+  teamId: string,
+  matchesPlayed: number,
+  count: number,
   gw: number,
   ga: number,
   rank: number

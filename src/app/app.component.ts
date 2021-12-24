@@ -9,6 +9,7 @@ import { Location } from "@angular/common";
 import { DOCUMENT } from "@angular/common";
 import { UserService } from "./services/user.service";
 import { Router } from "@angular/router";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-root",
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     private renderer: Renderer2,
     public location: Location,
     private userService: UserService,
+    private titleService: Title,
     @Inject(DOCUMENT) document
   ) {}
   @HostListener("window:scroll", ["$event"])
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.titleService.setTitle("Nazamly");
     this.userService.getCurrentUser();
     this.onWindowScroll(event);  
   }

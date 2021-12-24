@@ -23,17 +23,21 @@
         <tr>
             <th (click)="sortTable(0)">Rank</th>
             <th (click)="sortTable(1)">Team</th>
-            <th (click)="sortTable(2)">Points</th>
-            <th (click)="sortTable(3)">Goals With</th>
-            <th (click)="sortTable(4)">Goals Against</th>
+            <th (click)="sortTable(2)">Played</th>
+            <th (click)="sortTable(3)">Pts</th>
+            <th (click)="sortTable(4)">GF</th>
+            <th (click)="sortTable(5)">GA</th>
+            <th (click)="sortTable(6)">GD</th>
         </tr>
         <ng-container *ngFor="let score of Scorers">
             <tr *ngIf="score.teamId != ''">
                 <td>{{score.rank}}</td>
                 <td>{{getTeam(score.teamId).name}}</td>
+                <td>{{score.matchesPlayed}}</td>
                 <td>{{score.count}}</td>
                 <td>{{score.gw}}</td>
                 <td>{{score.ga}}</td>
+                <td>{{score.gw-score.ga}}</td>
             </tr>
         </ng-container>
     </table>
