@@ -24,7 +24,7 @@
 <div class="content">
     <mat-grid-list cols="3" rowHeight="550px" style="margin: 10px;">
         <div *ngFor="let tsmatch of matchList">
-            <mat-grid-tile *ngIf="(tsmatch.date == this.today && !this.authService.userLoggedIn)
+            <mat-grid-tile *ngIf="((tsmatch.date == this.today) && !this.authService.userLoggedIn)
             ||(this.authService.userLoggedIn && (this.userService.currentUser.favouriteTeamsIds.includes(tsmatch.aId)||this.userService.currentUser.favouriteTeamsIds.includes(tsmatch.bId)))">
                 <app-match-card [tsmatch]="tsmatch" [manager]="false" style="width: 100%;"></app-match-card>
             </mat-grid-tile>

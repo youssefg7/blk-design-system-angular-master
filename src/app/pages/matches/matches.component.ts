@@ -30,7 +30,7 @@ export class MatchesComponent implements OnInit {
   dateSearch: string = "";
 
   ngOnInit(): void {
-    this.todayDate = new Date();
+    /*this.todayDate = new Date();
     this.today = (this.todayDate).getFullYear().toString();
     if ((this.todayDate.getMonth() + 1) < 10) {
       this.today = this.today.concat("-0", (this.todayDate.getMonth() + 1).toString());
@@ -42,7 +42,7 @@ export class MatchesComponent implements OnInit {
     } else {
       this.today = this.today.concat("-", (this.todayDate.getDate()).toString());
     }
-    this.dateSearch = this.today;
+    this.dateSearch = this.today;*/
     this.matches$.subscribe(queriedItems => {
       this.matchList = queriedItems;
       return queriedItems;

@@ -24,6 +24,10 @@ export class HomepageComponent implements OnInit {
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   ngOnInit(): void {
 
+    if(this.authService.userLoggedIn){
+      this.userService.getCurrentUser();
+    }
+    
     this.todayDate = new Date();
     this.today = (this.todayDate).getFullYear().toString();
     if ((this.todayDate.getMonth() + 1) < 10) {

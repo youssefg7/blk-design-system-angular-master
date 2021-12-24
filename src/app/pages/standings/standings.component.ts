@@ -217,6 +217,12 @@ export class StandingsComponent implements OnInit {
     if (a.count < b.count) {
       return 1;
     }
+    if(a.gw - a.ga > b.gw - b.ga){
+      return -1;
+    }
+    if(a.gw - a.ga < b.gw - b.ga){
+      return 1
+    }
     if (a.gw > b.gw) {
       return -1;
     }
