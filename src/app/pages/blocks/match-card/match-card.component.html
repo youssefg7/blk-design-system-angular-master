@@ -8,6 +8,13 @@
         <app-match-manage [tsmatch]="tsmatch"></app-match-manage>
     </div>
 </ng-template>
+<ng-template #verifytemplate>
+    <div style="background-color: #1f2251;">
+        <input placeholder="Type Ticket Id" style="width: 90%; margin-left: auto; margin-right: auto; margin-top: 10px;" id="ticketSelect" class="form-control" (input)="onTicketChange()">
+        <h2 class="text-center validover" style="margin-top: 10px;">{{verifyText}}</h2>
+        <h6 class="text-center" style="margin-top: 10px; margin-bottom: 10px;">Ticket for {{ticketNo}}</h6>
+    </div>
+</ng-template>
 <ng-template #scorerstemplate>
     <div  style="background-color: #1f2251;">
     <div class="table-wrapper">
@@ -51,20 +58,23 @@
         </div>
         <div class="match-header" style="padding-bottom: 10px; color: white;">
             <a *ngIf="!manager" class="btn btn-danger btn-round btn-lg" (click)="openMenu(scorerstemplate)">
-                DETAILS
+                Score Details
             </a>
-            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg">
-                Sales Details
+            <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" (click)="openMenu(verifytemplate)">
+                Verify Ticket
             </a>
-            <button *ngIf="!manager && this.authService.userLoggedIn" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
+            <button *ngIf="!manager && this.authService.userLoggedIn && tsmatch.ticketsLeft != 0" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(buytemplate)">
                 Buy Tickets
+            </button>
+            <button *ngIf="!manager && this.authService.userLoggedIn && tsmatch.ticketsLeft == 0" class="btn btn-danger btn-round btn-lg" tooltip="Either this match was sold out or no tickets are offered" style="opacity: 0.3; color: white;">
+                Sold Out
             </button>
             <button *ngIf="!manager && !this.authService.userLoggedIn" class="btn btn-danger btn-round btn-lg" tooltip="You need an account to access this feature" style="opacity: 0.3; color: white;">
                 Buy Tickets
             </button>
 
             <a *ngIf="manager" class="btn btn-danger btn-round btn-lg" style="color: white;" (click)="openMenu(detailtemplate)">
-                Edit Details
+                Edit Score
             </a>
         </div>
     </div>

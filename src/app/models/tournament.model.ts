@@ -6,5 +6,6 @@ export interface Tournament {
     matchesId: string[];
     startDate:string;
     endDate:string;
+    tickets:number;
     doc?: any;
   }

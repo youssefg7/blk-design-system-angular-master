@@ -44,7 +44,7 @@ export class BuyCardComponent implements OnInit {
     this.buyAttempt = true;
     if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (this.cvv.value() != "" && this.cardNumber.value() != "" && this.expiryDate.value() != ""))) {
       this.cardInfo = true;
-      this.currentticket = this.makeid(20);
+      this.currentticket = this.makeid(8);
       document.getElementById("ticketId").innerHTML = this.currentticket;
       this.matchService.addMatch(this.tsmatch.id, {
         aId: this.tsmatch.aId,

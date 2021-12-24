@@ -9,7 +9,10 @@ import { Tournament } from 'src/app/models/tournament.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { Player } from 'src/app/models/player.model';
-
+import { TicketService } from 'src/app/services/ticket.service';
+import { Ticket } from 'src/app/models/ticket.model';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-match-card',
@@ -25,9 +28,15 @@ export class MatchCardComponent implements OnInit {
   teamList: Team[];
   players$: Observable<Array<Player>> = this.playerService.players$;
   playerList: Player[];
+  tickets$: Observable<Array<Ticket>> = this.ticketService.tickets$;
+  ticketList: Ticket[];
+  users$: Observable<Array<User>> = this.userService.users$;
+  userList: User[];
+  verifyText:string = "Waiting for ticket id...";
+  ticketNo:string = "#";
 
 
-  constructor(private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService, public authService:AuthService, private playerService: PlayerService) { }
+  constructor(private userService:UserService, private ticketService:TicketService ,private modalService: BsModalService, private tournamentService: TournamentService, private teamService: TeamService, public authService:AuthService, private playerService: PlayerService) { }
 
 
   modalRef?: BsModalRef;
@@ -44,6 +53,14 @@ export class MatchCardComponent implements OnInit {
     });
     this.players$.subscribe(queriedItems => {
       this.playerList = queriedItems;
+      return queriedItems;
+    });
+    this.tickets$.subscribe(queriedItems => {
+      this.ticketList = queriedItems;
+      return queriedItems;
+    });
+    this.users$.subscribe(queriedItems => {
+      this.userList = queriedItems;
       return queriedItems;
     });
   }
@@ -63,12 +80,36 @@ export class MatchCardComponent implements OnInit {
     return this.playerList.find(x => x.id === player);
   }
 
+  getTicket(ticket: string): Ticket {
+    return this.ticketList.find(x => x.id === ticket);
+  }
+
+  getUser(user: string): User {
+    return this.userList.find(x => x.id === user);
+  }
+
   getDate(date: string): string {
     return (new Date(date)).toLocaleDateString();
   }
 
   eventHandle(event){
     this.modalRef.hide();
+  }
+  onTicketChange(){
+    let ticid = (document.getElementById("ticketSelect") as HTMLInputElement).value;
+    if(this.ticketList.some(e => e.id === ticid)){
+      let curtic = this.getTicket(ticid);
+      if(curtic.matchId === this.tsmatch.id){
+        this.verifyText = "Valid Ticket for " + this.getUser(curtic.userId).name;
+        this.ticketNo = curtic.number.toString();
+      }else{
+        this.verifyText = "Invalid Ticket";
+        this.ticketNo = "#";
+      }
+    }else{
+        this.verifyText = "Invalid Ticket";
+        this.ticketNo = "#";
+    }
   }
 
 }

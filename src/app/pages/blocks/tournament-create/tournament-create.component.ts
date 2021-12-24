@@ -71,6 +71,14 @@ export class TournamentCreateComponent implements OnInit {
     }
     const tour = this.generateTournament(this.addedTeams);
     const tourid = this.makeid(20);
+    let price = (document.getElementById("price") as HTMLInputElement).valueAsNumber;
+    let capacity = (document.getElementById("capacity") as HTMLInputElement).valueAsNumber;
+    if( isNaN(price) ){
+      price = 0;
+    }
+    if( isNaN(capacity) ){
+      capacity = 0;
+    }
     for (let i = 0; i < rounds; i++) {
       for (let j = 0; j < matches; j++) {
         let teamA = tour[i][j][0];
@@ -92,8 +100,8 @@ export class TournamentCreateComponent implements OnInit {
           aId: teamA,
           bId: teamB,
           date: date,
-          ticketPrice: (document.getElementById("price") as HTMLInputElement).valueAsNumber,
-          ticketsLeft: (document.getElementById("capacity") as HTMLInputElement).valueAsNumber,
+          ticketPrice: price,
+          ticketsLeft: capacity,
           tournamentId: tourid,
           aScore: "-",
           bScore: "-",
@@ -113,6 +121,7 @@ export class TournamentCreateComponent implements OnInit {
       matchesId: matchesId,
       startDate: start.getFullYear().toString().concat("-", (start.getMonth() + 1).toString(), "-", start.getDate().toString()),
       endDate: end.getFullYear().toString().concat("-", (end.getMonth() + 1).toString(), "-", end.getDate().toString()),
+      tickets: capacity
     });
 
     this.toastr.success('Tournament Added!', (document.getElementById("tournamentName") as HTMLInputElement).value, {
