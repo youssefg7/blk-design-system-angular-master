@@ -13,42 +13,55 @@ div.teamitem {
     padding: 15px;
     align-self: center;
     align-items: center;
+
     &.table-full-width {
-        padding-left: 0;
-        padding-right: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
+
     .card-title {
-        color: #fff;
-        text-transform: inherit;
-        font-weight: 300;
-        margin-bottom: 0.75rem;
+      color: #fff;
+      text-transform: inherit;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
     }
+
     .card-description,
     .card-category {
-        color: rgba(#fff, 0.6);
+      color: rgba(#fff, 0.6);
     }
-}
+  }
 
-.match-header {
+  .match-header {
     padding: 20px 0 0;
     overflow: hidden;
     align-self: center;
     align-items: center;
-    .match-title {
-        position: relative;
-        font-size: 5em;
-        font-weight: 900;
-        color: #fff;
-        margin-left: -5px;
-        z-index: 1;
-    }
-}
 
-.textover {
+    .match-title {
+      position: relative;
+      font-size: 5em;
+      font-weight: 900;
+      color: #fff;
+      margin-left: -5px;
+      z-index: 1;
+    }
+  }
+
+  .textover {
     display: block;
     width: 150px;
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
     text-overflow: ellipsis;
-}
+  }
+
+  .titleover {
+    display: block;
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    text-overflow: ellipsis;
+  }

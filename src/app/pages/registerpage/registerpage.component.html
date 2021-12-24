@@ -40,7 +40,7 @@
                                         </div>
                                         <input formControlName="password" class="form-control" minlength="6" placeholder="Password" type="password" (focus)="focus2 = true" (blur)="focus2 = false" />
                                     </div>
-                                    <span *ngIf="newPassword && newPassword.errors?.required && registerAttempt==true" style="color: red;">Password is required</span>
+                                    <span *ngIf="newPassword && newPassword.invalid && registerAttempt==true" style="color: red;">Passwords need to be 6 characters min</span>
                                     <span id="failedLogIn" style="display: none; color: red;">Incorrect password or email. Try again</span>
 
                                     <div class="form-check text-left">

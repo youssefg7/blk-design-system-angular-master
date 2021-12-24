@@ -1,6 +1,6 @@
 <ng-template #buytemplate>
     <div style="background-color: #1f2251;">
-        <app-buy-card [firstTeam]="getTeam(tsmatch.aId)" [secondTeam]="getTeam(tsmatch.bId)" [tournament]="getTournament(tsmatch.tournamentId)" [tsmatch]="tsmatch"></app-buy-card>
+        <app-buy-card (EEmitter)="eventHandle($event)" [firstTeam]="getTeam(tsmatch.aId)" [secondTeam]="getTeam(tsmatch.bId)" [tournament]="getTournament(tsmatch.tournamentId)" [tsmatch]="tsmatch"></app-buy-card>
     </div>
 </ng-template>
 <ng-template #detailtemplate>

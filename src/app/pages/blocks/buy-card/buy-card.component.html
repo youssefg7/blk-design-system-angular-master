@@ -1,30 +1,3 @@
-<div *ngIf="buyAttempt" class="container" id="ticket">
-    <div class="card card-register">
-        <div class="match-header">
-            <h1>NAZAMLY TICKETS</h1>
-            <h1>{{tournament.name}}</h1>
-            <p>Week {{tsmatch.week}}</p>
-        </div>
-        <h3 style="align-self: center;">{{tsmatch.date}}</h3>
-        <div class="match-body">
-            <div class="row" style="align-items: center; align-self: center;">
-                <div class="teamitem" style="padding-right: 30px;">
-                    <h2 class="caption textover">{{firstTeam.name}}</h2>
-                </div>
-                <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">vs</h2>
-                <div class="teamitem" style="padding-left: 30px;">
-                    <h2 class="caption textover">{{secondTeam.name}}</h2>
-                </div>
-            </div>
-        </div>
-        <span>Tickets for: {{favTeam.value}}</span>
-        <span>Ticket price: {{tsmatch.ticketPrice}}</span>
-        <span>Number of tickets: {{numOfTickets.value}} </span>
-        <span>Total paid: {{tsmatch.ticketPrice * numOfTickets.value}} </span>
-        <span>Payment method: {{paymentMethod.value}} </span>
-
-    </div>
-</div>
 <div class="card card-register">
     <div class="card-header">
         <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
@@ -43,7 +16,7 @@
                               id="firstTeam"
                               name="favTeam"
                               type="radio"
-                              value="firstTeam"
+                              [value]="firstTeam.name"
                               [formControl]="favTeam"
                             />
                             <span class="form-check-sign"> </span> {{firstTeam.name}}
@@ -58,7 +31,7 @@
                               id="secondTeam"
                               name="favTeam"
                               type="radio"
-                              value="secondTeam"
+                              [value]="secondTeam.name"
                               [formControl]="favTeam"
                             />
                             <span class="form-check-sign"> </span> {{secondTeam.name}}
@@ -147,5 +120,34 @@
                 </button>
             </div>
         </form>
+    </div>
+</div>
+<div style="opacity: 100;" class="container">
+    <div class="card card-register" id="ticket">
+        <div class="match-header">
+            <h1 class="text-center">NAZAMLY TICKETS</h1>
+            <h1 class="titleover">{{tournament.name}}</h1>
+            <p class="text-center">Week {{tsmatch.week}}</p>
+        </div>
+        <h3 style="align-self: center;">{{tsmatch.date}}</h3>
+        <div class="match-body">
+            <div class="row" style="align-items: center; align-self: center;">
+                <div class="teamitem" style="padding-right: 30px;">
+                    <h2 class="caption textover">{{firstTeam.name}}</h2>
+                </div>
+                <h2 style="padding-right: 10px; padding-left: 10px;" class="card-title">vs</h2>
+                <div class="teamitem" style="padding-left: 30px;">
+                    <h2 class="caption textover">{{secondTeam.name}}</h2>
+                </div>
+            </div>
+        </div>
+        <span>Tickets for: {{favTeam.value}}</span>
+        <span>Ticket price: {{tsmatch.ticketPrice}}</span>
+        <span>Number of tickets: {{numOfTickets.value}} </span>
+        <span>Total paid: {{tsmatch.ticketPrice * numOfTickets.value}} </span>
+        <span>Payment method: {{paymentMethod.value}} </span>
+        <span id="ticketId"></span>
+        
+
     </div>
 </div>

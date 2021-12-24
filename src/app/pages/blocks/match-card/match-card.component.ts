@@ -67,4 +67,8 @@ export class MatchCardComponent implements OnInit {
     return (new Date(date)).toLocaleDateString();
   }
 
+  eventHandle(event){
+    this.modalRef.hide();
+  }
+
 }

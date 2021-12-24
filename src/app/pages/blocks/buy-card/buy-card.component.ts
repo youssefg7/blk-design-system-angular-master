@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Match } from 'src/app/models/match.model';
 import jsPDF from 'jspdf';
@@ -10,6 +10,7 @@ import { Team } from 'src/app/models/team.model';
 import { Tournament } from 'src/app/models/tournament.model';
 import { MatchService } from 'src/app/services/match.service';
 import { UserService } from 'src/app/services/user.service';
+import { TicketService } from 'src/app/services/ticket.service';
 
 @Component({
   selector: 'app-buy-card',
@@ -18,14 +19,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class BuyCardComponent implements OnInit {
 
-  constructor(private userService: UserService, private tournamentService: TournamentService, private teamService: TeamService, private matchService: MatchService) { }
+  constructor(private userService: UserService, private tournamentService: TournamentService, private ticketService: TicketService, private matchService: MatchService) { }
   buyAttempt: boolean;
   cardInfo: boolean;
+  currentticket:string = "Id yet to be generated";
   cardRadioChecked: boolean;
   @Input() tsmatch: Match;
   @Input() firstTeam: Team;
   @Input() secondTeam: Team;
   @Input() tournament: Tournament;
+  @Output() EEmitter: EventEmitter<string> = new EventEmitter<string>();
   focus; focus1; focus2; focus3; focus4;
 
   buyForm = new FormGroup({
@@ -37,10 +40,12 @@ export class BuyCardComponent implements OnInit {
     expiryDate: new FormControl(''),
   });
 
-  onSubmitBuy(): void {
+  onSubmitBuy() {
     this.buyAttempt = true;
     if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (this.cvv.value() != "" && this.cardNumber.value() != "" && this.expiryDate.value() != ""))) {
       this.cardInfo = true;
+      this.currentticket = this.makeid(20);
+      document.getElementById("ticketId").innerHTML = this.currentticket;
       this.matchService.addMatch(this.tsmatch.id, {
         aId: this.tsmatch.aId,
         bId: this.tsmatch.bId,
@@ -53,16 +58,29 @@ export class BuyCardComponent implements OnInit {
         week: this.tsmatch.week,
         scorersId: this.tsmatch.scorersId
       })
+     
+      
+      
 
       const doc = new jsPDF();
       const ta = document.getElementById('ticket');
       html2canvas(ta).then(content => {
-        let imgHeight = (content.height * 210 / content.width);
+      // let imgHeight = (content.height * 210 / content.width);
         const contentDataURL = content.toDataURL('image/png');
-        let pdf = new jsPDF();
-        pdf.addImage(contentDataURL,'PNG',0,0,210,imgHeight);
+        let pdf = new jsPDF('p', 'mm', [content.height, content.width]);
+        pdf.addImage(contentDataURL,'PNG',0,0,content.width,content.height);
         pdf.save("Tickets");
-      })
+      });
+
+      this.ticketService.addTicket(this.currentticket,{
+        matchId: this.tsmatch.id,
+        userId: this.userService.currentUser.id,
+        number: this.numOfTickets.value
+      });
+
+      this.EEmitter.emit("close tournament-create");
+
+
     }
   }
 
@@ -97,6 +115,17 @@ export class BuyCardComponent implements OnInit {
     this.buyAttempt = false;
     this.cardInfo = true;
     this.userService.getCurrentUser();
+  }
+
+  makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
   }
 
 }
