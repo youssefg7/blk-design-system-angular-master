@@ -1,8 +1,8 @@
 <div *ngIf="afAuth.user | async">
     <ng-template #passTemplate>
         <div style="background-color: #1f2251;">
-            <input type="password" id="currentPass" placeholder="Current Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 10px; width: 60%;">
-            <input type="password" id="newPass" placeholder="New Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 15px; width: 60%;">
+            <input type="password" id="currentPass" placeholder="New Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 10px; width: 60%;">
+            <input type="password" id="newPass" placeholder="Confirm New Password" class="form-control" style="margin-left: auto; margin-right: auto; margin-top: 15px; width: 60%;">
             <button class="btn btn-danger btn-round float-right" type="submit" (click)="changePass()" style="margin-top: 15px; margin-bottom: 10px; margin-right: 20%;">
                 Submit
             </button>

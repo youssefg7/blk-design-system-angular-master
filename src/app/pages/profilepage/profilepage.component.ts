@@ -9,6 +9,7 @@ import { Observable } from "rxjs";
 import { User } from "src/app/models/user.model";
 import { CookieService } from "ngx-cookie-service";
 import { Team } from "src/app/models/team.model";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-profilepage",
@@ -32,7 +33,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   modalRef?: BsModalRef;
   isCollapsed = true;
-  constructor(private modalService: BsModalService, public userService:UserService,public teamService:TeamService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
+  constructor(private toastr: ToastrService, private modalService: BsModalService, public userService:UserService,public teamService:TeamService, private cookieService:CookieService, private authService:AuthService, public afAuth:AngularFireAuth) {}
 
   ngOnInit() {
     this.users$.subscribe( queriedItems => {
@@ -98,6 +99,18 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   onUserNameChange(){
     this.userSearch = (document.getElementById("userSelect") as HTMLInputElement).value;
+  }
+
+  async changePass(){
+    
+    if((document.getElementById("newPass") as HTMLInputElement).value == (document.getElementById("currentPass") as HTMLInputElement).value){
+      this.authService.authUpdatePassword((document.getElementById("newPass") as HTMLInputElement).value);
+    }else{
+        this.toastr.error('Please make sure both fields are equal', 'Password Missmatch', {
+          timeOut: 3000,
+        });
+    }
+    
   }
 
   

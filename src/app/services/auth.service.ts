@@ -2,6 +2,9 @@ import { Injectable,OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, from, Subject } from 'rxjs';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -11,13 +14,14 @@ export class AuthService {
   registeredUserid:any;
   userLoggedIn:boolean;
   isPaused:boolean;
+  cred;
   
 
 
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private cookieService:CookieService) { 
+  constructor(private toastr:ToastrService, private userService:UserService,private router: Router, private afAuth: AngularFireAuth, private cookieService:CookieService) { 
     this.userLoggedIn = false;
-    this.afAuth.onAuthStateChanged((user) => {
+    this.cred = this.afAuth.onAuthStateChanged((user) => {
       if (user) {
         this.userLoggedIn = true;
         this.cookieService.set('Uid',user.uid);
@@ -56,6 +60,7 @@ export class AuthService {
       });
   }
 
+
   resetPassword(email: string): Promise<any> {
     return this.afAuth.sendPasswordResetEmail(email)
       .then(() => {
@@ -87,7 +92,24 @@ export class AuthService {
   }
 
   authUpdatePassword(pass:string){
-    this.afAuth.authState.subscribe( item => {return item.updatePassword(pass);});
+    
+    this.afAuth.authState.subscribe( item => item.updatePassword(pass).then(() => {
+      this.toastr.success('Success!', 'Password Changed', {
+        timeOut: 3000,
+      });
+    }).catch((error) => {
+      if(pass.length < 6){
+        this.toastr.error('has to be more than 6 char','New Password invalid' , {
+          timeOut: 3000,
+        });
+      }else{
+        console.log(error);
+        this.toastr.error('Please Logout and back in again before changing password', 'Security Check!', {
+          timeOut: 3000,
+        });
+      }
+    }));
+   
   }
 
     
