@@ -11,6 +11,7 @@ import { MatchesComponent } from "./pages/matches/matches.component";
 import { ManagepageComponent } from "./pages/managepage/managepage.component";
 import { StatspageComponent } from "./pages/statspage/statspage.component";
 import { HomepageComponent } from "./pages/homepage/homepage.component";
+import { StandingsComponent } from "./pages/standings/standings.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "manage", component: ManagepageComponent },
   { path: "profile", component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
+  { path: "standings", component: StandingsComponent },
   { path: "landing", component: IndexComponent },
 ];
 

@@ -15,55 +15,67 @@ import { Tournament } from 'src/app/models/tournament.model';
 })
 export class MatchesComponent implements OnInit {
 
-  constructor(private matchService:MatchService, private teamService:TeamService, private tournamentService:TournamentService) { }
-  
-  todayDate: string;
+  constructor(private matchService: MatchService, private teamService: TeamService, private tournamentService: TournamentService) { }
+
+  todayDate: Date;
+  today: string;
   matches$: Observable<Array<Match>> = this.matchService.matches$;
-  matchList:Match[];
+  matchList: Match[];
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   tournaments$: Observable<Array<Tournament>> = this.tournamentService.tournaments$;
-  tournamentList : Tournament[];
-  teamList : Team[];
-  teamSearch:string = "";
-  tourSearch:string = "";
-  dateSearch:string = "";
+  tournamentList: Tournament[];
+  teamList: Team[];
+  teamSearch: string = "";
+  tourSearch: string = "";
+  dateSearch: string = "";
 
   ngOnInit(): void {
-    this.todayDate = new Date().toString();
-
-    this.matches$.subscribe( queriedItems => {
+    this.todayDate = new Date();
+    this.today = (this.todayDate).getFullYear().toString();
+    if ((this.todayDate.getMonth() + 1) < 10) {
+      this.today = this.today.concat("-0", (this.todayDate.getMonth() + 1).toString());
+    } else {
+      this.today = this.today.concat("-", (this.todayDate.getMonth() + 1).toString())
+    }
+    if (this.todayDate.getDate() < 10) {
+      this.today = this.today.concat("-0", (this.todayDate.getDate()).toString());
+    } else {
+      this.today = this.today.concat("-", (this.todayDate.getDate()).toString());
+    }
+    this.dateSearch = this.today;
+    this.matches$.subscribe(queriedItems => {
       this.matchList = queriedItems;
       return queriedItems;
     });
-    this.teams$.subscribe( queriedItems => {
+    this.teams$.subscribe(queriedItems => {
       this.teamList = queriedItems;
       return queriedItems;
     });
-    this.tournaments$.subscribe( queriedItems => {
+    this.tournaments$.subscribe(queriedItems => {
       this.tournamentList = queriedItems;
       return queriedItems;
     });
-      
+
   }
 
-  onDateChange(){
+  onDateChange() {
     this.dateSearch = (document.getElementById("dateSelect") as HTMLInputElement).value;
 
   }
 
-  onTourChange(){
+  onTourChange() {
     this.tourSearch = (document.getElementById("tournamentSelect") as HTMLInputElement).value;
   }
 
-  onTeamChange(){
+  onTeamChange() {
     this.teamSearch = (document.getElementById("teamSelect") as HTMLInputElement).value;
   }
 
-  getTeam(team:string):Team{
+  getTeam(team: string): Team {
     return this.teamList.find(x => x.id == team);
   }
-  
-  getTournament(tournament:string):Tournament{
+
+  getTournament(tournament: string): Tournament {
     return this.tournamentList.find(x => x.id == tournament);
   }
 

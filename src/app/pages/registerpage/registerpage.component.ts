@@ -37,7 +37,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.users$.subscribe(queriedItems => {
-      console.log(queriedItems);
       this.userList = queriedItems;
       return queriedItems;
     });
@@ -50,8 +49,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   onSubmitRegister(): void {
-    console.log(this.registerForm.value.name + 'successfully added');
-    console.log('register fn');
     this.registerAttempt = true;
     if (this.registerForm.valid) {
       this.registerAttempt = false;

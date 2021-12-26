@@ -36,6 +36,7 @@ import { MatchManageComponent } from './blocks/match-manage/match-manage.compone
 import { TicketComponent } from './blocks/ticket/ticket.component';
 import { StatspageComponent } from './statspage/statspage.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { StandingsComponent } from './standings/standings.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatchManageComponent,
     TicketComponent,
     StatspageComponent,
-    HomepageComponent
+    HomepageComponent,
+    StandingsComponent
   ],
   exports: [
     IndexComponent,
