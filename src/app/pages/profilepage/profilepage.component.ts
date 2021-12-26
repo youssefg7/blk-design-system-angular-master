@@ -21,6 +21,8 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
   teams$: Observable<Array<Team>> = this.teamService.teams$;
   teamList:Team[];
   userId:string = this.cookieService.get('Uid');
+  teamSearch:string = "";
+  userSearch:string = "";
 
   accountDetails = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -84,6 +86,18 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
       return "Oragnizer"
     }
     return "Regular";
+  }
+
+  getUser(user: string): User {
+    return this.userList.find(x => x.id == user);
+  }
+
+  onTeamNameChange(){
+    this.teamSearch = (document.getElementById("teamSelect") as HTMLInputElement).value;
+  }
+
+  onUserNameChange(){
+    this.userSearch = (document.getElementById("userSelect") as HTMLInputElement).value;
   }
 
   

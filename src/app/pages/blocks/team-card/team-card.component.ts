@@ -67,12 +67,25 @@ export class TeamCardComponent implements OnInit {
         name: (document.getElementById("playerName") as HTMLInputElement).value,
         teamId: this.tsteam.id,
       });
+      this.teamService.updateTeam(this.tsteam.id, {
+        name: this.tsteam.name,
+        pictureUrl: this.tsteam.pictureUrl,
+        userId: this.tsteam.userId,
+        playersId: this.addedPlayers
+      });
     }
 
   }
 
   removePlayer(player: string) {
     this.addedPlayers = this.addedPlayers.filter(x => x != player);
+    this.playerService.deletePlayer(player);
+    this.teamService.updateTeam(this.tsteam.id, {
+      name: this.tsteam.name,
+      pictureUrl: this.tsteam.pictureUrl,
+      userId: this.tsteam.userId,
+      playersId: this.addedPlayers
+    });
   }
 
   getPlayer(player: string) {
@@ -87,15 +100,6 @@ export class TeamCardComponent implements OnInit {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-lg' }));
   }
 
-  editTeam() {
-    this.teamService.updateTeam(this.tsteam.id, {
-      name: this.tsteam.name,
-      pictureUrl: this.tsteam.pictureUrl,
-      userId: this.tsteam.userId,
-      playersId: this.addedPlayers
-    });
-    this.modalRef.hide();
-  }
 
   makeid(length) {
     var result = '';

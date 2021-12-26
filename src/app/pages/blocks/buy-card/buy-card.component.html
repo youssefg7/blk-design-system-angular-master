@@ -51,6 +51,10 @@
                 <input [formControl]="numOfTickets" [max]="tsmatch.ticketsLeft" class="form-control" type="number" min="1" (focus)="focus1 = true" (blur)="focus1 = false" />
             </div>
             <span>Total to pay: {{tsmatch.ticketPrice * numOfTickets.value}} </span>
+            <div style="display: flex;">
+                <span *ngIf="numError" style="color: red; margin-right: 0; margin-left: auto;">Only {{tsmatch.ticketsLeft}} tickets are available</span>
+                <span *ngIf="negError" style="color: red; margin-right: 0; margin-left: auto;">Please Enter A Valid Ticket Amount</span>
+            </div>
             <div class="input-group">
                 <p>Select Payment Method: </p>
                 <div class="form-check form-check-radio">
@@ -94,7 +98,9 @@
                             <i class="tim-icons icon-pencil"> </i>
                         </div>
                     </div>
-                    <input [formControl]="cardNumber" class="form-control" placeholder="Card Number" type="text" (focus)="focus2 = true" (blur)="focus2 = false" />
+                    <input [formControl]="cardNumber" class="form-control" placeholder="Card Number" [maxLength]="16" type="number" (focus)="focus2 = true" (blur)="focus2 = false" />
+                    <br>
+                    <label *ngIf="cardNumber && (cardNumber.value.toString().length != 16 || cardNumber.value < 0) && buyAttempt==true" style="color: red;">Card Number is not valid </label>
                 </div>
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus3 === true }">
                     <div class="input-group-prepend">
@@ -102,7 +108,9 @@
                             <i class="tim-icons icon-key-25"> </i>
                         </div>
                     </div>
-                    <input [formControl]="cvv" class="form-control" [maxLength]="3" [minLength]="3" placeholder="Cvv" type="text" (focus)="focus3 = true" (blur)="focus3 = false" />
+                    <input [formControl]="cvv" class="form-control" [maxLength]="3" [minLength]="3" placeholder="Cvv" type="number" (focus)="focus3 = true" (blur)="focus3 = false" />
+                    <br>
+                    <label *ngIf="cvv && (cvv.value.toString().length != 3 || cvv.value < 0) && buyAttempt==true" style="color: red;">CVV is not valid </label>
                 </div>
 
                 <div class="input-group" [ngClass]="{ 'input-group-focus': focus4 === true }">
@@ -112,6 +120,8 @@
                         </div>
                     </div>
                     <input [formControl]="expiryDate" class="form-control" placeholder="Expiry Date" type="date" (focus)="focus4 = true" (blur)="focus4 = false" />
+                    <br>
+                    <label *ngIf="expiryDate && buyAttempt==true" style="color: red;">Please Enter Expiry Date </label>
                 </div>
                 <span *ngIf="!this.cardInfo" style="color: red;">Check your card Info</span>
             </div>

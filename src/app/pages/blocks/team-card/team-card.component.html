@@ -37,10 +37,5 @@
             <i style="margin-left: 0; margin-right: auto;" *ngIf="player!=''">{{getPlayer(player).name}}</i>
             <i class="tim-icons icon-simple-remove" *ngIf="player!=''" style="margin-left: auto; margin-right: 0;" (click)="removePlayer(player)"></i>
         </div>
-        <div style="display: flex;">
-            <button class="btn btn-danger btn-round btn-lg" style="margin-top: 15px; margin-left: auto; margin-right: auto; margin-bottom: 20px;" (click)="editTeam()">
-                Submit Changes
-            </button>
-        </div>
     </div>
 </ng-template>

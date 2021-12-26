@@ -18,6 +18,8 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   loginAttempt: boolean;
   users$: Observable<Array<User>> = this.userService.users$;
   userList: any;
+  isEmail: boolean = false;
+  isName: boolean = false;
   focus; focus1; focus2; focus3; focus4;
 
   registerForm = new FormGroup({
@@ -49,21 +51,30 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
 
   onSubmitRegister(): void {
+    this.isEmail = false;
+    this.isName = false;
     this.registerAttempt = true;
     if (this.registerForm.valid) {
       this.registerAttempt = false;
-      this.authService.signupUser(this.registerForm.value).then((result) => {
-        if (result == null) {
-          this.userService.addUser(this.cookieService.get('Uid'), this.registerForm.value);
-          document.getElementById("failedRegister").style.display = "none";
-          document.getElementById("successRegister").style.display = "block";
-          this.router.navigate(["profile"]);
-        } else if (result.isvalid == false) {
-          document.getElementById("failedRegister").style.display = "block";
-          document.getElementById("successRegister").style.display = "none";
-        }
-
-      })
+      if(this.userList.some(e => e.email == (document.getElementById("emailNew") as HTMLInputElement).value)){
+        this.isEmail=true;
+      }else if(this.userList.some(e => e.name == (document.getElementById("nameNew") as HTMLInputElement).value)){
+        this.isName = true;
+      }
+      else{
+        this.authService.signupUser(this.registerForm.value).then((result) => {
+          if (result == null) {
+            this.userService.addUser(this.cookieService.get('Uid'), this.registerForm.value);
+            document.getElementById("failedRegister").style.display = "none";
+            document.getElementById("successRegister").style.display = "block";
+            this.router.navigate(["profile"]);
+          } else if (result.isvalid == false) {
+            document.getElementById("failedRegister").style.display = "block";
+            document.getElementById("successRegister").style.display = "none";
+          }
+  
+        });
+      }
     }
   }
 

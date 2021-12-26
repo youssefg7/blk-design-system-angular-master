@@ -22,6 +22,8 @@ export class BuyCardComponent implements OnInit {
   constructor(private userService: UserService, private tournamentService: TournamentService, private ticketService: TicketService, private matchService: MatchService) { }
   buyAttempt: boolean;
   cardInfo: boolean;
+  numError: boolean = false;
+  negError: boolean = false;
   currentticket:string = "Id yet to be generated";
   cardRadioChecked: boolean;
   @Input() tsmatch: Match;
@@ -42,7 +44,14 @@ export class BuyCardComponent implements OnInit {
 
   onSubmitBuy() {
     this.buyAttempt = true;
-    if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (this.cvv.value() != "" && this.cardNumber.value() != "" && this.expiryDate.value() != ""))) {
+    this.numError = false;
+    this.negError = false;
+    if(this.numOfTickets.value > this.tsmatch.ticketsLeft){
+      this.numError = true;
+    }else if(this.numOfTickets.value <= 0){
+      this.negError = true;
+    }
+    else if (this.buyForm.valid && (this.paymentMethod.value == "cash" || (!(this.cvv.value.toString().length != 3 || this.cvv.value < 0) && !(this.cardNumber.value.toString().length != 16 || this.cardNumber.value < 0) && this.expiryDate.value() != ""))) {
       this.cardInfo = true;
       this.currentticket = this.makeid(8);
       document.getElementById("ticketId").innerHTML = this.currentticket;
@@ -77,10 +86,7 @@ export class BuyCardComponent implements OnInit {
         userId: this.userService.currentUser.id,
         number: this.numOfTickets.value
       });
-
       this.EEmitter.emit("close tournament-create");
-
-
     }
   }
 

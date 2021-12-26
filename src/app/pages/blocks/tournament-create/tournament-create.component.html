@@ -4,18 +4,18 @@
             <mat-grid-list cols="2" rowHeight="50px">
                 <mat-grid-tile>
                     <input placeholder="Team Name" style="width: 200px;" id="teamSelect" class="form-control"
-                        >
+                        (input)="onTeamNameChange()">
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <input placeholder="Tournament Name" style="width: 200px;" id="tournamentSelect" class="form-control"
-                        >
+                    <input placeholder="UserName" style="width: 200px;" id="userSelect" class="form-control"
+                        (input)="onUserNameChange()">
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
         <div class="content" style="width: 100%; height: 500px; overflow-y: scroll;">
             <mat-grid-list cols="2" rowHeight="400px" style="margin: 10px;">
                 <div *ngFor="let tsteam of teamList">
-                    <mat-grid-tile>
+                    <mat-grid-tile *ngIf="(teamSearch == '' || tsteam.name.toLowerCase().startsWith(teamSearch.toLowerCase())) && (userSearch == '' || getUser(tsteam.userId).name.toLowerCase().startsWith(userSearch.toLowerCase()))">
                         <app-team-card (teamAddedId)="teamAddedHandler($event)" [showUser]="true" [tsteam]="tsteam" [added]="addedTeams.includes(tsteam.id)" style="width: 100%;"></app-team-card>
                     </mat-grid-tile>
                 </div>
@@ -51,5 +51,7 @@
         <button  class="btn btn-danger" style="margin-top: 20px;" (click)="onAddTournament()">
             Add Tournament
         </button>
+        <br>
+        <span *ngIf="isError" style="color: red; margin-left: auto; margin-right: auto;">{{errorMsg}}</span>
     </div>
 </div>

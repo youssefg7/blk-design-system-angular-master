@@ -23,5 +23,9 @@ export class PlayerService {
    addPlayer(id:string,player:Player){
     this.playersCollection.doc(id).set(player);
   }
+
+  deletePlayer(id:string){
+    this.playersCollection.doc(id).delete();
+  }
 }
 

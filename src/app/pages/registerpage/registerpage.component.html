@@ -19,19 +19,21 @@
                                                 <i class="tim-icons icon-single-02"> </i>
                                             </div>
                                         </div>
-                                        <input formControlName="name" class="form-control" placeholder="Full Name" type="text" (focus)="focus = true" (blur)="focus = false" />
+                                        <input id="nameNew" formControlName="name" class="form-control" placeholder="UserName" type="text" (focus)="focus = true" (blur)="focus = false" />
                                     </div>
                                     <span *ngIf="name && name.invalid && registerAttempt==true" style="color: red;">Name is required</span>
+                                    <span *ngIf="isName" style="color: red;">UserName already exists</span>
                                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus1 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="tim-icons icon-email-85"> </i>
                                             </div>
                                         </div>
-                                        <input formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus1 = true" (blur)="focus1 = false" />
+                                        <input id="emailNew" formControlName="email" class="form-control" placeholder="Email" type="text" (focus)="focus1 = true" (blur)="focus1 = false" />
                                     </div>
                                     <span *ngIf="newEmail && newEmail.errors?.email && registerAttempt==true" style="color: red;">Not an email</span>
                                     <span *ngIf="newEmail && newEmail.errors?.required && registerAttempt==true" style="color: red;">Email is required</span>
+                                    <span *ngIf="isEmail" style="color: red;">Email already has account</span>
                                     <div class="input-group" [ngClass]="{ 'input-group-focus': focus2 === true }">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
