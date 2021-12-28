@@ -50,18 +50,9 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
     AngularFireAuthModule,
     PagesModule,
     MatGridListModule,
-    // BsDropdownModule.forRoot(),
-    // ProgressbarModule.forRoot(),
-    // TooltipModule.forRoot(),
-    // CollapseModule.forRoot(),
-    // TabsModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    // PaginationModule.forRoot(),
-    // AlertModule.forRoot(),
-    // BsDatepickerModule.forRoot(),
-    // CarouselModule.forRoot(),
-    // ModalModule.forRoot()
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
