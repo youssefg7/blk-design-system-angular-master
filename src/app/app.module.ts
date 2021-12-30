@@ -25,10 +25,10 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { IndexComponent } from "./pages/index/index.component";
+
 import { ProfilepageComponent } from "./pages/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/registerpage/registerpage.component";
-import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [

@@ -19,10 +19,10 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
 
-import { IndexComponent } from "./index/index.component";
+
 import { ProfilepageComponent } from "./profilepage/profilepage.component";
 import { RegisterpageComponent } from "./registerpage/registerpage.component";
-import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
+
 import { MatchesComponent } from './matches/matches.component';
 import { MatchCardComponent } from './blocks/match-card/match-card.component';
 import { TeamCardComponent } from './blocks/team-card/team-card.component';
@@ -64,10 +64,8 @@ import { StandingsComponent } from './standings/standings.component';
     ModalModule.forRoot()
   ],
   declarations: [
-    IndexComponent,
     ProfilepageComponent,
     RegisterpageComponent,
-    LandingpageComponent,
     MatchesComponent,
     MatchCardComponent,
     TeamCardComponent,
@@ -84,10 +82,8 @@ import { StandingsComponent } from './standings/standings.component';
     StandingsComponent
   ],
   exports: [
-    IndexComponent,
     ProfilepageComponent,
     RegisterpageComponent,
-    LandingpageComponent,
   ],
   providers: []
 })
